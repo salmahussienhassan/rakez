@@ -1,0 +1,55 @@
+.main{
+    border-radius:8px;
+    width:95%;
+}
+
+.box{
+    border-radius: 0px 0px  8px 8px;
+border-right: 1px solid  #32012F;
+border-bottom: 1px solid #32012F;
+border-left: 1px solid  #32012F;
+background:  #FFF;
+
+}
+h6{
+    border-radius: var(--rounded-lg, 8px) var(--rounded-lg, 8px) 0px 0px;
+    border-top: 1px solid var(--Primary-900, #32012F);
+    background: #F8F9F6;
+}
+h5{
+    
+    color:#1F2A37;
+}
+.gary-400{
+    color:#9CA3AF;
+}
+.gray-700{
+    color:#374151;
+}
+.btn-gradient:hover{
+color:white;
+}
+.w-50{
+    width:68% !important;
+}
+@media (max-width: 768px) {
+.w-50{
+        margin-right: auto !important;
+        margin-left: auto !important;
+    width:100% !important; 
+}
+}
+.fs-14{
+    font-weight: 500;
+    font-size:14px !important;
+}
+.details-card{
+    border-radius: 4px;
+background: #F9FAFB;
+}
+
+.box-previous-address{
+    border-radius: 8px;
+border: 1px solid  #A49C8E;
+background: #FFF;
+}

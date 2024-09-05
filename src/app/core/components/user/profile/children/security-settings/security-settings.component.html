@@ -1,0 +1,160 @@
+
+<div class="mx-auto main-profile mt-2">
+    <div class="bg-white w-100 px-4 py-4 rounded-3 ">
+        <h5 [ngClass]="{'d-none': PasswordTitle}"class="fw-bolder primary-500 mb-0">  {{'SecuritySettings' | translate}}</h5>
+        <h5 [ngClass]="{'d-none': !PasswordTitle}" class="fw-bolder primary-500 mb-0">  {{'modifyPassword' | translate}}</h5>
+    </div>
+
+    @if(ChangPasswordFlag){
+
+        <ng-container>
+          <app-progress-bar-profile ></app-progress-bar-profile>
+        </ng-container>
+      }
+  
+@if( !ChangPasswordFlag){
+
+  <div class="bg-white border-gray my-3 w-100 px-4 py-4 rounded-3 ">
+ 
+        <div type="button" class="w-50">
+            <div class="d-flex justify-content-between mb-2">
+            <label for="">   {{'password' | translate}}</label>
+            
+        </div>
+        <div class="position-relative">
+          <p (click)="ChangePassword()" class="m-0 label-content position-absolute edit-position">{{'editLbl' | translate}} <i class="fa-solid fa-pen "></i> </p>
+        
+          <input type="password" class="form-control" value="0556667899" disabled />
+      </div>
+
+        </div>
+
+  
+</div>
+}
+
+@if(EmailPasswordFlag){
+  
+  <div class="bg-white border-gray my-3 w-100 px-4 py-4 rounded-3 ">
+    <div class="w-50">
+    
+      <form class="d-flex flex-column gap-2" action="">
+        
+        <label>  {{'EnterYourEmail' | translate}}</label>
+        <input class="form-control w-75 text-black" type="text" value="{{email}}" disabled/>
+     <button (click)="SendPasswordOtp()" class="btn  btn-purple w-25 p-1">{{'Continue' | translate}}</button>
+      </form>
+  </div>
+
+  </div>
+}
+
+@if(VerifyPasswordFlag){
+  
+  <div class="bg-white border-gray my-3 w-100 px-4 py-4 rounded-3 ">
+    <div>
+      <div>
+
+        <h6 class="mb-3" style="color: #221F1F;" >{{'PleaseEnterTheVerificationCodeThatWasSentToYourEmail' | translate}}
+         {{email}}
+        </h6>
+      </div>
+      
+        <form (ngSubmit)="VerifyPasswordOtp(PasswordOtpForm)" [formGroup]="PasswordOtpForm" class="d-flex flex-column gap-3 w-50" action="">
+      
+          <div class="d-flex w-30 gap-2" >
+            <input class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"  formControlName="input1"/>
+            <input class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"  formControlName="input2"/>
+            <input class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"  formControlName="input3"/>
+            <input class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"  formControlName="input4"/>
+            <input class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"  formControlName="input5"/>
+            <input class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"  formControlName="input6"/>
+          </div>
+
+      <button class="btn btn-purple w-25 p-1">{{'check' | translate}}</button>
+      
+      <button href="#" style="color: #4B5563;" class="bg-white text-center border-0">{{ message }}</button>
+      
+        </form>
+      
+      
+              </div>
+  </div>
+
+}
+
+@if(UpdatePasswordFlag){
+  <div class="bg-white border-gray my-3 w-100 px-4 py-4 rounded-3 ">
+
+      <div >    
+        <form (ngSubmit)="UpdatePassword(UpdatePasswordForm)" [formGroup]="UpdatePasswordForm" class="d-flex flex-column w-50 gap-2" >
+          <label> {{'new_password' | translate}}</label>
+          <input formControlName="newPassword" class="form-control text-black" type="text" />
+    
+          <label>{{'RepeatTheNewPassword' | translate}}</label>
+          <input formControlName="confirmPassword" class="form-control text-black" type="text" />
+    
+       <button class="btn btn-purple p-1 w-25"> {{'check' | translate}}</button>
+       <p class="text-center text-danger">{{passwordMessage}}</p>
+        </form>
+      </div>
+
+  </div>
+  
+}
+
+@if(succussFlagEmail){
+
+  <div class="bg-white d-flex flex-column justify-content-center align-items-center w-100 px-4 py-4 rounded-3 my-3" >
+    <dotlottie-player
+    class="text-center"
+    src="../../../../../../../assets/loaders/success.json"
+    background
+    ="transparent"
+    speed
+    ="2"
+    style
+    ="width: 160px;"
+    loop
+    autoplay
+    ></dotlottie-player>
+    <p class="text-center" style="color: #221F1F;">{{'YourEmailHasBeenVerifiedSuccessfully' | translate}}</p>
+  </div>
+}
+
+
+
+@if(!ChangPasswordFlag){
+  <div class="bg-white w-100 border-red px-4 py-4 rounded-3 my-4">
+    
+ <div  type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="w-100 col-md-3">
+           
+           <a  class="text-danger text-decoration-underline"> {{'DeleteMyAccount' | translate}}</a>
+           <p>{{'WeAreSadToSeeYouLeave,weHopeToSeeYouAgain' | translate}}</p>
+        </div>
+
+         <!-- Modal  -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div style="margin-top: 200px; margin-bottom: 200px;" class="modal-dialog ">
+              <div class="modal-content">
+                <div class="modal-body">
+                  
+        <div >
+            <p >{{'AreYouSureYouWantToDeleteYourAccount' | translate}}</p>
+         <div class="d-flex justify-content-center align-items-center">
+
+           <button  (click)="DeleteUser()" class="btn w-25 bg-red text-white p-1"> {{'confirm' | translate}}</button>
+           <button   data-bs-dismiss="modal" aria-label="Close" class="btn btn-outline w-25 p-1 cancel">{{'cancel' | translate}}</button>
+         </div>
+          </div>
+        
+                </div>
+               
+              </div>
+            </div>
+          </div>
+   
+</div>
+}
+
+</div>

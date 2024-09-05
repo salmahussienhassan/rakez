@@ -1,0 +1,57 @@
+<div class="main mt-4">
+  <div class="container">
+      <div class="row py-5 d-flex align-items-center justify-content-center gy-4">
+        <div class="col-md-6  d-flex flex-column  ">
+            <h1 class="primary-500  fw-bolder">{{'contactUS'|translate}}</h1>
+            <p class="w-75">{{'emailUs'|translate}}</p>
+            <p class="fw-bold">{{'email'|translate}} : info&#64;rakeez.com</p>
+            <p class="fw-bolder ">{{'freePhone'|translate}}  : 8001288000</p>
+            <p class="mt-4">{{'address'|translate}}</p>
+            <p class="fw-bold w-75">{{'kingdomOfSaudi'|translate}}</p>
+        </div>
+
+        <div class="col-md-6 d-flex flex-column align-items-center">
+            <div class="form-body w-75 py-3 px-3">
+            <h4 class="fw-bolder">{{'contactUS'|translate}}</h4>
+            <!-- <p style="font-size: 13px;">{{'youContactUsAtAnyTime'|translate}}</p> -->
+            <form class="d-flex flex-column gap-2" action="">
+                <label class="mb-0" for="">{{'fullName'|translate}}</label>
+                <input placeholder="{{'writeYourFullNameHere'|translate}}" class="form-control input-style" type="text">
+
+                <label class="mb-0" for="">{{'email'|translate}}</label>
+                <input  placeholder="{{'writeYourEmailHere'|translate}}" class="form-control input-style" type="text">
+
+                <div class="row d-flex justify-content-between ">
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                    <label class="mb-2" for="">{{'phone'|translate}}</label>
+                    <input  placeholder="{{'typeYourMobileNumber'|translate}}" class="form-control input-style" type="text">
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <div class="d-flex flex-column">
+                            <label class="" >{{'classificationOfTheProblem'|translate}}</label>
+                            <form class="dropdown">
+                                <button class="btn dropdown-toggle input-style py-0  d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="flex-grow-1 text-start" [ngClass]="{'d-none': technicalFlag || claimFlag ||  otherFlag}">  {{ 'chooseTheProblemFromTheFollowingList' | translate }}</span> 
+                                    <span class="flex-grow-1 text-start" [ngClass]="{'d-none': !technicalFlag}"> {{ 'Technique' | translate }}</span>
+                                    <span class="flex-grow-1 text-start" [ngClass]="{'d-none': !claimFlag}"> {{ 'Claim' | translate }}</span>
+                                    <span class="flex-grow-1 text-start" [ngClass]="{'d-none': !otherFlag}"> {{ 'Other' | translate }}</span>
+                                </button>
+                                <ul class="dropdown-menu w-100">
+                                    <li (click)="toggleFlag(1)" ><a class="dropdown-item text-start" >{{ 'Technique' | translate }}</a></li>
+                                    <li (click)="toggleFlag(2)"><a class="dropdown-item text-start" >{{ 'Claim' | translate }}</a></li>
+                                    <li (click)="toggleFlag(3)"><a class="dropdown-item text-start" >{{ 'Other' | translate }}</a></li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <label class="mb-0">{{'description'|translate}}</label>
+                <textarea class="input-style form-control h-75"></textarea>
+                <button class="py-2 my-3 btn-purple">{{'contactUs'|translate}}</button>
+            </form>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+a, p{
+    font-size:14px;
+    font-weight: bold;
+    color: var(--primary-500);
+}
+footer{
+    background-color: var(--white);
+    color: var(--primary-500);
+    border-top:1px solid var(--gray-500);
+   
+}
+ul{
+    list-style:none;
+}
+.third-col{
+    @media only screen and (max-width: 768px) {
+        align-items:start !important;
+
+    }
+}
+
+@media only screen and (max-width: 768px) {
+.flex-wrap-cards{
+    display:flex;
+     flex-wrap:wrap !important;
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .payment-img{
+        width:75%;
+        height:75%;
+    }
+
+    a, p{
+        font-size: var(--font-size-xs);
+    }
+    
+}
+
+.payment-icons li svg
+{
+    border: 1px solid var(--primary-500);
+    border-radius: 5px;
+}
+
+.social-icons svg path{
+  fill: var(--primary-500);
+}
+
+.social-icons svg circle{
+    stroke: var(--primary-500);
+}
+
+
+
+.ticktok{
+    fill: var(--white)!important;
+}

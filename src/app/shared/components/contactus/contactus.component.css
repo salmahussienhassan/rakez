@@ -1,0 +1,52 @@
+.main{
+    background-image:url('../../../../assets/images/paper texture by freeject.net 7 1.svg');
+}
+p{
+    color:#2B2829;
+}
+.form-body{
+    border-radius: 24px;
+border: 0.5px solid #939598;
+background: #FFF;
+box-shadow: 30px 44px 85px 0px rgba(0, 0, 0, 0.12);
+}
+.input-style{
+    height:32px;
+    border-radius: 8px !important;
+border: 1px solid var(--gray-300, #D1D5DB);
+background: var(--gray-50, #F9FAFB);
+}
+input::placeholder{
+    color: #6B7280;
+font-size: 12px;
+}
+select{
+    height:32px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--gray-300, #D1D5DB) !important;
+    background: var(--gray-50, #F9FAFB);
+}
+label{
+    font-weight:500;
+    color:#111928;
+}
+.dropdown-toggle{
+    color: #6B7280;
+    width:95%;
+    font-size:12px;
+}
+li a{
+    border-bottom:1px solid #e6e6e6;
+    color: #6B7280;
+    font-size:12px;
+} 
+
+.dropdown-item:active{
+    background-color:white !important;
+}
+@media only screen and (max-width: 768px) {
+
+    .w-75{
+        width:100% !important;
+    }
+}

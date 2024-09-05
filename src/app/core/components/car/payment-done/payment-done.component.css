@@ -1,0 +1,106 @@
+
+
+.navbar {
+    border-bottom: 1px solid #1f3b6e;
+}
+.text-style-container{
+   
+    border-radius: 18px;
+border: 1px solid #F97300;
+background: #FFF;
+box-shadow: 0px 4px 54px 0px rgba(105, 105, 105, 0.15);
+}
+
+.box {
+
+    margin-bottom: 30px;
+    margin-top: 40px;
+    padding: 30px 30px 30px;
+    width: 97%;
+}
+
+.box .close {
+    background-color: transparent;
+    border: none;
+    width: 30px;
+}
+
+.contact .child {
+    background-color:#F97300;
+    border: 3px solid #F97300;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 50px;
+    height:50px;
+}
+
+.download {
+    margin: 2em 0;
+}
+
+.download .child {
+    background-color: #294b82;
+    box-shadow: 2px 2px 5px #294b82;
+    color: #adbad3;
+    cursor: pointer;
+    height: 50px;
+    margin-left: 20px;
+    padding: 20px 10px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    width: 150px;
+}
+
+
+.home a {
+    color: #294b82;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+.w-95{
+    width:80%;
+}
+
+.box h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 800;
+    text-align: center;
+}
+download .child img {
+    padding: 0;
+    width: 30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.download .child p {
+    font-size: large;
+    height: 100%;
+    margin-left: 10px;
+    padding: 0;
+}
+
+p {
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.home .hme img {
+    width: 60px;
+}
+
+@media only screen and (max-width: 768px) {
+    .img-align {
+        justify-content:center !important;
+    }
+    .w-95{
+        width:100%;
+    }
+    
+    .w-75{
+        width:100% !important;
+    }
+}

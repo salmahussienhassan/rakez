@@ -1,0 +1,221 @@
+<div class="main-profile mx-auto mt-2">
+
+  <div class=" bg-white  px-4 py-4 rounded-3 ">
+    <h5  class="fw-bolder primary-500 mb-0">  {{'invoices' | translate}}</h5>
+  </div>
+
+<div class=" bg-white px-4  py-4 my-4 rounded-3 border-gray">
+  <div class="d-flex align-items-center mb-2">
+    <p class="mb-0">{{'invoices' | translate}}</p>
+
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.6663 2.16602H1.33301C1.05967 2.16602 0.833008 1.93935 0.833008 1.66602C0.833008 1.39268 1.05967 1.16602 1.33301 1.16602H14.6663C14.9397 1.16602 15.1663 1.39268 15.1663 1.66602C15.1663 1.93935 14.9397 2.16602 14.6663 2.16602Z" fill="#7D94A6"/>
+      <path d="M2.44629 1.66602V9.64602C2.44629 10.2993 2.75296 10.9193 3.27962 11.3127L6.75296 13.9127C7.49296 14.466 8.51296 14.466 9.25296 13.9127L12.7263 11.3127C13.253 10.9193 13.5596 10.2993 13.5596 9.64602V1.66602H2.44629ZM10.6663 9.16602H5.33296C5.05962 9.16602 4.83296 8.93935 4.83296 8.66602C4.83296 8.39268 5.05962 8.16602 5.33296 8.16602H10.6663C10.9396 8.16602 11.1663 8.39268 11.1663 8.66602C11.1663 8.93935 10.9396 9.16602 10.6663 9.16602ZM10.6663 5.83268H5.33296C5.05962 5.83268 4.83296 5.60602 4.83296 5.33268C4.83296 5.05935 5.05962 4.83268 5.33296 4.83268H10.6663C10.9396 4.83268 11.1663 5.05935 11.1663 5.33268C11.1663 5.60602 10.9396 5.83268 10.6663 5.83268Z" fill="#7D94A6"/>
+      </svg>
+      
+  </div>
+  <div   [class.isPromotionProgramsFormVisible]="isPromotionProgramsFormVisible ">
+    <div  [ngClass]="{'rounded-bottom-0': isPromotionProgramsFormVisible}" class="row-width d-flex py-2 mb-1 px-4 align-items-center justify-content-between selector "  (click)="showPromtionPrograms()">
+      <p [ngClass]="{'d-none': EnterTheReceiptNumber || TheIdentityoftheBeliever || InsuranceCompany}" class="gray-700 m-0 ">{{'ChooseASearchMethod'| translate}}</p>
+      <p [ngClass]="{'d-none': !EnterTheReceiptNumber}" class="gray-700 m-0 ">{{'ReceiptNumber'| translate}}</p>
+      <p [ngClass]="{'d-none': !TheIdentityoftheBeliever}" class="gray-700 m-0 ">{{'TheIdentityoftheBeliever'| translate}}</p>
+      <p [ngClass]="{'d-none': !InsuranceCompany}" class="gray-700 m-0 ">{{'InsuranceCompany'| translate}}</p>
+
+      <a>
+        @if(isPromotionProgramsFormVisible) {
+        <i class="fa my-0 fa-caret-up" aria-hidden="true"></i>
+        } @else {
+        <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+        }
+      </a>
+    
+    </div>
+
+    @if(isPromotionProgramsFormVisible) {
+   
+<ul class="px-0 row-width d-flex flex-column ">
+  <li (click)="showEnterTheReceiptNumber()" class="px-4 rounded-0  selector mb-1 py-2 list-unstyled gray-700 ">
+    {{'ReceiptNumber'| translate}}
+  </li>
+  <li (click)="showTheIdentityoftheBeliever()" class="px-4 rounded-0 selector mb-1 py-2 list-unstyled gray-700">
+    {{'TheIdentityoftheBeliever'| translate}}
+  </li>
+  <li (click)="showInsuranceCompany()" class="px-4 rounded-top-0 selector py-2 list-unstyled gray-700">
+    {{'InsuranceCompany'| translate}}
+  </li>
+</ul>
+     
+      }
+@if(EnterTheReceiptNumber){
+
+  <form [formGroup]="BillForm" (ngSubmit)="onSubmit()" class="bg-white py-4 mb-3 rounded-3">
+
+    <div class="row row-width">
+
+      <div class="col-md-8 ">
+          <label class="mb-2">{{'ReceiptNumber' | translate}}</label> 
+          <input placeholder="{{'EnterTheInsuredID' | translate}}" class="form-control"
+          formControlName="serialCustomCard" (keypress)="ValidateNumber($event)" type="text"
+          [maxLength]="10" [ngClass]="{'is-invalid': (serialCustomCard?.touched || serialCustomCard?.dirty) && serialCustomCard?.invalid}">
+          <p class="invalid-feedback m-0">
+            @if(serialCustomCard?.errors?.['required']) {<span>{{'serialCustomCardRequired' | translate}}</span>}
+            @if(serialCustomCard?.errors?.['minlength']) {<span>{{'limitCustomerCard' | translate}}</span>}
+          </p>
+        
+      </div>
+      
+      <div class="text-center  col-md-4">
+
+        <button type="submit" class="search-btn btn-purple justify-content-center py-2 d-flex btn text-white ">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16634 15.0007C12.388 15.0007 14.9997 12.389 14.9997 9.16732C14.9997 5.94566 12.388 3.33398 9.16634 3.33398C5.94468 3.33398 3.33301 5.94566 3.33301 9.16732C3.33301 12.389 5.94468 15.0007 9.16634 15.0007ZM9.16634 4.83398C8.59728 4.83398 8.03379 4.94607 7.50805 5.16384C6.9823 5.38161 6.5046 5.7008 6.10221 6.10319C5.69982 6.50558 5.38063 6.98328 5.16286 7.50902C4.94509 8.03477 4.83301 8.59826 4.83301 9.16732C4.83301 9.7196 5.28072 10.1673 5.83301 10.1673C6.38529 10.1673 6.83301 9.7196 6.83301 9.16732C6.83301 8.8609 6.89336 8.55748 7.01062 8.27439C7.12788 7.9913 7.29976 7.73407 7.51643 7.5174C7.7331 7.30073 7.99032 7.12886 8.27341 7.0116C8.55651 6.89434 8.85992 6.83398 9.16634 6.83398C9.71863 6.83398 10.1663 6.38627 10.1663 5.83398C10.1663 5.2817 9.71863 4.83398 9.16634 4.83398Z" fill="white"/>
+            <path d="M16.6667 16.6667L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        <span> {{'search' | translate}}</span>
+           
+        </button>
+      </div>
+    
+     
+  
+  </div>
+  </form>
+
+}
+@if(TheIdentityoftheBeliever){
+
+  <form [formGroup]="BillForm" (ngSubmit)="onSubmit()" class="bg-white py-4 mb-3 rounded-3">
+
+    <div class="row row-width">
+     
+      <div class="col-md-8">
+        <div>
+
+          <label class="mb-2">{{'TheIdentityoftheBeliever' | translate}}</label> 
+          <input placeholder="{{'EnterTheInsuredID' | translate}}" class="form-control"
+          formControlName="serialCustomCard" (keypress)="ValidateNumber($event)" type="text"
+          [maxLength]="10" [ngClass]="{'is-invalid': (serialCustomCard?.touched || serialCustomCard?.dirty) && serialCustomCard?.invalid}">
+          <p class="invalid-feedback m-0">
+            @if(serialCustomCard?.errors?.['required']) {<span>{{'serialCustomCardRequired' | translate}}</span>}
+            @if(serialCustomCard?.errors?.['minlength']) {<span>{{'limitCustomerCard' | translate}}</span>}
+          </p>
+        </div>
+       
+
+      </div>
+      
+      <div class="col-md-4 text-center">
+
+        <button  type="submit" class="search-btn btn-purple align-items-center justify-content-center btn text-white d-flex py-2  ">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16634 15.0007C12.388 15.0007 14.9997 12.389 14.9997 9.16732C14.9997 5.94566 12.388 3.33398 9.16634 3.33398C5.94468 3.33398 3.33301 5.94566 3.33301 9.16732C3.33301 12.389 5.94468 15.0007 9.16634 15.0007ZM9.16634 4.83398C8.59728 4.83398 8.03379 4.94607 7.50805 5.16384C6.9823 5.38161 6.5046 5.7008 6.10221 6.10319C5.69982 6.50558 5.38063 6.98328 5.16286 7.50902C4.94509 8.03477 4.83301 8.59826 4.83301 9.16732C4.83301 9.7196 5.28072 10.1673 5.83301 10.1673C6.38529 10.1673 6.83301 9.7196 6.83301 9.16732C6.83301 8.8609 6.89336 8.55748 7.01062 8.27439C7.12788 7.9913 7.29976 7.73407 7.51643 7.5174C7.7331 7.30073 7.99032 7.12886 8.27341 7.0116C8.55651 6.89434 8.85992 6.83398 9.16634 6.83398C9.71863 6.83398 10.1663 6.38627 10.1663 5.83398C10.1663 5.2817 9.71863 4.83398 9.16634 4.83398Z" fill="white"/>
+            <path d="M16.6667 16.6667L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        <span>  {{'search' | translate}}</span>
+          
+        </button>
+      </div>
+    
+     
+  
+  </div>
+  </form>
+
+}
+@if(InsuranceCompany){
+
+  <form [formGroup]="BillForm" (ngSubmit)="onSubmit()" class="bg-white py-4 mb-3 rounded-3">
+
+    <div class="row row-width">
+  
+       <div class="col-md-8">
+         <div>
+ 
+           <label class="mb-2">{{'InsuranceCompany' | translate}}</label> 
+           <input placeholder="{{'EnterNameofTheInsuranceCompany' | translate}}" class="form-control"
+           formControlName="serialCustomCard" (keypress)="ValidateNumber($event)" type="text"
+           [maxLength]="10" [ngClass]="{'is-invalid': (serialCustomCard?.touched || serialCustomCard?.dirty) && serialCustomCard?.invalid}">
+           <p class="invalid-feedback m-0">
+             @if(serialCustomCard?.errors?.['required']) {<span>{{'serialCustomCardRequired' | translate}}</span>}
+             @if(serialCustomCard?.errors?.['minlength']) {<span>{{'limitCustomerCard' | translate}}</span>}
+           </p>
+         </div>
+        
+ 
+       </div>
+       
+       <div class="col-md-4 text-center">
+ 
+         <button  type="submit" class="search-btn btn-purple align-items-center justify-content-center btn text-white d-flex py-2 ">
+           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16634 15.0007C12.388 15.0007 14.9997 12.389 14.9997 9.16732C14.9997 5.94566 12.388 3.33398 9.16634 3.33398C5.94468 3.33398 3.33301 5.94566 3.33301 9.16732C3.33301 12.389 5.94468 15.0007 9.16634 15.0007ZM9.16634 4.83398C8.59728 4.83398 8.03379 4.94607 7.50805 5.16384C6.9823 5.38161 6.5046 5.7008 6.10221 6.10319C5.69982 6.50558 5.38063 6.98328 5.16286 7.50902C4.94509 8.03477 4.83301 8.59826 4.83301 9.16732C4.83301 9.7196 5.28072 10.1673 5.83301 10.1673C6.38529 10.1673 6.83301 9.7196 6.83301 9.16732C6.83301 8.8609 6.89336 8.55748 7.01062 8.27439C7.12788 7.9913 7.29976 7.73407 7.51643 7.5174C7.7331 7.30073 7.99032 7.12886 8.27341 7.0116C8.55651 6.89434 8.85992 6.83398 9.16634 6.83398C9.71863 6.83398 10.1663 6.38627 10.1663 5.83398C10.1663 5.2817 9.71863 4.83398 9.16634 4.83398Z" fill="white"/>
+             <path d="M16.6667 16.6667L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+             </svg>
+             <span>  {{'search' | translate}}</span>
+
+          </button>
+       </div>
+
+     
+  
+  </div>
+  </form>
+
+}
+      
+  </div>
+</div>
+
+<div class=" bg-white px-4  py-4 my-2 rounded-3 border-gray">
+<p class="fw-bolder">{{'invoiceDetails' | translate}}</p>
+
+<div  style="overflow-x:auto;">
+
+<table class="table">
+  <thead>
+    <tr class="table-light">
+      <th class="th-style" scope="col">{{'ReceiptNumber'| translate}}</th>
+      <th class="th-style" scope="col">{{'invoiceDetails'| translate}}</th>
+      <th class="th-style" scope="col">{{'email'| translate}}</th>
+      <th class="th-style" scope="col">{{'insuranceName'| translate}}</th>
+      <th class="th-style" scope="col">{{'TransactionReferenceNumber'| translate}}</th>
+      <th class="th-style" scope="col">{{'total'| translate}}</th>
+      <th></th>
+      <th></th>
+      <th class="th-style" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for( item of test; track item ){
+      
+      <tr>
+        <th class="th-body-style" scope="row">{{item}}</th>
+        <td class="td-orange">Mark</td>
+        <td class="th-body-style">Otto</td>
+        <td class="th-body-style">mft</td>
+        <td class="th-body-style">Mark</td>
+        <td class="td-purple">Otto</td>
+        <td></td>
+        <td></td>
+        <td>
+          <a>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 14L11.2929 14.7071L12 15.4142L12.7071 14.7071L12 14ZM13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44771 11 5L13 5ZM6.29289 9.70711L11.2929 14.7071L12.7071 13.2929L7.70711 8.29289L6.29289 9.70711ZM12.7071 14.7071L17.7071 9.70711L16.2929 8.29289L11.2929 13.2929L12.7071 14.7071ZM13 14L13 5L11 5L11 14L13 14Z" fill="#FF9B45"/>
+            <path d="M5 16L5 17C5 18.1046 5.89543 19 7 19L17 19C18.1046 19 19 18.1046 19 17V16" stroke="#FF9B45" stroke-width="2"/>
+            </svg>
+
+          </a>
+        </td>
+      </tr>
+    }
+  </tbody>
+
+  </table>
+</div>
+
+</div>
+
+
+
+</div>
+

@@ -1,0 +1,217 @@
+<div class="mx-auto main-profile mt-2">
+
+    <div class="bg-white w-100 px-4 py-4 rounded-3 ">
+        <h5 [ngClass]="{'d-none': EmailTitle||PhoneEdit}" class="fw-bolder primary-500 mb-0">  {{'accountInformation' | translate}}</h5>
+        <h5 [ngClass]="{'d-none': !EmailTitle}"  class="fw-bolder primary-500 mb-0">  {{'editEmail' | translate}}</h5>
+        <h5 [ngClass]="{'d-none': !PhoneEdit}"  class="fw-bolder primary-500 mb-0">  {{'EditMobileNumber' | translate}}</h5>
+      </div>
+
+    @if(mainDevFlag || PhoneEdit){
+
+      <ng-container>
+        <app-progress-bar-profile ></app-progress-bar-profile>
+      </ng-container>
+    }
+
+
+@if(!mainDevFlag && !PhoneEdit){
+  
+  <div class="bg-white w-100 px-4 py-4 rounded-3 my-3 border-gray">
+    <div>
+      <div class="row gy-2 flex-column">
+  
+  <div style="cursor: pointer;" class="col-md-5">
+      <div class="d-flex justify-content-between mb-2">
+          <label for="">  {{'email' | translate}}</label>
+        </div>
+        
+        <div class="position-relative">
+          <p  (click)="SendOTPForUserMail()" class="m-0 label-content position-absolute edit-position">{{'editLbl' | translate}} <i class="fa-solid fa-pen "></i> </p>
+        <input type="text" class="form-control" value="{{email}}" disabled>
+      </div>
+  </div>
+ 
+  <div  (click)=" startCountdown()" type="button" data-bs-toggle="modal" data-bs-target="#phoneModal" class="col-md-5">
+      <div class="d-flex justify-content-between mb-2">
+      <label for=""> {{'phone' | translate}}</label>
+    </div>
+    <div class="position-relative">
+  <p (click)="ShowPhoneEdit()" class="m-0 label-content position-absolute edit-position"> {{'editLbl' | translate}} <i class="fa-solid fa-pen"></i></p>
+  
+  <input type="text" class="form-control" value="{{phoneNumber}}" disabled >
+  </div>
+  </div>
+  
+
+  
+  
+    </div>
+    </div>
+       
+    
+  </div>
+}
+
+  @if(EmailEdit){
+<div class="bg-white w-100 px-4 py-4 rounded-3 my-3 border-gray" >
+
+  <p style="color: #4B5563;" class="">{{'EnterTheVerificationCodeSentToYou' | translate}} {{email}}</p>
+  
+  <form  class="d-flex flex-column w-50" [formGroup]="EmailOtpForm">
+    
+    <div class="d-flex align-items-center gap-2 w-30 " >
+      <input formControlName="input1" class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1" />
+      <input formControlName="input2" class="form-control text-center  bg-white" type="text" pattern="[0-9]" maxlength="1"/>
+      <input formControlName="input3" class="form-control text-center  bg-white" type="text" pattern="[0-9]" maxlength="1"/>
+      <input formControlName="input4" class="form-control text-center  bg-white" type="text" pattern="[0-9]" maxlength="1"/>
+      <input formControlName="input5" class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"/>
+      <input formControlName="input6" class="form-control text-center bg-white" type="text" pattern="[0-9]" maxlength="1"/>
+    </div>
+    @if(EmailOtpForm.status=="INVALID"){
+
+      <p class="text-danger mt-2 mb-0">{{message}}</p>
+    }
+    <p class="text-danger mt-2 mb-0">{{ErrorMessage}}</p>
+    
+    <p [ngClass]="{'d-none': EnterOtpBodyFlag}"> {{'ICannotReachThisEmail-ResendTheCode' | translate}}</p>
+    <button (click)="CheckOTPForUserMail(EmailOtpForm)" class="btn btn-purple mt-3 w-25 p-1"> {{'check' | translate}}</button>
+  </form>
+</div>
+}
+@if(EnterEmailBodyFlag){
+
+  <div class="bg-white w-100 px-4 py-4 rounded-3 my-3 border-gray" >
+  
+    <p style="color: #4B5563;" class=""> {{'EnterTheNewEmail' | translate}}  </p>
+                  
+    <form  [formGroup]="SendEmailOtpForm" 
+    class="w-50 d-flex flex-column gap-3">    
+        <input formControlName="newEmail" class="form-control bg-white w-50" type="text"/>
+        <button (click)="SendOtpToNewMail(SendEmailOtpForm)" class="btn btn-purple w-25 p-1"> {{'confirm' | translate}} </button>
+        
+        </form>
+        @if(SendMobileOtpForm.status=="INVALID"&&SendMobileOtpForm.touched){
+      <p class="text-danger mt-2 mb-0">{{message}}</p>
+        }
+  </div>
+}
+
+@if(EnterOtpBodyFlag){
+  <div class="bg-white w-100 px-4 py-4 rounded-3 my-3 border-gray" >
+
+    <p style="color: #221F1F;">{{'VerifyTheEmailAddressYouEntered' | translate}}</p>
+    
+    <form class="d-flex flex-column w-50 " [formGroup]="CheckOTPForNewMailForm" >
+        
+      <div class="d-flex  gap-2 w-30 " >
+        <input class="form-control text-center bg-white" type="number" formControlName="input1" />
+        <input class="form-control text-center  bg-white" type="number" formControlName="input2"/>
+        <input class="form-control text-center  bg-white" type="number" formControlName="input3"/>
+        <input class="form-control text-center  bg-white" type="number" formControlName="input4"/>
+        <input class="form-control text-center bg-white" type="number" formControlName="input5"/>
+        <input class="form-control text-center bg-white" type="number" formControlName="input6"/>
+      </div>
+  
+      @if(CheckOTPForNewMailForm.status=="INVALID" && CheckOTPForNewMailForm.touched){
+  
+        <p class="text-danger mt-2 mb-0">{{message}}</p>
+      }
+     
+      <p class="text-danger mt-2 mb-0">{{ErrorMessage}}</p>
+    
+      <button (click)="CheckOTPForNewMail(CheckOTPForNewMailForm)" class="btn btn-purple mt-3 w-25 p-1"> {{'check' | translate}}</button>
+      
+  
+    </form>
+
+  </div>
+}
+@if(succussFlag){
+  <div class="bg-white d-flex flex-column justify-content-center align-items-center w-100 px-4 py-4 rounded-3 my-3" >
+    <dotlottie-player
+    class="text-center"
+    src="../../../../../../../assets/loaders/success.json"
+    background
+    ="transparent"
+    speed
+    ="2"
+    style
+    ="width: 160px;"
+    loop
+    autoplay
+    ></dotlottie-player>
+    <p class="text-center" style="color: #221F1F;">{{'YourEmailHasBeenVerifiedSuccessfully' | translate}}</p>
+  </div>
+}
+
+@if( PhoneEditBody){
+  <div class="bg-white border-gray d-flex flex-column  w-100 px-4 py-4 rounded-3 my-3" >
+  
+    <div [ngClass]="{'d-none': PhoneFlag}">
+      <p style="color: #221F1F;" class="m-0"> {{'EnterTheNewPhoneNumber' | translate}}</p>
+  
+  <form [formGroup]="SendMobileOtpForm" class="d-flex w-50 flex-column gap-3 mt-2">
+    <div class="d-flex flex-column w-75">
+  <div class="d-flex">
+  
+  <input type="number"  class="form-control border-input border-start-0"  formControlName="newMobile">
+  <input type="text" class="form-control bg-input w-25  text-center border-0 rounded-0" placeholder="+966"  disabled>
+  </div>
+      <p *ngIf="SendMobileOtpForm.get('newMobile')?.getError('required') && SendMobileOtpForm.get('newMobile')?.touched"  class="text-danger text-capitalize">please fill out this field</p>
+    </div>
+    <button (click)="ChangePhoneNumber()" class="btn btn-purple mt-3 w-50 p-1"> {{'ChangePhoneNumber' | translate}}</button>
+
+  </form>
+  
+  </div>
+  
+  </div>
+}
+@if(PhoneOtp){
+
+  <div class="bg-white border-gray d-flex flex-column  w-100 px-4 py-4 rounded-3 my-3" >
+    <div>
+      <p style="color: #221F1F;">{{'PleaseEnterTheVerificationCodeThatWasSentTo' | translate}}******59</p>
+    
+        <form class="d-flex w-50 flex-column gap-3" >
+          
+          <div class="d-flex w-30 align-items-center gap-2" >
+            <input class="form-control bg-white" type="number"/>
+            <input class="form-control bg-white" type="number"/>
+            <input class="form-control bg-white" type="number"/>
+            <input class="form-control bg-white" type="number"/>
+            <input class="form-control bg-white" type="number"/>
+            <input class="form-control bg-white" type="number"/>
+          </div>
+        <button (click)="CheckPhoneOtp()" class="btn btn-purple mt-3 w-25 p-1"> {{'check' | translate}}</button>
+    
+    
+     <button [disabled]="countdown!=0" href="" style="color: #4B5563;" class="bg-white text-center border-0 ">{{ message }}</button>
+    
+        </form>
+    
+      </div>
+    
+  </div>
+}
+@if(succussFlagMobile){
+
+  <div class="bg-white d-flex flex-column justify-content-center align-items-center w-100 px-4 py-4 rounded-3 my-3" >
+    <dotlottie-player
+    class="text-center"
+    src="../../../../../../../assets/loaders/success.json"
+    background
+    ="transparent"
+    speed
+    ="2"
+    style
+    ="width: 160px;"
+    loop
+    autoplay
+    ></dotlottie-player>
+    <p class="text-center" style="color: #221F1F;">{{'YourEmailHasBeenVerifiedSuccessfully' | translate}}</p>
+  </div>
+}
+
+
+</div>

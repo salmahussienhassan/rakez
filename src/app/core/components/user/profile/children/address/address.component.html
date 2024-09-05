@@ -1,0 +1,138 @@
+
+<div class="mx-auto main mt-2">
+  @for(item of address;track $index){
+    @if(item.IsPrimaryAddress == 'true'){
+      <!-- Current Address -->
+      <div class="row bg-white m-2 rounded-3 w-50 box">
+        <h6 class="text-center py-3 primary-500 fw-bolder"> {{'currentAddress' | translate}}</h6>
+        <div class="row mx-1 my-3">
+          <div class="col-12 fs-14 d-flex gap-3 flex-column mb-3">       
+            <div class="d-flex gap-3 py-2  px-1 details-card">               
+              <div class="d-flex gap-1 primary-500 fw-bold">
+                <span>❖</span>
+                <span>{{'city' | translate}}</span>
+                <span> » </span>
+                <span>{{item.City}}...</span>
+                <span>{{'saudiCountry' | translate}}</span>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-lg-6 col-md-6 col-xs-12 fs-14 d-flex gap-3 flex-column ">
+            <div class="d-flex gap-3 py-2  px-1 details-card">
+              <div class="d-flex gap-1 primary-500 fw-bold ">
+                <span>❖</span>
+                <span >{{'street' | translate}}</span>
+                <span> » </span>
+                <span> {{item.Street}}</span>
+              </div>
+            </div>   
+
+            <div class="d-flex gap-3 py-2 px-1 details-card">    
+              <div class="d-flex gap-1  primary-500 fw-bold">
+                <span>❖</span>
+                <span >{{'district' | translate}}</span>
+                <span> » </span>
+                <span>{{item.District}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-xs-12 fs-14 d-flex gap-3 flex-column ">
+            <div class="d-flex gap-3 py-2  px-1 details-card">
+              <div class="d-flex gap-1 primary-500 fw-bold ">
+                <span>❖</span>
+                <span >{{'zipCode' | translate}}</span>
+                <span> » </span>
+                <span> {{item.PostCode}}</span>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 py-2 px-1 details-card">
+              <div class="d-flex gap-1  primary-500 fw-bold">
+                <span>❖</span>
+                <span >{{'buildingNo' | translate}}</span>
+                <span> » </span>
+                <span> {{item.BuildingNumber}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+ 
+    @else(){
+      <!-- Others Address -->
+      <div class="row m-2 rounded-3 w-50 ">
+       
+        @if(previousAddress) {
+          <div  class="d-flex py-3 mb-1 align-items-start gap-2 pointer"  (click)="showPreviousAddress()">
+            <a>
+              @if(previousAddress) {<i class="fa-solid fa-angle-down primary-500"></i>} 
+              @else {<i class="fa-solid fa-angle-left gray-200"></i>}
+            </a>
+            <p [ngClass]="{'primary-500': previousAddress}"   class="mb-0 fw-bolder gray-200">{{'anotherAddress'|translate }}</p>
+          </div>
+          <div class="d-flex flex-column gap-3">    
+            <div class="box-previous-address bg-white rounded-3 w-100">
+              <div class="row mx-1 my-3">
+                <div class="col-12 fs-14 d-flex gap-3 flex-column mb-2">       
+                  <div class="d-flex gap-3 py-2  px-1 details-card">               
+                    <div class="d-flex gap-1 primary-500 fw-bold">
+                      <span>❖</span>
+                      <span>{{'city' | translate}}</span>
+                      <span> » </span>
+                      <span>{{item.City}}...</span>
+                      <span>{{'saudiCountry' | translate}}</span>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="col-lg-6 col-md-6 col-xs-12 fs-14 d-flex gap-3 flex-column ">
+                  <div class="d-flex gap-3 py-2  px-1 details-card">
+                    <div class="d-flex gap-1 primary-500 fw-bold ">
+                      <span>❖</span>
+                      <span >{{'street' | translate}}</span>
+                      <span> » </span>
+                      <span> {{item.Street}}</span>
+                    </div>
+                  </div>   
+      
+                  <div class="d-flex gap-3 py-2 px-1 details-card">    
+                    <div class="d-flex gap-1  primary-500 fw-bold">
+                      <span>❖</span>
+                      <span >{{'district' | translate}}</span>
+                      <span> » </span>
+                      <span>{{item.District}}</span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col-lg-6 col-md-6 col-xs-12 fs-14 d-flex gap-3 flex-column ">
+                  <div class="d-flex gap-3 py-2  px-1 details-card">
+                    <div class="d-flex gap-1 primary-500 fw-bold ">
+                      <span>❖</span>
+                      <span >{{'zipCode' | translate}}</span>
+                      <span> » </span>
+                      <span> {{item.PostCode}}</span>
+                    </div>
+                  </div>
+      
+                  <div class="d-flex gap-3 py-2 px-1 details-card">
+                    <div class="d-flex gap-1  primary-500 fw-bold">
+                      <span>❖</span>
+                      <span >{{'buildingNo' | translate}}</span>
+                      <span> » </span>
+                      <span> {{item.BuildingNumber}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

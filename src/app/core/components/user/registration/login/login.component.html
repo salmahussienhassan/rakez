@@ -1,0 +1,64 @@
+<div class="container-fluid registration">
+   <div class="container pt-5">
+    <div class="container w-50">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-4 login form-control border-0">
+          <h3 class="fw-bold primary-500 opacity-75 mb-4 text-center">{{'login' | translate}}</h3>
+          <div class="row mb-2">
+            <label>{{'identification_no' | translate}}</label>
+            <div>
+              <input (keypress)="allowSudiaID($event)" [maxLength]="10" type="text" formControlName="identityNumber" class="form-control"
+              [ngClass]="{ 'is-invalid':(identityNumber?.touched || identityNumber?.dirty) && identityNumber?.invalid}">
+              <span class="invalid-feedback">
+                @if(identityNumber?.errors?.['required'])
+                {<span>{{'identification_no_required' | translate}}</span>}
+                @else if(identityNumber?.errors?.['minlength'])
+                {<span>{{'limitOwnerId' | translate}}</span>}
+                </span>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label>{{'password' | translate}}</label>
+            <div class=" position-relative">
+              <input class="form-control" [type]="showPassword ? 'text' : 'password'"  formControlName="password"
+              [ngClass]="{ 'is-invalid':(password?.touched || password?.dirty) && password?.invalid}" />
+              <i [ngClass]="{'d-none': showPassword}" (click)="togglePasswordVisibility()" class="position-absolute  fa-solid fa-eye"></i>
+              <i [ngClass]="{'d-none': !showPassword}" (click)="togglePasswordVisibility()"  class="position-absolute fa-solid fa-eye-slash"></i>
+              <span class="invalid-feedback">
+                @if(password?.errors?.['required']) {<span>{{'password_required' | translate}}</span>}
+                <!-- @else if(password?.errors?.['pattern']) {<span>{{'password_not-valid' | translate}}</span>} -->
+               </span>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="sec-3 col-lg-12 col-md-12 col-sm-12 d-flex justify-content-between">
+              <div class="form-row-check d-flex position-relative ">
+                <input type="checkbox" id="done-check" class="d-none"
+                  onchange="document.getElementById('login').disabled = !this.checked;">
+                <label class="check-input mb-0" for="done-check"></label>
+                <label class="form-check-label mx-2 mb-0" for="done-check">{{'rememberMe' | translate}}</label>
+              </div>
+             
+            </div>
+            <div class="row">
+              <div class="mt-4 mb-3 ps-0 pe-4">
+                <button class="w-100 btn-registration bg-secondary py-2" type="submit" id="login" disabled >{{'enter' | translate}}</button>
+              </div>
+              <div class="have-account d-flex justify-content-center gap-1">
+                <a class="text-decoration-none forget-pass fw-bold text-black" routerLink="/{{lang}}/check-email">{{'forget_password' | translate}}</a>
+                <a routerLink="/{{lang}}/register" class="secondary fw-bold">{{'create_account' | translate}}</a>
+              </div>
+            </div>
+          </div>
+          @if(serverSideError && serverSideError.length!=0)
+          {
+          <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+            <img src="assets/icons/alert-danger.svg">
+            {{serverSideError}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          }
+      </form>
+    </div>
+   </div>
+</div>

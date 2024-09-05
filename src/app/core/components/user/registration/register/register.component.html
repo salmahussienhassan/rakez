@@ -1,0 +1,216 @@
+<div class="container-fluid registration">
+  <div class="container pt-3 mb-4">
+    <div class="container w-50 register" >
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="p-4  form-control border-0">
+          <h3 class="fw-bold primary-500 opacity-75 mb-4 text-center">{{'register' | translate}}</h3>
+          <div class="row mb-2">
+            <label>{{'identification_no' | translate}}</label>
+            <div class="">
+              <input type="tel" formControlName="ownerId"  (change)="detectChangeNo($event)"
+              (keypress)="allowSudiaID($event)" [maxLength]="10" required class="form-control"
+              [ngClass]="{'is-invalid': (ownerId?.touched || ownerId?.dirty) && ownerId?.invalid}">
+              <span class="invalid-feedback">
+                @if(ownerId?.errors?.['required']){<span>{{'identification_no_required' | translate}}</span>}
+              </span>
+            </div>
+          </div> 
+            @if(showHijriCalendar){
+              <div class=" row  mb-2">
+              <!-- Hijri Calendar -->
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <label class="drop-style-label">{{'month_birth' | translate}}</label>
+                  <select class="form-select" formControlName="driverHijriMonth"
+                    [ngClass]="{ 'is-invalid': (driverHijriMonth?.touched || driverHijriMonth?.dirty) && driverHijriMonth?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(month of hijriMonthsAr;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                    @else{
+                    @for(month of hijriMonthsEn;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                  </select>
+                  <span class="invalid-feedback">
+                    @if(driverHijriMonth?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <label class="drop-style-label">{{'year_birth' | translate}}</label>
+                  <select class="form-select" formControlName="driverHijriYear"
+                  [ngClass]="{ 'is-invalid': (driverHijriYear?.touched || driverHijriYear?.dirty) && driverHijriYear?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(year of years;track $index){
+                    <option value="{{year}}">{{year}}</option>
+                    }
+                    }
+                    @else{
+                    @for(year of years;track $index){
+                    <option  value="{{year}}">{{year}}</option>
+                    }
+                    }
+                  </select>
+                  <span class="invalid-feedback">
+                    @if(driverHijriYear?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+              </div>
+            }
+
+            @if(showMeladiCalendar){
+              <!-- Meladi Calendar -->
+              <div class="row mb-3">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <label>{{'month_birth' | translate}}</label>
+                  <select class="form-select" formControlName="driverMeladiMonth"
+                    [ngClass]="{ 'is-invalid': (driverMeladiMonth?.touched || driverMeladiMonth?.dirty) && driverMeladiMonth?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(month of meladiMonthsAr;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                    @else{
+                    @for(month of meladiMonthsEn;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                  </select>
+                  <span class="invalid-feedback">
+                    @if(driverMeladiMonth?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <label>{{'year_birth' | translate}}</label>
+                  <select class="form-select" formControlName="driverMeladiYear"
+                  [ngClass]="{ 'is-invalid': (driverMeladiYear?.touched || driverMeladiYear?.dirty) && driverMeladiYear?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(year of meladiYears;track $index){
+                    <option  value="{{year}}">{{year}}</option>
+                    }
+                    }
+                    @else{
+                    @for(year of meladiYears;track $index){
+                    <option  value="{{year}}">{{year}}</option>
+                    }
+                    }
+                  </select>
+                  <span class="invalid-feedback">
+                    @if(driverMeladiYear?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                </span>
+                </div>
+              </div>
+            }
+
+          <div class="row mb-2">
+            <label>{{'email' | translate}}</label>
+            <div class="">  
+              <input type="email" formControlName="email"  required class="form-control"
+              [ngClass]="{ 'is-invalid':(email?.touched || email?.dirty) && email?.invalid}">
+              <span class="invalid-feedback">
+                @if(email?.errors?.['required']) 
+                {<span>{{'email_required' | translate}}</span>}
+                @else if(email?.errors?.['pattern'])  
+                {<span>{{'email_invalid' | translate}}</span>}
+              </span>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label for="name">{{'name' | translate}}</label>
+            <div class="">  
+              <input type="text" (keypress)="ValidateAlphabetic($event)"  required minlength="2"
+              formControlName="name" class="form-control" [ngClass]="{'is-invalid': 
+                  (name?.touched || name?.dirty) && name?.invalid}">
+              <span class="invalid-feedback">
+                @if(name?.errors?.['required']) {<span>{{'name_required' | translate}}</span>}
+                @else if(name?.errors?.['minlength']) {<span>{{'name_length' | translate}}</span>}
+              </span>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label>{{'phone' | translate}}</label>
+            <div class="">
+              <input type="tel"  required [maxLength]="10" class="form-control"
+              formControlName="phoneNumber" (keypress)="ValidateNumber($event)"
+              [ngClass]="{'is-invalid':(phoneNumber?.touched || phoneNumber?.dirty) && phoneNumber?.invalid}">
+              <span class="invalid-feedback">
+                @if(phoneNumber?.errors?.['required']) {<span>{{'phone_required' | translate}}</span>}
+                @else if(phoneNumber?.errors?.['pattern']) {<span>{{'phone_not-valid' | translate}}</span>}
+              </span>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <label>{{'password' | translate}}</label>
+            <div class="">  
+              <div class="position-relative">
+                <input class="form-control " class="form-control" [type]="showPassword ? 'text' : 'password'" formControlName="password" 
+                [ngClass]="{'is-invalid':(password?.touched || password?.dirty)&& password?.invalid}"/>
+                <i [ngClass]="{'d-none': showPassword}" (click)="togglePasswordVisibility()" class="position-absolute  fa-solid fa-eye"></i>
+                <i [ngClass]="{'d-none': !showPassword}" (click)="togglePasswordVisibility()"  class="position-absolute  fa-solid fa-eye-slash"></i>
+              <span class="invalid-feedback">
+                @if(password?.errors?.['required']) {<span>{{'password_required' | translate}}</span>}
+                @else if(password?.errors?.['minlength']) {<span>{{'password_length' | translate}}</span>} 
+                @else if(password?.errors?.['pattern']) {<span>{{'errorMessage' | translate}}</span>} 
+              </span>
+              
+              </div>
+              <!-- <div class="password-hint pb-3"> {{'errorMessage' | translate}} </div> -->
+            </div>
+            
+          </div>
+
+          <div class="row mb-2">
+            <label>{{'confirm_password' | translate}}</label>
+            <div class="">  
+              <div class="position-relative">
+              <input class="form-control" [type]="showPassword2 ? 'text' : 'password'" formControlName="confirmPassword"
+              [ngClass]="{'is-invalid':(confirmPassword?.touched || confirmPassword?.dirty)&& confirmPassword?.invalid}"/>
+              <i [ngClass]="{'d-none': showPassword2}" (click)="togglePasswordVisibility2()" class="position-absolute  fa-solid fa-eye"></i>
+              <i [ngClass]="{'d-none': !showPassword2}" (click)="togglePasswordVisibility2()"  class="position-absolute fa-solid fa-eye-slash"></i>
+              <span class="invalid-feedback">
+                @if(confirmPassword?.errors?.['required']) {<span>{{'confirm_password_required' | translate}}</span>}
+                @else if(confirmPassword?.errors?.['mismatch']) { <span>{{'password_not_confirm'| translate}}</span> }
+                @else if(confirmPassword?.errors?.['pattern']) {<span>{{'password_not-valid' | translate}}</span>}
+              </span>
+            </div>
+          </div>
+          
+          </div>
+          <div class="row">
+            <div class="form-row-check d-flex position-relative ">
+              <input type="checkbox" id="done-check" class="d-none"
+                onchange="document.getElementById('register').disabled = !this.checked;">
+              <label class="check-input mb-0" for="done-check"></label>
+              <label class="form-check-label mx-2 mb-0" for="done-check">{{'agree_login' | translate}}</label>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="mt-4 mb-3">
+              <button class="w-100 btn-registration py-2 mb-3" type="submit"
+              id="register" disabled>{{'create_account' | translate}}
+                <svg class="arrow-icon" width="26" height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.6999 9.15529H4.43638L11.37 2.22165C11.6143 1.978 11.7517 1.6473 11.7521 1.30231C11.7525 0.957325 11.6158 0.626305 11.3722 0.382074C11.1285 0.137843 10.7978 0.00040725 10.4528 9.03613e-07C10.1079 -0.000405443 9.77684 0.136251 9.53261 0.379907L0.380206 9.53231C0.136748 9.77607 0 10.1065 0 10.451C0 10.7955 0.136748 11.126 0.380206 11.3697L9.53261 20.5308C9.65163 20.6585 9.79516 20.761 9.95463 20.832C10.1141 20.9031 10.2863 20.9413 10.4608 20.9444C10.6354 20.9475 10.8088 20.9153 10.9706 20.85C11.1325 20.7846 11.2796 20.6872 11.403 20.5638C11.5265 20.4403 11.6238 20.2933 11.6892 20.1314C11.7546 19.9695 11.7867 19.7961 11.7836 19.6216C11.7805 19.447 11.7423 19.2749 11.6713 19.1154C11.6002 18.9559 11.4978 18.8124 11.37 18.6934L4.43638 11.7597H24.6999C25.0447 11.7597 25.3754 11.6228 25.6192 11.379C25.863 11.1352 26 10.8045 26 10.4597C26 10.1149 25.863 9.78421 25.6192 9.54041C25.3754 9.2966 25.0447 9.15963 24.6999 9.15963V9.15529Z" fill="white"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="d-flex justify-content-center"><span class="tetx-center or position-relative">{{'or' | translate}}</span></div>
+            <div class="">
+              <button class="w-100 btn-registration btn-login bg-white primary-500 border py-2 my-3" type="button" (click)="login()">{{'loginNow' | translate}}</button>
+            </div>
+          </div>
+          @if(serverSideError && serverSideError.length!=0)
+          {
+          <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+            <img src="assets/icons/alert-danger.svg">
+            {{serverSideError}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          }
+      </form>
+    </div>
+  </div>
+</div> 

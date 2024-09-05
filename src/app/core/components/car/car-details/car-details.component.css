@@ -1,0 +1,301 @@
+@media (min-width: 768px) {
+    .col-md-7 {
+        flex: 0 0 auto;
+        width: 56%;
+    }
+}
+.pointer{
+    cursor:pointer;
+}
+hr{
+    color:#D9D9D9;
+}
+h5{
+    font-size:16px;
+}
+.bg-gray {
+    background:#F5F5F5;
+}
+.bg-dark{
+    background-color:#EBEBEB !important;
+}
+input::placeholder{
+    color:#6B7280 ;
+}
+h3{
+    font-size:18px;
+}
+h4{
+    font-size:18px;
+    font-weight:700;
+}
+.active-link{
+    background-color:var(--secondary);
+    color:var(--white);
+}
+.next-btn{
+    background: var(--primary-500);
+    border-radius: 8px;
+    color:var(--white);
+    font-size: var(--font-size-normal);
+}
+.back-btn{
+    background-color: #eaeaea;
+    border: var(--white);
+}
+
+.back-btn:hover{
+    background-color: #eaeaea !important;
+}
+.btn-outline {
+    background-color: #eaeaea !important;
+}
+@media only screen and (max-width: 768px) {
+.px-5{
+    padding-right:0px !important;
+    padding-left:0px !important;
+} 
+.mx-2{
+    margin-right:0px !important;
+    margin-left:0px !important;
+}
+    .tab-content{
+        width:100%;
+    }
+}
+
+
+.tap-style-active{
+    background: var(--secondary);
+    color:white !important;
+}
+.tap-style{
+    cursor:pointer;
+    font-size:14px;
+    color:#1D2939;
+}
+.input-style, .form-select{
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 100%;
+    height:36px;
+    background-color: #F9FAFB !important;
+    border:1px solid #D1D5DB;
+}
+
+
+label{
+    color:var(--black-900);
+    font-size: 14px;
+}
+
+.bg-white h4{
+    color:var(--black);
+}
+
+.car-nums tr, .car-nums td{
+    border:0.5px solid #D9D9D9;
+    text-align: center;
+   
+    font-size:var(--font-size-sm);
+}
+table{
+    background-color:#F6F6F6;
+}
+
+.add-driver{
+    background: var(--secondary);
+    border-radius: 8px;
+    color:var(--white);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 20px;
+    width: fit-content;
+}
+
+
+.custom-disabled-style:disabled {
+    opacity: 1;
+}
+
+.checkbox-container {
+    cursor: pointer;
+    display: inline-block;
+    font-size: var(--font-size-normal);
+
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.pad-checkbox{
+ padding: 0 2rem;
+}
+
+.custom-checkbox {
+    cursor: pointer;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+}
+
+.checkmark {
+    background-color: #eee;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    height: 25px;
+    position: absolute;
+    transition: background-color .3s;
+    width: 25px;
+}
+
+.checkmark:after {
+    border: solid var(--white);
+    border-width: 0 3px 3px 0;
+    content: "";
+    display: none;
+    height: 10px;
+    left: 9px;
+    position: absolute;
+    top: 5px;
+    transform: rotate(45deg);
+    width: 5px;
+}
+
+.mt-6 {
+    margin-top: 6%;
+}
+
+.btn-ok:disabled{
+    opacity: 1;
+}
+
+h1{
+    color:var(--primary);
+    font-weight: 600;
+}
+
+.drop-style-selected{
+    height: 40%;
+}
+
+
+.input-checks{
+    border-top: 1px solid #e2e2e2;
+    padding-top: 30px;
+}
+
+.custom-checkbox:checked~.checkmark{
+    background: var(--bg-secondary);
+    box-shadow: 0 3px 7px rgba(33, 150, 243, .3);
+}
+
+.serial-no{
+    font-size: var(--font-size-sm);
+}
+
+.car-info{
+   background: rgb(245 245 245);
+   border-radius: 8px;
+}
+
+.car-info .content{
+    border-left: 3px solid #c3bfbf;
+    justify-content:center ;
+}
+
+.country-select{
+    background-image: none;
+    padding:  6px 10px;
+}
+.add-btn:active{
+    outline: none!important;
+    border: none!important;
+    border-color:none!important;
+}
+
+.birthdate{
+    height:36px;
+}
+
+.bg-white.isPromotionProgramsFormVisible , .bg-white.isAdditionalFormVisible,
+.bg-white.isAddDriversFormVisible{
+    border: 2px solid var(--secondary);
+}
+
+
+
+.mt-7{
+    color: gray;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.fa-pen-to-square:before{
+ color:var(--green);
+}
+
+.fa-check-circle:before{
+    color:var(--green);
+}
+
+.fa-trash-can:before{
+    color:var(--red);
+}
+
+.country-select{
+    width: 100%;
+    border-radius: 5px;
+    border-color: gainsboro;
+}
+
+select:focus, .input-style:focus-visible {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-add, .btn-delete{
+    border:none!important;
+    outline: none;
+    font-size:var(--font-size-sm);
+}
+
+.border-container{
+    border:1px solid #D9D9D9;
+}
+
+.basic, .edit, .delete{
+    font-size:12px;
+    padding: 2px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.basic{
+    background: var(--green-100);
+    color:var(--green-800);
+}
+
+.edit{
+    background: var(--gray);
+    color:var(--black-600);
+}
+
+.delete{
+    background: var(--red-100);
+    color:var(--red-800);
+}
+
+.drivers{
+    border:1px solid var(--gray-100);
+    font-size: var(--font-size-sm)
+}
+
+.card{
+    background: none;
+    border: none;
+}

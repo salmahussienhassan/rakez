@@ -1,0 +1,203 @@
+<div class="d-flex">
+  <input (click)="ToggleClose()" hidden="hidden" type="checkbox" id="sidebar-toggle-profile" class="sidebar-toggle">
+  <label for="sidebar-toggle-profile" class="sidebar-label"><span></span></label>
+  
+  <div class="sidebar-overlay"></div>
+  <div [ngClass]="{'open': open}" [ngClass]="{'close': close}" class="dashbaord-sidebar mt-3">
+    <ul class="sidebar-links  m-0 rtl">
+      <div class="bg-white sidebar-border-bottom px-3 py-3 text-start">
+        <p class="m-0">{{'personalInformation' | translate}}</p>
+        <div [ngClass]="{'bg-gray': activeIndex === 'accountInformation'}" class="bg-white d-flex mt-3 px-2 rounded-3 align-items-center justify-content-between cursor-pointer section-border"  (click)="showAccountInfo()">  
+          <li (click)="scrollToTop()" 
+            class="sidebar-link d-flex align-items-end gap-2 rtl" 
+            [ngClass]="{'active': activeIndex === 'accountInformation'}" 
+            (click)="setActive('accountInformation')">  
+            <svg  [ngClass]="{'active-svg-fill': activeIndex === 'accountInformation'}"  
+                  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="9" r="3" fill="#413C34"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4515 15.9084C17.5089 16.0121 17.4794 16.1415 17.3844 16.2125C15.8829 17.3352 14.0192 18 12.0002 18C9.98114 18 8.11737 17.3351 6.61588 16.2124C6.5209 16.1414 6.49137 16.0121 6.5488 15.9083C7.49896 14.1915 9.58257 13 12.0001 13C14.4177 13 16.5014 14.1915 17.4515 15.9084Z" fill="#413C34"/>
+              <path d="M17 4H17.502C18.7134 4 19.319 4 19.7834 4.232C20.2095 4.44495 20.5551 4.79048 20.768 5.21665C21 5.68096 21 6.28664 21 7.498V8M17 20H17.502C18.7134 20 19.319 20 19.7834 19.768C20.2095 19.5551 20.5551 19.2095 20.768 18.7834C21 18.319 21 17.7134 21 16.502V16M7 4H6.498C5.28664 4 4.68096 4 4.21665 4.232C3.79048 4.44495 3.44495 4.79048 3.232 5.21665C3 5.68096 3 6.28664 3 7.498V8M7 20H6.498C5.28664 20 4.68096 20 4.21665 19.768C3.79048 19.5551 3.44495 19.2095 3.232 18.7834C3 18.319 3 17.7134 3 16.502V16" stroke="#413C34" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            
+            <a routerLink="accountInfo" 
+              routerLinkActive="router-link-active" 
+              aria-current="page" 
+              class="nuxt-link-exact-active nuxt-link-active sub-title">
+              {{'accountInformation' | translate}}
+            </a>
+          </li>
+          <a>
+            @if(isAccountInfoVisible) {
+            <i class="fa fa-caret-up primary-500 bg-white" aria-hidden="true"></i>
+            } @else {
+            <i class="fa fa-caret-down primary-500 bg-white" aria-hidden="true"></i>
+            }
+          </a>
+        </div>
+        @if(isAccountInfoVisible) {  
+          <div >
+            <li  (click)="toggleOpenAndClose()" (click)="scrollToTop()" class="sidebar-link bg-white d-flex align-items-end gap-2 rtl" 
+              [class.active]="activeIndex === 'accountInformation'" 
+              (click)="setActive('accountInformation')">
+              <a routerLink="accountInfo"
+                routerLinkActive="router-link-active" 
+                aria-current="page" 
+                class="nuxt-link-exact-active nuxt-link-active bg-white">
+                {{'basicInformation' | translate}}
+              </a>
+            </li>
+            <li  (click)="toggleOpenAndClose()" (click)="scrollToTop()" class=" bg-white sidebar-link d-flex align-items-end gap-2 rtl" 
+             [class.active]="activeIndex === 'securitySettings'" 
+             (click)="setActive('securitySettings')">
+             <a routerLink="security-settings"
+              routerLinkActive="router-link-active" 
+              aria-current="page" 
+              class="bg-white nuxt-link-exact-active nuxt-link-active">
+              {{'SecuritySettings' | translate}}
+             </a>
+            </li>
+          </div>
+        }
+
+        <li  (click)="toggleOpenAndClose()" [ngClass]="{'bg-gray': activeIndex === 'address'}" (click)="scrollToTop()" class="my-3 sidebar-link px-2 rounded-3 d-flex align-items-center gap-2 rtl" 
+          [class.active]="activeIndex === 'address'" 
+          (click)="setActive('address')">
+          <svg  [ngClass]="{'active-svg-fill': activeIndex === 'address'}"  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 18.75C11.59 18.75 11.25 18.41 11.25 18V17C11.25 16.59 11.59 16.25 12 16.25C12.41 16.25 12.75 16.59 12.75 17V18C12.75 18.41 12.41 18.75 12 18.75Z" fill="#413C34"/>
+            <path d="M12 22.75C11.59 22.75 11.25 22.41 11.25 22V21C11.25 20.59 11.59 20.25 12 20.25C12.41 20.25 12.75 20.59 12.75 21V22C12.75 22.41 12.41 22.75 12 22.75Z" fill="#413C34"/>
+            <path d="M2.0001 22.75C1.9401 22.75 1.8801 22.74 1.8201 22.73C1.4201 22.63 1.1701 22.22 1.2701 21.82L2.2701 17.82C2.3701 17.42 2.7701 17.17 3.1801 17.27C3.5801 17.37 3.8301 17.78 3.7301 18.18L2.7301 22.18C2.6401 22.52 2.3401 22.75 2.0001 22.75Z" fill="#413C34"/>
+            <path d="M21.7526 22.5026C21.4126 22.5026 21.1126 22.2726 21.0226 21.9326L20.0226 17.9326C19.9226 17.5326 20.1626 17.1226 20.5726 17.0226C20.9726 16.9226 21.3826 17.1626 21.4826 17.5726L22.4826 21.5726C22.5826 21.9726 22.3426 22.3826 21.9326 22.4826C21.8726 22.4926 21.8126 22.5026 21.7526 22.5026Z" fill="#413C34"/>
+            <path d="M19.1402 5.3C19.1402 5.6 18.8902 5.84 18.6002 5.84H5.53023C5.23023 5.84 4.99023 5.59 4.99023 5.3C4.99023 5 5.24023 4.76 5.53023 4.76H6.27023L6.55023 3.45C6.81023 2.17 7.35023 1 9.51023 1H14.6002C16.7602 1 17.3102 2.17 17.5702 3.44L17.8502 4.75H18.5902C18.8902 4.75 19.1402 5 19.1402 5.3Z" fill="#413C34"/>
+            <path d="M19.4501 9.39999C19.3401 8.19999 19.0201 6.92999 16.6901 6.92999H7.43014C5.10014 6.92999 4.79014 8.20999 4.67014 9.39999L4.26014 13.82C4.21014 14.37 4.39014 14.92 4.77014 15.34C5.16014 15.76 5.70014 16 6.28014 16H7.64014C8.82014 16 9.04014 15.33 9.19014 14.88L9.34014 14.44C9.51014 13.94 9.55014 13.82 10.2001 13.82H13.9201C14.5701 13.82 14.5901 13.89 14.7801 14.44L14.9301 14.88C15.0701 15.33 15.3001 16 16.4701 16H17.8301C18.4001 16 18.9501 15.76 19.3401 15.34C19.7201 14.93 19.9001 14.37 19.8501 13.82L19.4501 9.39999ZM9.88014 10.92H7.71014C7.41014 10.92 7.17014 10.67 7.17014 10.38C7.17014 10.09 7.42014 9.83999 7.71014 9.83999H9.89014C10.1901 9.83999 10.4301 10.09 10.4301 10.38C10.4301 10.67 10.1801 10.92 9.88014 10.92ZM16.4101 10.92H14.2301C13.9301 10.92 13.6901 10.67 13.6901 10.38C13.6901 10.09 13.9401 9.83999 14.2301 9.83999H16.4101C16.7101 9.83999 16.9501 10.09 16.9501 10.38C16.9501 10.67 16.7101 10.92 16.4101 10.92Z" fill="#413C34"/>
+          </svg>   
+          <a class="sub-title" routerLink="address"
+            routerLinkActive="router-link-active">
+            {{'national_address' | translate}}
+          </a>
+        </li>
+        
+
+       
+      </div>
+    
+      <div class="bg-white sidebar-border-bottom px-3 py-2 text-start">
+        <p class="m-0">{{'vehicleInsurance' | translate}}</p>
+        <div [ngClass]="{'bg-gray': activeIndex === 'statistics'}" class="bg-white d-flex mt-3 px-2 rounded-3 align-items-center justify-content-between cursor-pointer section-border"  (click)="showStatistics()">
+          <li  (click)="scrollToTop()" class="sidebar-link d-flex align-items-end gap-2 rtl" 
+            [class.active]="activeIndex === 'statistics'" 
+            (click)="setActive('statistics')">
+            <svg [ngClass]="{'active-svg-fill': activeIndex === 'statistics'}" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.51669 4.79613C5.84343 6.09112 4 8.83028 4 12C4 12.1969 4.00711 12.3921 4.0211 12.5855L10.1629 10.9398L8.51669 4.79613ZM11.4148 4.02107L13.1901 10.6463L13.2017 10.6897C13.2517 10.8754 13.3222 11.1373 13.3532 11.3775C13.3922 11.6802 13.4014 12.159 13.1197 12.6469C12.838 13.1348 12.4188 13.3662 12.1371 13.4838C11.9136 13.5771 11.6515 13.647 11.4657 13.6965L11.4223 13.7081L4.79626 15.4836C6.0913 18.1567 8.83039 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C11.8032 4 11.6081 4.00711 11.4148 4.02107Z" fill="#413C34"/>
+         <path d="M9.92945 4.27259C9.67849 3.33602 9.55302 2.86773 9.12083 2.67286C8.68865 2.47799 8.30723 2.66782 7.54439 3.04748C6.97028 3.33321 6.42361 3.67419 5.91239 4.06647C4.87054 4.8659 3.99636 5.86272 3.33975 7C2.68314 8.13728 2.25696 9.39275 2.08555 10.6947C2.00144 11.3336 1.97948 11.9775 2.01909 12.6176C2.07171 13.4681 2.09803 13.8933 2.48288 14.1701C2.86773 14.447 3.33602 14.3215 4.27259 14.0706L10.0681 12.5176C10.9788 12.2736 11.4342 12.1516 11.6413 11.7929C11.8484 11.4342 11.7264 10.9788 11.4824 10.0681L9.92945 4.27259Z" fill="#413C34"/>
+       </svg>      
+            <a routerLink="program-promotions"
+              routerLinkActive="router-link-active" 
+              aria-current="page" 
+              class="nuxt-link-exact-active nuxt-link-active sub-title">
+              {{'statistics' | translate}}
+            </a>
+          </li>
+          <a>
+            @if(isStatistics) {
+            <i class="fa fa-caret-up primary-500 bg-white" aria-hidden="true"></i>
+            } @else {
+            <i class="fa fa-caret-down primary-500 bg-white" aria-hidden="true"></i>
+            }
+          </a> 
+        </div>
+        @if(isStatistics) {
+          <div>
+            <li  (click)="toggleOpenAndClose()" (click)="scrollToTop()" class="bg-white sidebar-link d-flex align-items-end gap-2 rtl" 
+              [class.active]="activeIndex === 'programPromotions'" 
+              (click)="setActive('programPromotions')">
+              <a routerLink="program-promotions"
+                routerLinkActive="router-link-active" 
+                aria-current="page" 
+                class="bg-white nuxt-link-exact-active nuxt-link-active">
+                {{'programPromotions' | translate}}
+              </a>
+            </li>
+            <li  (click)="toggleOpenAndClose()" (click)="scrollToTop()" class="bg-white sidebar-link d-flex align-items-end gap-2 rtl" 
+              [class.active]="activeIndex === 'offers'" 
+              (click)="setActive('offers')">
+              <a routerLink="offers"
+                routerLinkActive="router-link-active" 
+                aria-current="page" 
+                class="bg-white nuxt-link-exact-active nuxt-link-active">
+                {{'offers' | translate}}
+              </a>
+            </li>
+          </div>
+        }
+        <li  (click)="toggleOpenAndClose()" [ngClass]="{'bg-gray': activeIndex === 'documents'}" (click)="scrollToTop()" class="my-3 sidebar-link px-2 rounded-3 d-flex align-items-center gap-2 rtl" 
+            [class.active]="activeIndex === 'documents'" 
+            (click)="setActive('documents')">
+            <svg [ngClass]="{'active-svg-fill': activeIndex === 'documents'}" 
+             width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2V7L12 7.05441C11.9999 7.47848 11.9998 7.8906 12.0455 8.23052C12.097 8.61372 12.2226 9.051 12.5858 9.41421C12.949 9.77743 13.3863 9.90295 13.7695 9.95447C14.1094 10.0002 14.5215 10.0001 14.9456 10H14.9456H14.9456H14.9456L15 10H20V16C20 18.8284 20 20.2426 19.1213 21.1213C18.2426 22 16.8284 22 14 22H10C7.17157 22 5.75736 22 4.87868 21.1213C4 20.2426 4 18.8284 4 16V8C4 5.17157 4 3.75736 4.87868 2.87868C5.75736 2 7.17157 2 10 2H12ZM14 2.00462V7C14 7.49967 14.0021 7.77383 14.0277 7.96402L14.0287 7.97131L14.036 7.97231C14.2262 7.99788 14.5003 8 15 8H19.9954C19.9852 7.58836 19.9525 7.31595 19.8478 7.06306C19.6955 6.69552 19.4065 6.40649 18.8284 5.82843L16.1716 3.17157C15.5935 2.59351 15.3045 2.30448 14.9369 2.15224C14.684 2.04749 14.4116 2.01481 14 2.00462ZM8 13C8 12.4477 8.44772 12 9 12L15 12C15.5523 12 16 12.4477 16 13C16 13.5523 15.5523 14 15 14L9 14C8.44772 14 8 13.5523 8 13ZM9 16C8.44772 16 8 16.4477 8 17C8 17.5523 8.44772 18 9 18H13C13.5523 18 14 17.5523 14 17C14 16.4477 13.5523 16 13 16H9Z" fill="#413C34"/>
+            </svg>  
+            <a class="sub-title" routerLink="documents"
+              routerLinkActive="router-link-active">
+              {{'documents' | translate}}
+            </a>
+        </li>
+        <li  (click)="toggleOpenAndClose()" [ngClass]="{'bg-gray': activeIndex === 'vehicles'}" (click)="scrollToTop()" class="my-3 sidebar-link px-2 rounded-3 d-flex align-items-center gap-2 rtl" 
+          [class.active]="activeIndex === 'vehicles'" 
+          (click)="setActive('vehicles')">
+          <svg  [ngClass]="{'active-svg-fill': activeIndex === 'vehicles'}"  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 18.75C11.59 18.75 11.25 18.41 11.25 18V17C11.25 16.59 11.59 16.25 12 16.25C12.41 16.25 12.75 16.59 12.75 17V18C12.75 18.41 12.41 18.75 12 18.75Z" fill="#413C34"/>
+            <path d="M12 22.75C11.59 22.75 11.25 22.41 11.25 22V21C11.25 20.59 11.59 20.25 12 20.25C12.41 20.25 12.75 20.59 12.75 21V22C12.75 22.41 12.41 22.75 12 22.75Z" fill="#413C34"/>
+            <path d="M2.0001 22.75C1.9401 22.75 1.8801 22.74 1.8201 22.73C1.4201 22.63 1.1701 22.22 1.2701 21.82L2.2701 17.82C2.3701 17.42 2.7701 17.17 3.1801 17.27C3.5801 17.37 3.8301 17.78 3.7301 18.18L2.7301 22.18C2.6401 22.52 2.3401 22.75 2.0001 22.75Z" fill="#413C34"/>
+            <path d="M21.7526 22.5026C21.4126 22.5026 21.1126 22.2726 21.0226 21.9326L20.0226 17.9326C19.9226 17.5326 20.1626 17.1226 20.5726 17.0226C20.9726 16.9226 21.3826 17.1626 21.4826 17.5726L22.4826 21.5726C22.5826 21.9726 22.3426 22.3826 21.9326 22.4826C21.8726 22.4926 21.8126 22.5026 21.7526 22.5026Z" fill="#413C34"/>
+            <path d="M19.1402 5.3C19.1402 5.6 18.8902 5.84 18.6002 5.84H5.53023C5.23023 5.84 4.99023 5.59 4.99023 5.3C4.99023 5 5.24023 4.76 5.53023 4.76H6.27023L6.55023 3.45C6.81023 2.17 7.35023 1 9.51023 1H14.6002C16.7602 1 17.3102 2.17 17.5702 3.44L17.8502 4.75H18.5902C18.8902 4.75 19.1402 5 19.1402 5.3Z" fill="#413C34"/>
+            <path d="M19.4501 9.39999C19.3401 8.19999 19.0201 6.92999 16.6901 6.92999H7.43014C5.10014 6.92999 4.79014 8.20999 4.67014 9.39999L4.26014 13.82C4.21014 14.37 4.39014 14.92 4.77014 15.34C5.16014 15.76 5.70014 16 6.28014 16H7.64014C8.82014 16 9.04014 15.33 9.19014 14.88L9.34014 14.44C9.51014 13.94 9.55014 13.82 10.2001 13.82H13.9201C14.5701 13.82 14.5901 13.89 14.7801 14.44L14.9301 14.88C15.0701 15.33 15.3001 16 16.4701 16H17.8301C18.4001 16 18.9501 15.76 19.3401 15.34C19.7201 14.93 19.9001 14.37 19.8501 13.82L19.4501 9.39999ZM9.88014 10.92H7.71014C7.41014 10.92 7.17014 10.67 7.17014 10.38C7.17014 10.09 7.42014 9.83999 7.71014 9.83999H9.89014C10.1901 9.83999 10.4301 10.09 10.4301 10.38C10.4301 10.67 10.1801 10.92 9.88014 10.92ZM16.4101 10.92H14.2301C13.9301 10.92 13.6901 10.67 13.6901 10.38C13.6901 10.09 13.9401 9.83999 14.2301 9.83999H16.4101C16.7101 9.83999 16.9501 10.09 16.9501 10.38C16.9501 10.67 16.7101 10.92 16.4101 10.92Z" fill="#413C34"/>
+          </svg>   
+          <a class="sub-title" routerLink="vehicles"
+            routerLinkActive="router-link-active">
+            {{'vehicle' | translate}}
+          </a>
+        </li>
+      </div>
+    
+      <div class="bg-white sidebar-border-bottom px-3 py-2 text-start">
+        <p class="m-0">{{'financialTransactions' | translate}}</p>
+        <li  (click)="toggleOpenAndClose()" [ngClass]="{'bg-gray': activeIndex === 'bills'}" (click)="scrollToTop()" class="my-3 sidebar-link px-2 rounded-3  d-flex align-items-end gap-2 rtl" 
+          [class.active]="activeIndex === 'bills'" 
+          (click)="setActive('bills')">
+          <svg  [ngClass]="{'active-svg-fill': activeIndex === 'bills'}"  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17.5" cy="17.5" r="2.5" stroke="#413C34" stroke-width="2"/>
+            <path d="M21 21L19.5 19.5" stroke="#413C34" stroke-width="2" stroke-linecap="round"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 10C4 6.22876 4 4.34315 5.17157 3.17157C6.34315 2 8.22876 2 12 2C15.7712 2 17.6569 2 18.8284 3.17157C20 4.34315 20 6.22876 20 10V13.1689C19.2646 12.7435 18.4107 12.5 17.5 12.5C14.7386 12.5 12.5 14.7386 12.5 17.5C12.5 19.4428 13.6081 21.1269 15.2268 21.9546C14.337 22 13.2765 22 12 22C8.22876 22 6.34315 22 5.17157 20.8284C4 19.6569 4 17.7712 4 14V10ZM8 5C7.44772 5 7 5.44772 7 6C7 6.55228 7.44772 7 8 7H12C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5H8ZM8 9C7.44772 9 7 9.44772 7 10C7 10.5523 7.44772 11 8 11H14C14.5523 11 15 10.5523 15 10C15 9.44772 14.5523 9 14 9L8 9ZM8 13C7.44772 13 7 13.4477 7 14C7 14.5523 7.44772 15 8 15H11C11.5523 15 12 14.5523 12 14C12 13.4477 11.5523 13 11 13H8Z" fill="#413C34"/>
+          </svg> 
+          <a class="sub-title" routerLink="bills" 
+            routerLinkActive="router-link-active">
+            {{'invoices' | translate}}
+          </a>
+        </li>
+      </div>
+    
+      <div class="bg-white px-3 py-2  border-bottom-0  mb-4 text-start">
+        <p class="m-0">{{'support' | translate}}</p>
+        <li (click)="toggleOpenAndClose()" (click)="scrollToTop()" class="sidebar-link my-3 px-2 rounded-3 d-flex align-items-end gap-2 rtl" 
+          [class.active]="activeIndex === 'support'" 
+          (click)="setActive('support')">
+          <svg  [ngClass]="{'active-svg-fill': activeIndex === 'support'}"   width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.2773 21.3166C12.676 21.6748 11.9378 21.2533 11.8797 20.5559L11.75 19H11.5C9.13333 19 7.125 18.175 5.475 16.525C3.825 14.875 3 12.8667 3 10.5C3 8.13333 3.825 6.125 5.475 4.475C7.125 2.825 9.13333 2 11.5 2C12.6833 2 13.7877 2.22067 14.813 2.662C15.8383 3.10333 16.7383 3.71167 17.513 4.487C18.2877 5.26233 18.8957 6.16233 19.337 7.187C19.7783 8.21167 19.9993 9.316 20 10.5C20 11.75 19.796 12.95 19.388 14.1C18.98 15.25 18.4213 16.3167 17.712 17.3C17.0027 18.2833 16.161 19.175 15.187 19.975C14.5843 20.4701 13.9477 20.9173 13.2773 21.3166ZM11.475 15.975C11.7583 15.975 12 15.875 12.2 15.675C12.4 15.475 12.5 15.2333 12.5 14.95C12.5 14.6667 12.4 14.425 12.2 14.225C12 14.025 11.7583 13.925 11.475 13.925C11.1917 13.925 10.95 14.025 10.75 14.225C10.55 14.425 10.45 14.6667 10.45 14.95C10.45 15.2333 10.55 15.475 10.75 15.675C10.95 15.875 11.1917 15.975 11.475 15.975ZM10.75 12.8H12.25C12.25 12.3 12.3 11.95 12.4 11.75C12.5 11.55 12.8167 11.1833 13.35 10.65C13.65 10.35 13.9 10.025 14.1 9.675C14.3 9.325 14.4 8.95 14.4 8.55C14.4 7.7 14.1127 7.06233 13.538 6.637C12.9633 6.21167 12.284 5.99933 11.5 6C10.7667 6 10.15 6.20433 9.65 6.613C9.15 7.02167 8.8 7.51733 8.6 8.1L10 8.65C10.0833 8.36667 10.2417 8.08767 10.475 7.813C10.7083 7.53833 11.05 7.40067 11.5 7.4C11.95 7.39933 12.2877 7.52433 12.513 7.775C12.7383 8.02567 12.8507 8.30067 12.85 8.6C12.85 8.88333 12.7667 9.13767 12.6 9.363C12.4333 9.58833 12.2333 9.81733 12 10.05C11.4167 10.55 11.0627 10.946 10.938 11.238C10.8133 11.53 10.7507 12.0507 10.75 12.8Z" fill="#413C34"/>
+          </svg>
+          <a class="sub-title" routerLink="support"
+            routerLinkActive="router-link-active">
+            {{'technical_support' | translate}}
+          </a>
+        </li>
+      </div>
+    </ul>
+  </div>
+  <div class="my-2 w-100 ">
+    <router-outlet></router-outlet>
+  </div>
+</div>

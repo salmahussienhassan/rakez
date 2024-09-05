@@ -1,0 +1,25 @@
+.btn{
+    padding:12px 10px;
+    width: 100%;
+}
+
+
+.m-50-auto{
+    margin:50px auto;
+}
+
+.get-update{
+    padding: 10px 0px;
+}
+
+
+@media (min-width: 768px) {
+    h1{
+        font-size: 75px;
+        margin:80px auto  180px auto;
+    }
+
+    .form-container{
+      background: none;
+    }
+}

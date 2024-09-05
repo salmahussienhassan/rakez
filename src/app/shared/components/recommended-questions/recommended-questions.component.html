@@ -1,0 +1,304 @@
+<section class="bg-pdf-files recommendedQuestions">
+    <div class="container py-5">
+        <div class="pdf-files-bg-container p-4">
+            <h2 class="text-center fw-bold mb-5">{{'recommendedQuestions' | translate}}</h2>
+    
+                <h4 class= "fw-bold">{{'aboutRakeez'|translate}}</h4>
+            
+            <div class=" border-3 rounded-2"  [class.RecommendedQuestion]="RecommendedQuestion ">
+                <div  class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('RecommendedQuestion')">
+                    <a class="m-0">
+                      @if(RecommendedQuestion) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'whoIsRakeez'|translate}}</p>
+                </div>
+
+@if(RecommendedQuestion){
+    <p class="px-3">{{'whoIsRakeezAns'|translate}}</p>
+}
+
+            </div>
+
+          
+            <div class=" border-3 rounded-2"  [class.isRakeezWebsiteAuthorized]="isRakeezWebsiteAuthorized ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('isRakeezWebsiteAuthorized')">
+                    <a class="m-0">
+                      @if(isRakeezWebsiteAuthorized) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'isRakeezWebsiteAuthorized'|translate}}</p>
+                </div>
+
+@if(isRakeezWebsiteAuthorized){
+    <p class="px-3">{{'isRakeezWebsiteAuthorizedAns'|translate}}</p>
+}
+
+            </div>
+
+
+            <div class=" border-3 rounded-2"  [class.isRakeezWebsiteSafeForElectronicPayment]="isRakeezWebsiteSafeForElectronicPayment ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('isRakeezWebsiteSafeForElectronicPayment')">
+                    <a class="m-0">
+                      @if(isRakeezWebsiteSafeForElectronicPayment) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'isRakeezWebsiteSafeForElectronicPayment'|translate}}</p>
+                </div>
+
+@if(isRakeezWebsiteSafeForElectronicPayment){
+    <p class="px-3">{{'isRakeezWebsiteSafeForElectronicPaymentAns'|translate}}</p>
+}
+
+            </div>
+
+
+            <div class=" border-3 rounded-2"  [class.doesRakeezIncreaseThePriceInsuranceCompaniesRates]="doesRakeezIncreaseThePriceInsuranceCompaniesRates ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('doesRakeezIncreaseThePriceInsuranceCompaniesRates')">
+                    <a class="m-0">
+                      @if(doesRakeezIncreaseThePriceInsuranceCompaniesRates) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'doesRakeezIncreaseThePriceInsuranceCompaniesRates'|translate}}</p>
+                </div>
+
+@if(doesRakeezIncreaseThePriceInsuranceCompaniesRates){
+    <p class="px-3">{{'doesRakeezIncreaseThePriceInsuranceCompaniesRatesAns'|translate}}</p>
+}
+
+            </div>
+
+
+            <div class=" border-3 rounded-2"  [class.isTheProcessOfPurchasing]="isTheProcessOfPurchasing ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('isTheProcessOfPurchasing')">
+                    <a class="m-0">
+                      @if(isTheProcessOfPurchasing) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'istheProcessOfPurchasin'|translate}}</p>
+                </div>
+
+@if(isTheProcessOfPurchasing){
+    <p class="px-3">{{'istheProcessOfPurchasingAns'|translate}}</p>
+}
+
+            </div>
+
+
+            
+            <div class=" border-3 rounded-2"  [class.whatAreTheCustomerServiceChannels]="whatAreTheCustomerServiceChannels ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('whatAreTheCustomerServiceChannels')">
+                    <a class="m-0">
+                      @if(whatAreTheCustomerServiceChannels) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'whatAreTheCustomerServiceChannels'|translate}}</p>
+                </div>
+
+       @if(whatAreTheCustomerServiceChannels){
+    <p style="white-space: pre-line;" class="px-3">{{'whatAreTheCustomerServiceChannelsAns'|translate}}</p>
+         }
+
+            </div>
+
+            <h4 class= "fw-bold">{{'generalQuestions'|translate}}</h4>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion1]="generalQuestion1 ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion1')">
+                    <a class="m-0">
+                      @if(generalQuestion1) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'whatIsDifferenceBetweenThirdPartyInsuranceComprehensiveMotorInsurance'|translate}}</p>
+                </div>
+
+       @if(generalQuestion1){
+    <p style="white-space: pre-line;" class="px-3">{{'whatIsDifferenceBetweenThirdPartyInsuranceComprehensiveMotorInsuranceAns'|translate}}</p>
+         }
+
+            </div>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion2]="generalQuestion2 ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion2')">
+                    <a class="m-0">
+                      @if(generalQuestion2) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'willInsuranceCompanyCompensateMe'|translate}}</p>
+                </div>
+
+       @if(generalQuestion2){
+    <p style="white-space: pre-line;" class="px-3">{{'willInsuranceCompanyCompensateMeAns'|translate}}</p>
+         }
+
+            </div>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion3]="generalQuestion3 ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion3')">
+                    <a class="m-0">
+                      @if(generalQuestion3) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'whatIsTheUnifiedCompulsoryVehicleInsurancePolicy'|translate}}</p>
+                </div>
+
+       @if(generalQuestion3){
+    <p style="white-space: pre-line;" class="px-3">{{'whatIsTheUnifiedCompulsoryVehicleInsurancePolicyAns'|translate}}</p>
+         }
+
+            </div>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion4]="generalQuestion4 ">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion4')">
+                    <a class="m-0">
+                      @if(generalQuestion4) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'isPossibleTransferInsuranceFromOnePersonToAnotherWhenPurchasingUsedVehicle'|translate}}</p>
+                </div>
+
+       @if(generalQuestion4){
+    <p style="white-space: pre-line;" class="px-3">{{'isPossibleTransferInsuranceFromOnePersonToAnotherWhenPurchasingUsedVehicleAns'|translate}}</p>
+         }
+
+            </div>
+
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion5]="generalQuestion5">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion5')">
+                    <a class="m-0">
+                      @if(generalQuestion5) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'isItPossibleToPurchase'|translate}}</p>
+                </div>
+
+       @if(generalQuestion5){
+    <p style="white-space: pre-line;" class="px-3">{{'isItPossibleToPurchaseAns'|translate}}</p>
+         }
+
+            </div>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion6]="generalQuestion6">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion6')">
+                    <a class="m-0">
+                      @if(generalQuestion6) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'isItPossibleToPurchaseInsurance'|translate}}</p>
+                </div>
+
+       @if(generalQuestion6){
+    <p style="white-space: pre-line;" class="px-3">{{'isItPossibleToPurchaseInsuranceAns'|translate}}</p>
+         }
+
+            </div>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion7]="generalQuestion7">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion7')">
+                    <a class="m-0">
+                      @if(generalQuestion7) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'doesCompulsoryInsurancePolicy'|translate}}</p>
+                </div>
+
+       @if(generalQuestion7){
+    <p style="white-space: pre-line;" class="px-3">{{'doesCompulsoryInsurancePolicyAns'|translate}}</p>
+         }
+
+            </div>
+
+            <div class=" border-3 rounded-2"  [class.generalQuestion8]="generalQuestion8">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion8')">
+                    <a class="m-0">
+                      @if(generalQuestion8) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'didIDiscoverError'|translate}}</p>
+                </div>
+
+       @if(generalQuestion8){
+    <p style="white-space: pre-line;" class="px-3">{{'didIDiscoverErrorAns'|translate}}</p>
+         }
+
+            </div>
+
+            
+            <div class=" border-3 rounded-2"  [class.generalQuestion9]="generalQuestion9">
+                <div class="pointer d-flex py-2 mb-1 px-3 align-items-center "  (click)="toggleQuestion('generalQuestion9')">
+                    <a class="m-0">
+                      @if(generalQuestion9) {
+                          <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                        } @else {
+                          <i class="fa-solid fa-caret-left"></i>
+                      }
+                    </a>
+
+                  <p  class="m-0 mx-3">{{'whenCanCustomerRenewVehicleInsurance'|translate}}</p>
+                </div>
+
+       @if(generalQuestion9){
+    <p style="white-space: pre-line;" class="px-3">{{'whenCanCustomerRenewVehicleInsuranceAns'|translate}}</p>
+         }
+
+            </div>
+        </div>
+    </div>
+</section>

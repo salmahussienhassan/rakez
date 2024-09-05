@@ -1,0 +1,678 @@
+@if(!headerHomePage){
+  <!-- Desktop profile-->
+  <header class="header border-0 desktop-show">
+  <nav class="container-fluid">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="main-sidebar">
+          <div class="d-flex">
+            <input (click)="ToggleClose()" hidden="hidden" type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+            <label for="sidebar-toggle" class="sidebar-label my-2"><span></span></label>
+            <div class="sidebar-overlay"></div>
+            <div [ngClass]="{'open': open}" [ngClass]="{'close': close}" class="dashbaord-sidebar">
+              <ul class="sidebar-ul-links m-0 text-end">
+                <div class="bg-white text-end py-3 px-3">
+                  <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'home'" (click)="setActive('home')"
+                    routerLink ="{{langUrl}}/home">
+                    <a>
+                      {{'home' | translate}}
+                    </a>
+                  </li>
+                  <div class="d-flex justify-content-between sidebar-link py-1 px-2 mb-1" (click)="chooseVehicleInsurance()"
+                  [class.active]="activeIndex === 'vehicleInsurance'" (click)="setActive('vehicleInsurance')">
+                    <li (click)="scrollToTop()" class=" d-flex align-items-end gap-2 rtl"
+                    routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'vehicle_insurance' | translate}}
+                      </a>
+                    </li>
+                    <a>
+                    @if(vehicleInsurance) {
+                    <i class="fa fa-caret-up text-white" aria-hidden="true"></i>
+                    } @else {
+                    <i class="fa fa-caret-down text-white" aria-hidden="true"></i>
+                    }
+                    </a>
+                  </div>
+                  @if(vehicleInsurance) {
+                    <div>
+                      <li (click)="onLinkClick(1)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                        [class.active1]="activeIndex1 === 'newInsurance'"  routerLink ="{{langUrl}}/home" 
+                        (click)="setActive1('newInsurance')">
+                   
+                        <a >
+                          {{'new_insurance' | translate}}
+                        </a>
+                      </li>
+                      <li (click)="onLinkClick(2)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                        [class.active1]="activeIndex1 === 'ownTransfer'" routerLink ="{{langUrl}}/home" 
+                        (click)="setActive1('ownTransfer')">
+                     
+                        <a >
+                          {{'own_transfer' | translate}}
+                        </a>
+                      </li>
+
+                      <li (click)="onLinkClick(3)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active1]="activeIndex1 === 'customsCard'"  routerLink ="{{langUrl}}/home"
+                      (click)="setActive1('customsCard')">
+                   
+                      <a>
+                        {{'customs_card' | translate}}
+                      </a>
+                      </li>
+                    </div>
+                  }
+               
+                  <li (click)="onLinkClick(4)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'medicalInsurance'" (click)="setActive('medicalInsurance')"
+                    routerLink ="{{langUrl}}/home" >
+                    <a>
+                      {{'medical_insurance' | translate}}
+                    </a>
+                  </li>
+ 
+                  <li (click)="onLinkClick(5)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'medicalFaultsInsurance'" (click)="setActive('medicalFaultsInsurance')"
+                    routerLink ="{{langUrl}}/home">
+                    <a>
+                      {{'medical_faults_insurance' | translate}}
+                    </a>
+                  </li>
+                  <li (click)="onLinkClick(6)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'travelInsurance'" (click)="setActive('travelInsurance')"
+                    routerLink ="{{langUrl}}/home">
+                    <a >
+                      {{'travel_insurance' | translate}}
+                    </a>
+                  </li>
+                  <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                  [class.active]="activeIndex === 'ourServices'" (click)="setActive('ourServices')">
+                  <a>
+                    {{'ourServices' | translate}}
+                  </a>
+                  </li>
+               
+                  <li (click)="toggleOpenAndClose(); setActive('contactUS')" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                  [class.active]="activeIndex === 'contactUS'" 
+                  routerLink ="{{langUrl}}/contact-us" >
+                  <a>
+                    {{'contactUS' | translate}}
+                  </a>
+                  </li>
+ 
+                  <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                  [class.active]="activeIndex === 'recommendedQuestions'" (click)="setActive('recommendedQuestions')"
+                  routerLink ="{{langUrl}}/recommended-question" >
+                  <a>
+                    {{'recommendedQuestions' | translate}}
+                  </a>
+                  </li>
+                  <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'addTicket1'" (click)="setActive('addTicket1')"
+                    routerLink ="{{langUrl}}/profile/support">
+                    <a>
+                      {{'addTicket1' | translate}}
+                    </a>
+                    </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="pe-5">
+          <a class="navbar-brand" routerLink="{{langUrl}}/home">
+            <img src="../../../../assets/images/home-icons/rakeez.jpg" class="img-fluid" alt="logo" />
+          </a>
+        </div>
+     
+        <div class="d-flex">
+          @if(!userLoggedIn){
+            <button (click)="login()"  type="button" class="btn btn-outline">{{'login'|translate}}</button>
+          }
+ 
+          @else{
+ 
+            <div class="dropdown">
+              <button class="btn dropdown-toggle px-3 input-style d-flex justify-content-center align-items-center py-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{'hi'|translate}} {{registrationData.displayName}}
+              </button>
+              <ul class="dropdown-menu p-0">
+                <li><a (click)="profile()" class="dropdown-item text-center py-2 px-3 border-bottom rounded-1" >{{'profile'|translate}}</a></li>
+                <li><a (click)="logout()" class="dropdown-item text-center py-2 px-3 rounded-1" >{{'logout'|translate}}</a></li>
+              </ul>
+            </div>
+ 
+       
+          }
+          <div class="d-flex language align-items-center gap-2">
+            <button class="lang" type="button" (click)="changeLanguage(langText)">
+              {{langText | uppercase}}</button>
+              <svg  width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_148_523)">
+                <path d="M16 8.5C15.9972 6.38383 15.1571 4.35475 13.6633 2.85586C12.1695 1.35696 10.1433 0.510027 8.02712 0.5L7.9756 0.5C5.85387 0.503237 3.82032 1.3492 2.32232 2.85177C0.824317 4.35435 -0.0154343 6.39047 -0.0121977 8.5122C-0.00896117 10.6339 0.836997 12.6675 2.33958 14.1655C3.84216 15.6635 5.87827 16.5032 8.00001 16.5C10.1211 16.4978 12.1547 15.6543 13.6545 14.1545C15.1543 12.6547 15.9979 10.6211 16 8.5ZM8.00001 14.8729C7.10711 13.9383 6.41494 12.8308 5.96611 11.6186H10.0339C9.58507 12.8308 8.8929 13.9383 8.00001 14.8729ZM5.59729 10.2627C5.3659 9.09896 5.3659 7.90104 5.59729 6.73729H10.4027C10.6341 7.90104 10.6341 9.09896 10.4027 10.2627H5.59729ZM1.35594 8.5C1.35598 7.90438 1.43625 7.31148 1.59458 6.73729H4.21967C4.01716 7.90371 4.01716 9.09629 4.21967 10.2627H1.59458C1.43625 9.68852 1.35598 9.09562 1.35594 8.5ZM8.00001 2.12712C8.8929 3.06173 9.58507 4.1692 10.0339 5.38136H5.96611C6.41494 4.1692 7.10711 3.06173 8.00001 2.12712ZM11.7803 6.73729H14.4054C14.7236 7.8909 14.7236 9.1091 14.4054 10.2627H11.7803C11.9828 9.09629 11.9828 7.90371 11.7803 6.73729ZM13.8658 5.38136H11.4549C11.0801 4.19046 10.4981 3.07505 9.7356 2.08644C10.612 2.32577 11.4303 2.74142 12.1405 3.30798C12.8506 3.87453 13.4377 4.58005 13.8658 5.38136ZM6.26441 2.08644C5.50194 3.07505 4.91991 4.19046 4.54509 5.38136H2.13424C2.56229 4.58005 3.14937 3.87453 3.85954 3.30798C4.56971 2.74142 5.38803 2.32577 6.26441 2.08644ZM2.13424 11.6186H4.54509C4.91991 12.8095 5.50194 13.9249 6.26441 14.9136C5.38803 14.6742 4.56971 14.2586 3.85954 13.692C3.14937 13.1255 2.56229 12.42 2.13424 11.6186ZM9.72746 14.9136C10.4928 13.9255 11.0776 12.8101 11.4549 11.6186H13.8658C13.4377 12.42 12.8506 13.1255 12.1405 13.692C11.4303 14.2586 10.612 14.6742 9.7356 14.9136H9.72746Z" fill="#524C42"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_148_523">
+                <rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
+                </clipPath>
+                </defs>
+                </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+   </header>
+ <!-- Mobile profile -->
+  <header  class="header mobile-show">
+    <nav class="m-0 py-2">
+      <div class="container">
+        <div class="row align-items-center pe-4">
+          @if(mainNavBar){
+          <div class="col-3 main-sidebar">
+            <div class="d-flex">
+              <input   (click)="ToggleClose()" hidden="hidden" type="checkbox" id="sidebar-toggle1" class="sidebar-toggle">
+              <label for="sidebar-toggle1" class="sidebar-label p-0 my-2"><span></span></label>
+              <div class="sidebar-overlay"></div>
+              <div [ngClass]="{'open': open}" [ngClass]="{'close': close}" class="dashbaord-sidebar ">
+                <ul class="sidebar-ul-links m-0 text-end">
+                  <div class="bg-white text-end py-3 px-4">
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'home'" (click)="setActive('home')"
+                    routerLink ="{{langUrl}}/home">
+                    <a>
+                      {{'home' | translate}}
+                    </a>
+                  </li>
+                    <div class="d-flex justify-content-between sidebar-link py-1 px-2 mb-1" (click)="chooseVehicleInsurance()"
+                    [class.active]="activeIndex === 'vehicleInsurance'" (click)="setActive('vehicleInsurance')">
+                      <li (click)="scrollToTop()" class=" d-flex align-items-end gap-2 rtl"
+                      routerLink ="{{langUrl}}/home">
+                        <a>
+                          {{'vehicle_insurance' | translate}}
+                        </a>
+                      </li>
+                      <a>
+                      @if(vehicleInsurance) {
+                      <i class="fa fa-caret-up text-white" aria-hidden="true"></i>
+                      } @else {
+                      <i class="fa fa-caret-down text-white" aria-hidden="true"></i>
+                      }
+                      </a>
+                    </div>
+                    @if(vehicleInsurance) {
+                      <div>
+                        <li (click)="onLinkClick(1)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                          [class.active1]="activeIndex1 === 'newInsurance'"
+                          (click)="setActive1('newInsurance')"
+                          routerLink ="{{langUrl}}/home">
+                     
+                          <a (click)="onLinkClick(1)">
+                            {{'new_insurance' | translate}}
+                          </a>
+                        </li>
+                        <li (click)="onLinkClick(2)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                          [class.active1]="activeIndex1 === 'ownTransfer'"
+                          (click)="setActive1('ownTransfer')"
+                          routerLink ="{{langUrl}}/home">
+                       
+                          <a>
+                            {{'own_transfer' | translate}}
+                          </a>
+                        </li>
+                        <li (click)="onLinkClick(3)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                        [class.active1]="activeIndex1 === 'customsCard'"
+                        (click)="setActive1('customsCard')" routerLink ="{{langUrl}}/home">
+                     
+                        <a>
+                          {{'customs_card' | translate}}
+                        </a>
+                        </li>
+                      </div>
+                    }
+                 
+                    <li (click)="onLinkClick(4)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'medicalInsurance'" (click)="setActive('medicalInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'medical_insurance' | translate}}
+                      </a>
+                    </li>
+ 
+                    <li (click)="onLinkClick(5)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'medicalFaultsInsurance'" (click)="setActive('medicalFaultsInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'medical_faults_insurance' | translate}}
+                      </a>
+                    </li>
+                    <li (click)="onLinkClick(6)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'travelInsurance'" (click)="setActive('travelInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'travel_insurance' | translate}}
+                      </a>
+                    </li>
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'ourServices'" (click)="setActive('ourServices')">
+                    <a>
+                      {{'ourServices' | translate}}
+                    </a>
+                    </li>
+     
+                    <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'contactUS'" (click)="setActive('contactUS')"
+                    routerLink ="{{langUrl}}/contact-us">
+                    <a>
+                      {{'contactUS' | translate}}
+                    </a>
+                    </li>
+ 
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'recommendedQuestions'" (click)="setActive('recommendedQuestions')"
+                    routerLink ="{{langUrl}}/recommended-question">
+                    <a>
+                      {{'recommendedQuestions' | translate}}
+                    </a>
+                    </li>
+
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'addTicket1'" (click)="setActive('addTicket1')"
+                    routerLink ="{{langUrl}}/profile/support">
+                    <a>
+                      {{'addTicket1' | translate}}
+                    </a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          }
+          @else {
+            <div class="col-3 main-sidebar"></div>
+          }
+ 
+          <div class="col-5 text-center">
+            <a class="navbar-brand" routerLink="{{langUrl}}/home">
+              <img src="../../../../assets/images/home-icons/rakeez.jpg" class="img-fluid" alt="logo" />
+            </a>
+          </div>
+       
+          <div class="col-2 d-flex">
+            @if(!userLoggedIn){
+              <button (click)="login()"  type="button" class="login btn btn-outline py-0 px-1">{{'login'|translate}}</button>
+            }
+ 
+            @else{
+           
+              <div class="dropdown">
+                <button class="btn  dropdown-toggle px-1 input-style d-flex justify-content-center align-items-center py-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{'hi'|translate}} {{registrationData.displayName}}
+                </button>
+                <ul class="dropdown-menu p-0">
+                  <li><a (click)="profile()" class="dropdown-item text-center py-2 px-2 border-bottom rounded-1" >{{'profile'|translate}}</a></li>
+                  <li><a (click)="logout()" class="dropdown-item text-center py-2 px-2 rounded-1" >{{'logout'|translate}}</a></li>
+                </ul>
+              </div>
+             
+            }
+            <div class="d-flex language align-items-center">
+              <button class="lang" type="button" (click)="changeLanguage(langText)">
+                {{langText | uppercase}}</button>
+                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_148_523)">
+                  <path d="M16 8.5C15.9972 6.38383 15.1571 4.35475 13.6633 2.85586C12.1695 1.35696 10.1433 0.510027 8.02712 0.5L7.9756 0.5C5.85387 0.503237 3.82032 1.3492 2.32232 2.85177C0.824317 4.35435 -0.0154343 6.39047 -0.0121977 8.5122C-0.00896117 10.6339 0.836997 12.6675 2.33958 14.1655C3.84216 15.6635 5.87827 16.5032 8.00001 16.5C10.1211 16.4978 12.1547 15.6543 13.6545 14.1545C15.1543 12.6547 15.9979 10.6211 16 8.5ZM8.00001 14.8729C7.10711 13.9383 6.41494 12.8308 5.96611 11.6186H10.0339C9.58507 12.8308 8.8929 13.9383 8.00001 14.8729ZM5.59729 10.2627C5.3659 9.09896 5.3659 7.90104 5.59729 6.73729H10.4027C10.6341 7.90104 10.6341 9.09896 10.4027 10.2627H5.59729ZM1.35594 8.5C1.35598 7.90438 1.43625 7.31148 1.59458 6.73729H4.21967C4.01716 7.90371 4.01716 9.09629 4.21967 10.2627H1.59458C1.43625 9.68852 1.35598 9.09562 1.35594 8.5ZM8.00001 2.12712C8.8929 3.06173 9.58507 4.1692 10.0339 5.38136H5.96611C6.41494 4.1692 7.10711 3.06173 8.00001 2.12712ZM11.7803 6.73729H14.4054C14.7236 7.8909 14.7236 9.1091 14.4054 10.2627H11.7803C11.9828 9.09629 11.9828 7.90371 11.7803 6.73729ZM13.8658 5.38136H11.4549C11.0801 4.19046 10.4981 3.07505 9.7356 2.08644C10.612 2.32577 11.4303 2.74142 12.1405 3.30798C12.8506 3.87453 13.4377 4.58005 13.8658 5.38136ZM6.26441 2.08644C5.50194 3.07505 4.91991 4.19046 4.54509 5.38136H2.13424C2.56229 4.58005 3.14937 3.87453 3.85954 3.30798C4.56971 2.74142 5.38803 2.32577 6.26441 2.08644ZM2.13424 11.6186H4.54509C4.91991 12.8095 5.50194 13.9249 6.26441 14.9136C5.38803 14.6742 4.56971 14.2586 3.85954 13.692C3.14937 13.1255 2.56229 12.42 2.13424 11.6186ZM9.72746 14.9136C10.4928 13.9255 11.0776 12.8101 11.4549 11.6186H13.8658C13.4377 12.42 12.8506 13.1255 12.1405 13.692C11.4303 14.2586 10.612 14.6742 9.7356 14.9136H9.72746Z" fill="#524C42"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_148_523">
+                  <rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
+                  </clipPath>
+                  </defs>
+                  </svg>
+            </div>
+ 
+            <div class="py-2 px-1">
+              <i class="fa-solid fa-chevron-left" (click)="back()"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+}
+
+@else{
+   <!-- Desktop home -->
+  <header class="header header-home border-0 desktop-show">
+    <nav class="container-fluid">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="main-sidebar">
+            <div class="d-flex">
+              <input (click)="ToggleClose()" hidden="hidden" type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+              <label for="sidebar-toggle" class="sidebar-label my-2"><span></span></label>
+              <div class="sidebar-overlay"></div>
+              <div [ngClass]="{'open': open}" [ngClass]="{'close': close}" class="dashbaord-sidebar">
+                <ul class="sidebar-ul-links m-0 text-end">
+                  <div class="bg-white text-end py-3 px-3">
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'home'" (click)="setActive('home')"
+                    routerLink ="{{langUrl}}/home">
+                    <a>
+                      {{'home' | translate}}
+                    </a>
+                  </li>
+                    <div class="d-flex justify-content-between sidebar-link py-1 px-2 mb-1" (click)="chooseVehicleInsurance()"
+                    [class.active]="activeIndex === 'vehicleInsurance'" (click)="setActive('vehicleInsurance')">
+                      <li (click)="scrollToTop()" class=" d-flex align-items-end gap-2 rtl"
+                      routerLink ="{{langUrl}}/home" >
+                        <a>
+                          {{'vehicle_insurance' | translate}}
+                        </a>
+                      </li>
+                      <a>
+                      @if(vehicleInsurance) {
+                      <i class="fa fa-caret-up text-white" aria-hidden="true"></i>
+                      } @else {
+                      <i class="fa fa-caret-down text-white" aria-hidden="true"></i>
+                      }
+                      </a>
+                    </div>
+                    @if(vehicleInsurance) {
+                      <div>
+                        <li (click)="onLinkClick(1)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                          [class.active1]="activeIndex1 === 'newInsurance'"
+                          (click)="setActive1('newInsurance')"
+                          routerLink ="{{langUrl}}/home">
+                     
+                          <a>
+                            {{'new_insurance' | translate}}
+                          </a>
+                        </li>
+                        <li (click)="onLinkClick(2)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                          [class.active1]="activeIndex1 === 'ownTransfer'"
+                          (click)="setActive1('ownTransfer')"
+                          routerLink ="{{langUrl}}/home">
+                       
+                          <a>
+                            {{'own_transfer' | translate}}
+                          </a>
+                        </li>
+                        <li (click)="onLinkClick(3)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                        [class.active1]="activeIndex1 === 'customsCard'"
+                        (click)="setActive1('customsCard')" routerLink ="{{langUrl}}/home">
+                     
+                        <a>
+                          {{'customs_card' | translate}}
+                        </a>
+                        </li>
+                      </div>
+                    }
+                 
+                    <li (click)="onLinkClick(4)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'medicalInsurance'" (click)="setActive('medicalInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'medical_insurance' | translate}}
+                      </a>
+                    </li>
+ 
+                    <li (click)="onLinkClick(5)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'medicalFaultsInsurance'" (click)="setActive('medicalFaultsInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'medical_faults_insurance' | translate}}
+                      </a>
+                    </li>
+                    <li (click)="onLinkClick(6)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'travelInsurance'" (click)="setActive('travelInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'travel_insurance' | translate}}
+                      </a>
+                    </li>
+                    <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'ourServices'" (click)="setActive('ourServices')">
+                    <a>
+                      {{'ourServices' | translate}}
+                    </a>
+                    </li>
+               
+                    <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'contactUS'" (click)="setActive('contactUS')" routerLink ="{{langUrl}}/contact-us">
+                    <a>
+                      {{'contactUS' | translate}}
+                    </a>
+                    </li>
+ 
+                    <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'recommendedQuestions'" (click)="setActive('recommendedQuestions')"
+                    routerLink ="{{langUrl}}/recommended-question">
+                    <a>
+                      {{'recommendedQuestions' | translate}}
+                    </a>
+                    </li>
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'addTicket1'" (click)="setActive('addTicket1')"
+                    routerLink ="{{langUrl}}/profile/support">
+                    <a>
+                      {{'addTicket1' | translate}}
+                    </a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="pe-5">
+            <a class="navbar-brand w-100 d-flex justify-content-center align-items-center" routerLink="{{langUrl}}/home">
+              <img src="../../../../assets/images/home-icons/rakeez.jpg" class="img-fluid" alt="logo" />
+            </a>
+          </div>
+       
+          <div class="d-flex">
+            @if(!userLoggedIn){
+              <button (click)="login()"  type="button" class="btn btn-outline">{{'login'|translate}}</button>
+            }
+ 
+            @else{
+ 
+              <div class="dropdown">
+                <button class="btn dropdown-toggle px-3 input-style d-flex justify-content-center align-items-center py-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{'hi'|translate}} {{registrationData.displayName}}
+                </button>
+                <ul class="dropdown-menu p-0">
+                  <li><a (click)="profile()" class="dropdown-item text-center py-2 px-3 border-bottom rounded-1" >{{'profile'|translate}}</a></li>
+                  <li><a (click)="logout()" class="dropdown-item text-center py-2 px-3 rounded-1" >{{'logout'|translate}}</a></li>
+                </ul>
+              </div>
+ 
+         
+            }
+            <div class="d-flex language align-items-center gap-2">
+              <button class="lang" type="button" (click)="changeLanguage(langText)">
+                {{langText | uppercase}}</button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                  <path d="M17.0005 8C16.9977 5.88383 16.1576 3.85475 14.6638 2.35586C13.17 0.856962 11.1438 0.0100273 9.02761 0L8.97609 0C6.85436 0.00323657 4.82081 0.849195 3.32281 2.35177C1.8248 3.85435 0.985054 5.89047 0.988291 8.0122C0.991527 10.1339 1.83749 12.1675 3.34007 13.6655C4.84264 15.1635 6.87876 16.0032 9.00049 16C11.1216 15.9978 13.1551 15.1543 14.655 13.6545C16.1548 12.1547 16.9983 10.1211 17.0005 8ZM9.00049 14.3729C8.1076 13.4383 7.41543 12.3308 6.9666 11.1186H11.0344C10.5856 12.3308 9.89339 13.4383 9.00049 14.3729ZM6.59778 9.76271C6.36638 8.59896 6.36638 7.40104 6.59778 6.23729H11.4032C11.6346 7.40104 11.6346 8.59896 11.4032 9.76271H6.59778ZM2.35643 8C2.35647 7.40438 2.43674 6.81148 2.59507 6.23729H5.22016C5.01765 7.40371 5.01765 8.59629 5.22016 9.76271H2.59507C2.43674 9.18852 2.35647 8.59562 2.35643 8ZM9.00049 1.62712C9.89339 2.56173 10.5856 3.6692 11.0344 4.88136H6.9666C7.41543 3.6692 8.1076 2.56173 9.00049 1.62712ZM12.7808 6.23729H15.4059C15.7241 7.3909 15.7241 8.6091 15.4059 9.76271H12.7808C12.9833 8.59629 12.9833 7.40371 12.7808 6.23729ZM14.8663 4.88136H12.4554C12.0806 3.69046 11.4986 2.57505 10.7361 1.58644C11.6125 1.82577 12.4308 2.24142 13.141 2.80798C13.8511 3.37453 14.4382 4.08005 14.8663 4.88136ZM7.2649 1.58644C6.50243 2.57505 5.92039 3.69046 5.54558 4.88136H3.13473C3.56278 4.08005 4.14986 3.37453 4.86003 2.80798C5.5702 2.24142 6.38852 1.82577 7.2649 1.58644ZM3.13473 11.1186H5.54558C5.92039 12.3095 6.50243 13.4249 7.2649 14.4136C6.38852 14.1742 5.5702 13.7586 4.86003 13.192C4.14986 12.6255 3.56278 11.92 3.13473 11.1186ZM10.728 14.4136C11.4933 13.4255 12.0781 12.3101 12.4554 11.1186H14.8663C14.4382 11.92 13.8511 12.6255 13.141 13.192C12.4308 13.7586 11.6125 14.1742 10.7361 14.4136H10.728Z" fill="white"/>
+                  </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+ <!-- Mobile home -->
+  <header  class="header header-home mobile-show">
+    <nav class="m-0 py-2">
+      <div class="container">
+        <div class="row align-items-center">
+          @if(mainNavBar){
+          <div class="col-4 main-sidebar">
+            <div class="d-flex">
+              <input   (click)="ToggleClose()" hidden="hidden" type="checkbox" id="sidebar-toggle1" class="sidebar-toggle">
+              <label for="sidebar-toggle1" class="sidebar-label my-2"><span></span></label>
+              <div class="sidebar-overlay"></div>
+              <div [ngClass]="{'open': open}" [ngClass]="{'close': close}" class="dashbaord-sidebar ">
+                <ul class="sidebar-ul-links m-0 text-end">
+                  <div class="bg-white text-end py-3 px-4">
+                     <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'home'" (click)="setActive('home')"
+                    routerLink ="{{langUrl}}/home">
+                    <a>
+                      {{'home' | translate}}
+                    </a>
+                  </li>
+                    <div class="d-flex justify-content-between sidebar-link py-1 px-2 mb-1" (click)="chooseVehicleInsurance()"
+                    [class.active]="activeIndex === 'vehicleInsurance'" (click)="setActive('vehicleInsurance')">
+                      <li (click)="scrollToTop()" class=" d-flex align-items-end gap-2 rtl"
+                      routerLink ="{{langUrl}}/home">
+                        <a>
+                          {{'vehicle_insurance' | translate}}
+                        </a>
+                      </li>
+                      <a>
+                      @if(vehicleInsurance) {
+                      <i class="fa fa-caret-up text-white" aria-hidden="true"></i>
+                      } @else {
+                      <i class="fa fa-caret-down text-white" aria-hidden="true"></i>
+                      }
+                      </a>
+                    </div>
+                    @if(vehicleInsurance) {
+                      <div>
+                        <li (click)="onLinkClick(1)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                          [class.active1]="activeIndex1 === 'newInsurance'"
+                          (click)="setActive1('newInsurance')"
+                          routerLink ="{{langUrl}}/home">
+                     
+                          <a>
+                            {{'new_insurance' | translate}}
+                          </a>
+                        </li>
+                        <li (click)="onLinkClick(2)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                          [class.active1]="activeIndex1 === 'ownTransfer'"
+                          (click)="setActive1('ownTransfer')"
+                          routerLink ="{{langUrl}}/home">
+                       
+                          <a>
+                            {{'own_transfer' | translate}}
+                          </a>
+                        </li>
+                        <li (click)="onLinkClick(3)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                        [class.active1]="activeIndex1 === 'customsCard'"
+                        (click)="setActive1('customsCard')"
+                        routerLink ="{{langUrl}}/home">
+                     
+                        <a>
+                          {{'customs_card' | translate}}
+                        </a>
+                        </li>
+                      </div>
+                    }
+                 
+                    <li (click)="onLinkClick(4)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'medicalInsurance'" (click)="setActive('medicalInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'medical_insurance' | translate}}
+                      </a>
+                    </li>
+ 
+                    <li (click)="onLinkClick(5)" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'medicalFaultsInsurance'" (click)="setActive('medicalFaultsInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'medical_faults_insurance' | translate}}
+                      </a>
+                    </li>
+                    <li (click)="onLinkClick(6)"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                      [class.active]="activeIndex === 'travelInsurance'" (click)="setActive('travelInsurance')"
+                      routerLink ="{{langUrl}}/home">
+                      <a>
+                        {{'travel_insurance' | translate}}
+                      </a>
+                    </li>
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'ourServices'" (click)="setActive('ourServices')">
+                    <a>
+                      {{'ourServices' | translate}}
+                    </a>
+                    </li>
+     
+                    <li (click)="toggleOpenAndClose()" class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'contactUS'" (click)="setActive('contactUS')"
+                    routerLink ="{{langUrl}}/contact-us">
+                    <a>
+                      {{'contactUS' | translate}}
+                    </a>
+                    </li>
+ 
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'recommendedQuestions'" (click)="setActive('recommendedQuestions')"
+                    routerLink ="{{langUrl}}/recommended-question">
+                    <a>
+                      {{'recommendedQuestions' | translate}}
+                    </a>
+                    </li>
+                    <li (click)="toggleOpenAndClose()"  class="sidebar-link d-flex align-items-end gap-2 rtl py-1 px-2  mb-1"
+                    [class.active]="activeIndex === 'addTicket1'" (click)="setActive('addTicket1')"
+                    routerLink ="{{langUrl}}/profile/support">
+                    <a>
+                      {{'addTicket1' | translate}}
+                    </a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          }
+          @else {
+            <div class="col-4 main-sidebar"></div>
+          }
+ 
+          <div class="col-6 text-center">
+            <a class="navbar-brand" routerLink="{{langUrl}}/home">
+              <img src="../../../../assets/images/home-icons/rakeez.jpg" class="img-fluid " alt="logo" />
+            </a>
+          </div>
+       
+          <div class="col-2 d-flex">
+            @if(!userLoggedIn){
+              <button (click)="login()"  type="button" class="login btn btn-outline py-0 px-1">{{'login'|translate}}</button>
+            }
+ 
+            @else{
+           
+              <div class="dropdown">
+                <button class="btn  dropdown-toggle px-1 input-style d-flex justify-content-center align-items-center py-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{'hi'|translate}} {{registrationData.displayName}}
+                </button>
+                <ul class="dropdown-menu p-0">
+                  <li><a (click)="profile()" class="dropdown-item text-center py-2 px-2 border-bottom rounded-1" >{{'profile'|translate}}</a></li>
+                  <li><a (click)="logout()" class="dropdown-item text-center py-2 px-2 rounded-1" >{{'logout'|translate}}</a></li>
+                </ul>
+              </div>
+             
+            }
+            <div class="d-flex language align-items-center gap-2">
+              <button class="lang" type="button" (click)="changeLanguage(langText)">
+                {{langText | uppercase}}</button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                  <path d="M17.0005 8C16.9977 5.88383 16.1576 3.85475 14.6638 2.35586C13.17 0.856962 11.1438 0.0100273 9.02761 0L8.97609 0C6.85436 0.00323657 4.82081 0.849195 3.32281 2.35177C1.8248 3.85435 0.985054 5.89047 0.988291 8.0122C0.991527 10.1339 1.83749 12.1675 3.34007 13.6655C4.84264 15.1635 6.87876 16.0032 9.00049 16C11.1216 15.9978 13.1551 15.1543 14.655 13.6545C16.1548 12.1547 16.9983 10.1211 17.0005 8ZM9.00049 14.3729C8.1076 13.4383 7.41543 12.3308 6.9666 11.1186H11.0344C10.5856 12.3308 9.89339 13.4383 9.00049 14.3729ZM6.59778 9.76271C6.36638 8.59896 6.36638 7.40104 6.59778 6.23729H11.4032C11.6346 7.40104 11.6346 8.59896 11.4032 9.76271H6.59778ZM2.35643 8C2.35647 7.40438 2.43674 6.81148 2.59507 6.23729H5.22016C5.01765 7.40371 5.01765 8.59629 5.22016 9.76271H2.59507C2.43674 9.18852 2.35647 8.59562 2.35643 8ZM9.00049 1.62712C9.89339 2.56173 10.5856 3.6692 11.0344 4.88136H6.9666C7.41543 3.6692 8.1076 2.56173 9.00049 1.62712ZM12.7808 6.23729H15.4059C15.7241 7.3909 15.7241 8.6091 15.4059 9.76271H12.7808C12.9833 8.59629 12.9833 7.40371 12.7808 6.23729ZM14.8663 4.88136H12.4554C12.0806 3.69046 11.4986 2.57505 10.7361 1.58644C11.6125 1.82577 12.4308 2.24142 13.141 2.80798C13.8511 3.37453 14.4382 4.08005 14.8663 4.88136ZM7.2649 1.58644C6.50243 2.57505 5.92039 3.69046 5.54558 4.88136H3.13473C3.56278 4.08005 4.14986 3.37453 4.86003 2.80798C5.5702 2.24142 6.38852 1.82577 7.2649 1.58644ZM3.13473 11.1186H5.54558C5.92039 12.3095 6.50243 13.4249 7.2649 14.4136C6.38852 14.1742 5.5702 13.7586 4.86003 13.192C4.14986 12.6255 3.56278 11.92 3.13473 11.1186ZM10.728 14.4136C11.4933 13.4255 12.0781 12.3101 12.4554 11.1186H14.8663C14.4382 11.92 13.8511 12.6255 13.141 13.192C12.4308 13.7586 11.6125 14.1742 10.7361 14.4136H10.728Z" fill="white"/>
+                  </svg>
+            </div>
+ 
+           
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+}

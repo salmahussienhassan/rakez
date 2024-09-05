@@ -1,0 +1,45 @@
+.status-holder {
+    align-items: center;
+    position: relative;
+    width:20%;
+}
+
+
+.status-bar img{
+    width:20%;
+}
+
+.status-slash {
+    border-radius: 3.5px;
+    height: 6px;
+    width: 5%;
+    background: #8a8a8a26;
+    border-radius: 2px;
+    height: 6px;
+}
+
+.status-holder {
+    align-items: center;
+    position: relative;
+}
+
+.status-slash.active {
+    background: #F97300 ;
+    border-radius: 3.5px;
+}
+
+
+.status-holder h1 {
+    color: var(--black-900);
+    font-size: var(--font-size-normal);
+    margin-bottom: 0;
+    margin:0px 8px;
+}
+
+
+.headerActive{
+    color: var(--turquoise) !important;
+}
+.status-bar{
+    margin: 50px 100px;
+}

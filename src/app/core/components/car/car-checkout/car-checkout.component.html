@@ -1,0 +1,227 @@
+<div class="container">
+  <app-progress-bar></app-progress-bar>
+  <div>
+    <div class="container car-details-holder ">
+      <div class="details-holder w-50  mx-auto pt-4">
+          <div class="bg-white w-85 p-4 mb-5 cart border-1 rounded-3 mx-auto p-3">
+          <div class="d-flex justify-content-between">
+
+            <p> {{'basicPremium' | translate}}</p>
+            <p>1,500<span>{{'sr' | translate}}</span></p>
+          </div>
+          <div class="d-flex justify-content-between">
+
+            <p> {{'Tax' | translate}}</p>
+            <p>500<span>{{'sr' | translate}}</span></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center pb-3 border-bottom">
+
+            <p class="mb-0"> {{'voucher' | translate}}</p>
+            <div class="d-flex align-items-center">
+              <div class="verify-input d-flex justify-content-center">
+                <img src="../../../../../assets/images/fi-rr-arrow-small-right.svg" alt="">
+              </div>
+              <input class="verify" type="text">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between pt-3">
+
+            <h5 class="fw-bolder"> {{'total' | translate}}</h5>
+            <h5  class="fw-bolder secondary">{{totalCost}}<span>{{'sr' | translate}}</span></h5>
+          </div>
+          </div>
+          <!-- register form -->
+           @if(token){
+            <div class="bg-white w-85 py-3 px-3 mb-5 cart border-1 rounded-3 mx-auto">
+              <form [formGroup]="createAccountForm" (ngSubmit)="createAccount()" class="p-3"> 
+                <div class="row mb-2">
+                  <label>{{'email' | translate}}</label>
+                  <div class="">  
+                    <input type="email" formControlName="email"  class="form-control"
+                     value="{{this.userData.email}}" readonly>
+                  </div>
+                </div>
+                
+                <div class="row mb-2">
+                  <label>{{'phone' | translate}}</label>
+                  <div class="">
+                    <input type="tel" class="form-control"
+                    formControlName="phoneNumber" value="{{this.userData.phoneNumber}}" readonly>
+                  </div>
+                </div>
+      
+                <div class="mt-4">
+                  <button class="w-100 btn btn-purple btn-sure px-3 py-2" type="submit">{{'continuePayment' | translate}}</button>
+                </div>
+              
+              </form>
+              @if(serverSideError && serverSideError.length!=0)
+              {
+              <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+                <img src="assets/icons/alert-danger.svg">
+              {{serverSideError}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              }
+            </div>
+           }
+           @else{
+            <div class="bg-white w-85 py-3 px-3 mb-5 cart border-1 rounded-3 mx-auto">
+              <form [formGroup]="createAccountForm" (ngSubmit)="createAccount()" class="p-3"> 
+                <div class="row mb-2">
+                  <label>{{'email' | translate}}</label>
+                  <div class="">  
+                    <input type="email" formControlName="email"  class="form-control"
+                    [ngClass]="{ 'is-invalid':(email?.touched || email?.dirty) && email?.invalid}">
+                    <span class="invalid-feedback">
+                      @if(email?.errors?.['required']) 
+                      {<span>{{'email_required' | translate}}</span>}
+                      @else if(email?.errors?.['pattern'])  
+                      {<span>{{'email_invalid' | translate}}</span>}
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="row mb-2">
+                  <label>{{'phone' | translate}}</label>
+                  <div class="">
+                    <input type="tel"   [maxLength]="10" class="form-control"
+                    formControlName="phoneNumber" (keypress)="ValidateNumber($event)"
+                    [ngClass]="{'is-invalid':(phoneNumber?.touched || phoneNumber?.dirty) && phoneNumber?.invalid}">
+                    <span class="invalid-feedback">
+                      @if(phoneNumber?.errors?.['required']) {<span>{{'phone_required' | translate}}</span>}
+                      @else if(phoneNumber?.errors?.['pattern']) {<span>{{'phone_not-valid' | translate}}</span>}
+                    </span>
+                  </div>
+                </div>
+      
+                <div class="row mb-2">
+                  <label>{{'password' | translate}}</label>
+                  <div class="">  
+                    <div class="position-relative">
+                      <input class="form-control " class="form-control" [type]="showPassword ? 'text' : 'password'" formControlName="password" 
+                      [ngClass]="{'is-invalid':(password?.touched || password?.dirty)&& password?.invalid}"/>
+                      <i [ngClass]="{'d-none': showPassword}" (click)="togglePasswordVisibility()" class="position-absolute  fa-solid fa-eye"></i>
+                      <i [ngClass]="{'d-none': !showPassword}" (click)="togglePasswordVisibility()"  class="position-absolute  fa-solid fa-eye-slash"></i>
+                    <span class="invalid-feedback">
+                      @if(password?.errors?.['required']) {<span>{{'password_required' | translate}}</span>}
+                      @else if(password?.errors?.['minlength']) {<span>{{'password_length' | translate}}</span>} 
+                      @else if(password?.errors?.['pattern']) {<span>{{'errorMessage' | translate}}</span>} 
+                    </span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row mb-2">
+                  <label>{{'confirm_password' | translate}}</label>
+                  <div class="">  
+                    <div class="position-relative">
+                    <input class="form-control" [type]="showPassword2 ? 'text' : 'password'" formControlName="confirmPassword"
+                    [ngClass]="{'is-invalid':(confirmPassword?.touched || confirmPassword?.dirty)&& confirmPassword?.invalid}"/>
+                    <i [ngClass]="{'d-none': showPassword2}" (click)="togglePasswordVisibility2()" class="position-absolute  fa-solid fa-eye"></i>
+                    <i [ngClass]="{'d-none': !showPassword2}" (click)="togglePasswordVisibility2()"  class="position-absolute fa-solid fa-eye-slash"></i>
+                    <span class="invalid-feedback">
+                      @if(confirmPassword?.errors?.['required']) {<span>{{'confirm_password_required' | translate}}</span>}
+                      @else if(confirmPassword?.errors?.['mismatch']) { <span>{{'password_not_confirm'| translate}}</span> }
+                      @else if(confirmPassword?.errors?.['pattern']) {<span>{{'password_not-valid' | translate}}</span>}
+                    </span>
+                  </div>
+                </div>
+                </div>
+                <div class="mt-4">
+                  <button class="w-100 btn btn-purple btn-sure px-3 py-2" type="submit">{{'continuePayment' | translate}}</button>
+                </div>
+              
+              </form>
+              @if(serverSideError && serverSideError.length!=0)
+              {
+              <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+                <img src="assets/icons/alert-danger.svg">
+              {{serverSideError}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              }
+            </div>
+           }
+      </div>
+
+      <!-- otp form -->
+        <div class="modal fade" id="otp" tabindex="-1" aria-labelledby="otp" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body pt-0">
+                <form [formGroup]="otpForm" (ngSubmit)="onSubmit()" class="bg-white pt-5 px-3   border-1 rounded-3 mx-auto payment-for">
+                  <h3 class="fw-bold text-center text-black opacity-75 mb-4">{{'checkEmail' | translate}}</h3>
+                  <div class="row mb-1">
+                    <label>{{'checkCode' | translate}}</label>
+                    <div class="text-center my-2">
+                      <ngx-otp-input [options]="otpOptions" (otpChange)="otpComplete($event)"></ngx-otp-input>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="align-items-center d-flex justify-content-between">
+                        <a class="resend-code fw-bold" (click)="resendCode()"  [class.disabled]="isResendDisabled">{{'resendCode' |  translate}}</a>
+                        <label class="form-check-label fw-bold">{{ minutes }}:{{ seconds | number: '2.0' }}</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">    
+                      <button class="w-100 btn-registration bg-primary-500 py-2 my-3" type="submit">{{'check' | translate}} </button>
+                    </div>
+                  </div>
+                  @if(serverSideError && serverSideError.length!=0)
+                  {
+                  <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+                    <img src="assets/icons/alert-danger.svg">
+                  {{serverSideError}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  }
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+     <!-- payment form -->
+      @if(showPaymentCard){
+        <form class="bg-white py-3 px-3 mb-5 cart border-1 rounded-3 mx-auto payment-form" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+          <div class="row  justify-content-between">
+            <div class="details-input  col-lg-12">
+              <!-- <p class="my-4">{{'pay_via' | translate}}</p> -->
+              <div class="payment-way-holders d-flex justify-content-between">
+                <div class="payment-way col-lg-5" (click)="choosePayment(1,'creditcard')" [class.active]="isActive(1)">
+                  <img class="img-logo px-1" src="assets/icons/payment/mastercard.svg" alt="" />
+                  <img class="img-logo px-1" src="assets/icons/payment/visa.svg" alt="" />
+                  <img class="img-logo px-1" src="assets/icons/payment/mada.svg" alt="" />
+                  <img class="img-logo px-1" src="assets/icons/payment/amex.svg" alt="" />
+                </div>
+                <div class="payment-way col-lg-2" (click)="choosePayment(2,'stcpay')" [class.active]="isActive(2)">
+                  <img src="assets/icons/payment/stc.svg" alt="" />
+                </div>
+                <div class="payment-way col-lg-2" (click)="choosePayment(3,'sadad')" [class.active]="isActive(3)">
+                  <img src="assets/icons/payment/sadad.svg" alt="" />
+                </div>
+                <div class="payment-way col-lg-2" (click)="tappyPayment()" (click)="choosePayment(4,'tabby')" [class.active]="isActive(4)">
+                  <img src="assets/icons/payment/tabby.svg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <section style="display: flex; height: 100%; width: 100%; justify-content: center; justify-items: center;">
+            <div  *ngIf="activeIndex !== null" class="mysr-form" style="width: 360px; margin: 40px 0 0 0"></div>
+          </section>
+
+          <div class="container d-flex mt-4 justify-content-center">
+            <div class="btns-holder">
+              <button class="btn btn-purple btn-sure px-3 py-2" type="submit">{{'payment_confirm' | translate}}</button>
+              <button class="btn back-btn btn-outline px-2 py-2" type="button" (click)="previousPage()"> {{'back' | translate}}</button>
+            </div>
+          </div>
+        </form>
+      }
+      
+    </div>
+  </div>
+</div>
+

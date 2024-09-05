@@ -1,0 +1,38 @@
+
+.password-hint {
+    font-size: var(--font-size-xs);
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+.arrow-icon{
+  background: var(--primary-500);
+  border-radius: 50%;
+  opacity: 70%;
+  padding: 5px;
+}
+.btn-registration{
+  background-color: var(--secondary);
+}
+
+.btn-registration:focus{
+  background-color: var(--primary-500);
+  color: var(--white);
+  transition: .3s;
+}
+
+.btn-registration:focus .arrow-icon{
+  background-color: var(--primary-500);
+  border-radius: unset;
+  opacity: 100%;
+  padding: 0 5px 0 0;
+}
+
+.btn-login:focus{
+  color: var(--primary-500);
+  background-color: var(--primary-500);
+}
+
+.form-select{
+  background-color: var(--white2)!important;
+}

@@ -1,0 +1,23 @@
+<div class="status-bar">
+  <div class="row justify-content-between align-items-center">
+    <div class="status-holder d-flex col-lg-2 col-sm-6">
+      <img src="../../../../assets/images/progress-bar/personal.svg" alt="" />
+      <h1>{{'personal_info' | translate}}</h1>
+    </div>
+    <div class="status-slash d-md-block "></div>
+    <div class="status-holder active d-flex col-lg-2 col-sm-6">
+      <img [src]="activeIcon === 'car-details' ? '../../../../assets/images/progress-bar/insurance-info-active.svg' : '../../../../assets/images/progress-bar/insurance-info.svg'" alt="" />
+      <h1 [class.headerActive]="activeIcon === 'car-details'" >{{'insurance_info'| translate}}</h1>
+    </div>
+    <div class="status-slash d-md-block " [class.active]="activeIcon === 'car-details'"></div>
+    <div class="status-holder d-flex col-lg-2 col-sm-6">
+      <img [src]="activeIcon === 'car-quotation' ? '../../../../assets/images/progress-bar/choice-offer-active.svg' : '../../../../assets/images/progress-bar/choice-offer.svg'" alt="" />
+      <h1 [class.headerActive]="activeIcon === 'car-quotation'">{{'choose_offer' | translate}}</h1>
+    </div>
+    <div class="status-slash d-md-block "  [class.active]="activeIcon === 'car-quotation'"></div>
+    <div class="status-holder d-flex col-lg-2 col-sm-6">
+      <img [src]="activeIcon === 'car-checkout' ? '../../../../assets/images/progress-bar/payment-active.svg' : '../../../../assets/images/progress-bar/payment.svg'" alt="" />
+      <h1 [class.headerActive]="activeIcon === 'car-checkout'">{{'payment' | translate}}</h1>
+    </div>
+  </div>
+</div>

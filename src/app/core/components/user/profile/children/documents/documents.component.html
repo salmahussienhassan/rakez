@@ -1,0 +1,134 @@
+<div class="mx-auto main-profile mt-2">
+  
+  <div class=" bg-white  px-4 py-4 rounded-3 ">
+    <h5  class="fw-bolder primary-500 mb-0">  {{'documents' | translate}}</h5>
+    
+  </div>
+
+  
+  <form [formGroup]="InsuranceDocumentForm" (ngSubmit)="onSubmit()" class="border-gray bg-white my-4 w-100 px-3 py-4 rounded-3">
+  <div class=" ">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+      <div class="row flex-column">
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <label class="mb-2">{{'serialCustomCard' | translate}}</label> 
+          <input  class="form-control"
+          formControlName="serialCustomCard" (keypress)="ValidateNumber($event)" type="text"
+          [maxLength]="10" [ngClass]="{'is-invalid': (serialCustomCard?.touched || serialCustomCard?.dirty) && serialCustomCard?.invalid}">
+          <span class="invalid-feedback">
+            @if(serialCustomCard?.errors?.['required']) {<span>{{'serialCustomCardRequired' | translate}}</span>}
+            @if(serialCustomCard?.errors?.['minlength']) {<span>{{'limitCustomerCard' | translate}}</span>}
+          </span>
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <label class="mb-2">{{'identification_no' | translate}}</label> 
+          <input type="text"  required="required" class="form-control"
+          formControlName="IdentificationNumber"  (keypress)="ValidateNumber($event)" 
+          [maxLength]="10" [ngClass]="{'is-invalid': (IdentificationNumber?.touched || IdentificationNumber?.dirty) && IdentificationNumber?.invalid}">
+          <span class="invalid-feedback">
+            @if(IdentificationNumber?.errors?.['required']) {<span>{{'identification_no_required' | translate}}</span>}
+            @else if(IdentificationNumber?.errors?.['minlength']) {<span>{{'limitOwnerId' | translate}}</span>}
+          </span>
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
+          <label class="mb-2">{{'document_no' | translate}}</label> 
+          <input type="text"  class="form-control"
+          formControlName="documentNumber"
+            [ngClass]="{'is-invalid': (documentNumber?.touched || documentNumber?.dirty) && documentNumber?.invalid}">
+          <span class="invalid-feedback">
+            @if(documentNumber?.errors?.['required']) {<span>{{'document_no_required' | translate}}</span>}
+          </span>
+        </div>
+
+   <div class="col-lg-8 col-md-8 col-sm-12 mt-3">
+
+     <button type="submit" class="search-btn w-100 mx-0 btn text-white ">
+       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16634 15.0007C12.388 15.0007 14.9997 12.389 14.9997 9.16732C14.9997 5.94566 12.388 3.33398 9.16634 3.33398C5.94468 3.33398 3.33301 5.94566 3.33301 9.16732C3.33301 12.389 5.94468 15.0007 9.16634 15.0007ZM9.16634 4.83398C8.59728 4.83398 8.03379 4.94607 7.50805 5.16384C6.9823 5.38161 6.5046 5.7008 6.10221 6.10319C5.69982 6.50558 5.38063 6.98328 5.16286 7.50902C4.94509 8.03477 4.83301 8.59826 4.83301 9.16732C4.83301 9.7196 5.28072 10.1673 5.83301 10.1673C6.38529 10.1673 6.83301 9.7196 6.83301 9.16732C6.83301 8.8609 6.89336 8.55748 7.01062 8.27439C7.12788 7.9913 7.29976 7.73407 7.51643 7.5174C7.7331 7.30073 7.99032 7.12886 8.27341 7.0116C8.55651 6.89434 8.85992 6.83398 9.16634 6.83398C9.71863 6.83398 10.1663 6.38627 10.1663 5.83398C10.1663 5.2817 9.71863 4.83398 9.16634 4.83398Z" fill="white"/>
+         <path d="M16.6667 16.6667L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+         </svg>
+         
+       {{'search' | translate}}
+     </button>
+   </div>
+      </div>
+      
+      </div>
+  
+      
+    </div>
+  </div>
+  </form>
+
+  <div class="border-gray bg-white w-100 px-3 py-4 my-4 rounded-3">
+<div class="d-flex flex-column">
+
+  <div class="d-flex mb-2">
+<p [ngClass]="{'tap-style-active': OngoingDocumentsFlag}" (click)="OngoingDocuments()" class="border tap-style-active tap-style rounded-2 rounded-start-0 p-2"> {{'ongoingDocumentation' | translate}}</p>
+<p [ngClass]="{'tap-style-active': ExpiredDocumentsFlag}" (click)="ExpiredDocuments()" class="border tap-style rounded-2 rounded-end-0 p-2"> {{'expiredDocuments' | translate}}</p>
+  </div>
+
+  <div >
+<h5 [ngClass]="{'d-none': ExpiredDocumentsFlag}" class="fw-bolder mb-4">{{'currentInsurancePolicies' | translate}}</h5>
+<h5 [ngClass]="{'d-none': OngoingDocumentsFlag}" class="fw-bolder mb-4">{{'expiredInsurancePolicies' | translate}}</h5>
+
+<div  style="overflow-x:auto;">
+
+  <table class="table">
+    <thead>
+      <tr class="table-light">
+        <th class="th-style" scope="col">{{'status'| translate}}</th>
+        <th class="th-style" scope="col">{{'theTypeOfTheVehicle'| translate}}</th>
+        <th class="th-style" scope="col">{{'document_no'| translate}}</th>
+        <th class="th-style" scope="col">{{'insurance_name'| translate}}</th>
+        <th [ngClass]="{'d-none': ExpiredDocumentsFlag}" class="th-style" scope="col">{{'insuranceStartDate'| translate}}</th>
+        <th class="th-style" scope="col">{{'insuranceEndDate'| translate}}</th>
+        <th></th>
+        <th></th>
+        <th class="th-style" scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for( item of test; track item ){
+        
+        <tr>
+          <th class="th-body-style d-flex flex-column align-items-center" scope="row">
+            <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.1534 0.695165L17.8189 13.9717C17.9358 14.1741 17.9973 14.4038 17.9973 14.6376C17.9973 14.8713 17.9358 15.101 17.8189 15.3034C17.702 15.5059 17.5339 15.674 17.3314 15.7909C17.129 15.9078 16.8994 15.9693 16.6656 15.9693H1.33463C1.10087 15.9693 0.871221 15.9078 0.668776 15.7909C0.466331 15.674 0.29822 15.5059 0.18134 15.3034C0.0644597 15.101 0.0029282 14.8713 0.00292969 14.6376C0.00293117 14.4038 0.0644656 14.1741 0.181348 13.9717L7.84682 0.695165C8.3591 -0.192659 9.64023 -0.192659 10.1534 0.695165ZM9.00011 11.2177C8.76464 11.2177 8.53882 11.3112 8.37232 11.4777C8.20582 11.6442 8.11228 11.87 8.11228 12.1055C8.11228 12.341 8.20582 12.5668 8.37232 12.7333C8.53882 12.8998 8.76464 12.9933 9.00011 12.9933C9.23557 12.9933 9.46139 12.8998 9.62789 12.7333C9.79439 12.5668 9.88793 12.341 9.88793 12.1055C9.88793 11.87 9.79439 11.6442 9.62789 11.4777C9.46139 11.3112 9.23557 11.2177 9.00011 11.2177ZM9.00011 5.00289C8.78265 5.00292 8.57276 5.08276 8.41026 5.22726C8.24776 5.37176 8.14394 5.57087 8.1185 5.78684L8.11228 5.89071V9.44201C8.11253 9.6683 8.19918 9.88595 8.35452 10.0505C8.50987 10.215 8.72218 10.3141 8.94808 10.3273C9.17398 10.3406 9.39641 10.2671 9.56994 10.1219C9.74347 9.97661 9.85499 9.77059 9.88172 9.54589L9.88793 9.44201V5.89071C9.88793 5.65525 9.79439 5.42943 9.62789 5.26293C9.46139 5.09643 9.23557 5.00289 9.00011 5.00289Z" fill="#15B097"/>
+              </svg>
+              
+
+              <span>{{'renewalComingSoon'| translate}}</span>
+          </th>
+          <td class="td-orange">{{item}}</td>
+          <td class="th-body-style">Otto</td>
+          <td class="th-body-style">mft</td>
+          <td [ngClass]="{'d-none': ExpiredDocumentsFlag}" class="th-body-style">Mark</td>
+     
+          <td class="td-purple">Otto</td>
+          <td></td>
+          <td></td>
+          <td>
+            <a>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 14L11.2929 14.7071L12 15.4142L12.7071 14.7071L12 14ZM13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44771 11 5L13 5ZM6.29289 9.70711L11.2929 14.7071L12.7071 13.2929L7.70711 8.29289L6.29289 9.70711ZM12.7071 14.7071L17.7071 9.70711L16.2929 8.29289L11.2929 13.2929L12.7071 14.7071ZM13 14L13 5L11 5L11 14L13 14Z" fill="#FF9B45"/>
+              <path d="M5 16L5 17C5 18.1046 5.89543 19 7 19L17 19C18.1046 19 19 18.1046 19 17V16" stroke="#FF9B45" stroke-width="2"/>
+              </svg>
+  
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  
+    </table>
+  </div>
+  
+
+  </div>
+</div>
+  </div>
+</div>

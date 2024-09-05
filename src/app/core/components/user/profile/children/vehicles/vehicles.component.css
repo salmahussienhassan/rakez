@@ -1,0 +1,65 @@
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 49%;
+    }
+}
+
+:not(.btn-check) + .btn:active{
+    border-color:#EDF6F8 !important;
+}
+button:hover{
+    color:var(--black-300)
+}
+.main-profile{
+    border-radius:8px;
+    width:95%;
+}
+input{
+border:  #D1D5DB;
+background: #F9FAFB;
+}
+.border-gray{
+    border-right:  2px solid #7D94A6;
+}
+.table {
+    --bs-table-bg: #F6F6F6;
+   
+}
+.table{
+    border: 0.5px solid #DDD;
+    font-size:13px;
+}
+.bg-gray{
+    margin-bottom:-50px;
+    border-radius: 0px 0px 8px 8px;
+    background-color:#E9E9E9;
+}
+.bg-gray:hover{
+    background-color:#F4E9F4;
+}
+.gray-600{
+    color:#302D27;
+}
+@media only screen and (max-width: 767px) {
+
+    .table-container{
+        width:100% !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .vehicles-list{
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-direction: column;
+    }
+}
+
+.vehicles-list{
+    flex-direction: row;
+    overflow-x:auto; 
+    overflow-y: hidden
+}

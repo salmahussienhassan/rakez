@@ -1,0 +1,681 @@
+<div class="container">
+  <!--Sidebar-->
+  <app-progress-bar></app-progress-bar>
+  <!--Quotation-->
+  <div class="container car-details-holder">
+    <h3 class="my-4">{{'choose_the_appropriate_offer'| translate}}</h3>
+  </div>
+
+  <div class="row gy-2 d-flex justify-content-between sort-prices align-items-center">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <button class="subtab-panel-title px-4 btn" [style]="activeIndex === 1 ? activeStyle : inactiveStyle" (click)="selectType(1)">
+          {{'against_others'| translate}}
+        </button>
+        <button class="subtab-panel-title  px-4 btn" [style]="activeIndex === 2 ? activeStyle : inactiveStyle" (click)="selectType(2)">
+          {{'including'| translate}}
+        </button>
+        <button class="subtab-panel-title  px-4 title1 btn" [style]="activeIndex === 3 ? activeStyle : inactiveStyle" (click)="selectType(3)">
+          {{'other'| translate}}
+        </button>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-12"></div>
+    @if(typeRepair){
+      <div class=" col-lg-5 col-md-5 col-sm-12 d-flex mt-3 align-items-center">
+        <div class="row w-100">
+          <div class="col-md-7 col-sm-12 text-start">
+              <label class="form-label">{{'maintenance_way' | translate}}</label>
+              <select class="input-style">
+                @for(item of repairMethods;track $index){
+                <option>{{item.value}}</option>}
+              </select>
+          </div>
+          <div class="col-md-5 col-sm-12 ">
+              <p class="mb-0 text-start"><i style="background: rgb(206, 206, 206); color: rgb(33, 60, 117);" class="fa-solid fa-arrow-down-wide-short "></i>
+                {{'sort_by_lowest_price'| translate}}
+              </p>
+          </div>
+        </div>
+      </div>
+    }
+    @if(!typeRepair){
+      <div class="col-lg-4 col-md-4 col-sm-12">
+          <p class="arrange-salary mb-0"><i style="background: rgb(206, 206, 206); color: rgb(33, 60, 117);" class="fa-solid fa-arrow-down-wide-short"></i>
+            {{'sort_by_lowest_price'| translate}}
+          </p>
+      </div>
+    }
+  </div>
+
+  <div (click)="ToggleCopySuccess()" class="share-button-fix pb-2">
+    <a class="px-3 py-2" data-toggle="tooltip" data-bs-target="#share-offer" data-bs-toggle="modal">
+    <span class="text-inherit font-semibold text-sm">{{'shareTheQuote'|translate}} </span>
+      <i class="fas fa-share-alt"></i>
+    </a>
+  </div>
+
+  <!--Quotation-->
+  @if(againstOthers){
+    <div class="row justify-content-between align-items-center gy-5 my-2 px-2">
+      @for(item of carQuotation;track $index){
+        <div class="col-md-4 car-card pt-3 position-relative ">
+
+          <div class="card-offer py-2 px-1 position-absolute text-white top-0 d-flex flex-column align-items-center justify-content-center ">
+            <p class="text-center mb-2">  {{'noClaimsDiscount' | translate}}</p>
+            <p class="mb-0 fw-bold">500 {{'sr' | translate}}</p>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-center flex-column">
+            <img class="w-img mb-3" [src]=item.src>
+              <h5 class="fw-bold">{{item.title}}</h5>
+              <div >
+              <span class="rate-negam">{{'rate-negam' | translate}}</span>
+              <div class="star-rating d-flex justify-content-center" title="{{'negm4' | translate}}">
+                <label class="star" for="star1">&#9733;</label>
+                <label class="star" for="star2">&#9733;</label>
+                <label class="star" for="star3">&#9733;</label>
+                <label class="star" for="star4">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1" hidden>
+                <input type="radio" id="star2" name="rating" value="2" hidden>
+                <input type="radio" id="star3" name="rating" value="3" hidden>
+                <input type="radio" id="star4" name="rating" value="4" hidden>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-3">
+            <div class="d-flex tabby  align-items-center py-1 px-0" title="{{'tabbyTittle' | translate}}">
+              <img class="px-2" src="../../../../../assets/icons/tabby.svg">
+              <span class="opacity-75">{{'installment'| translate}}</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div>
+              <div class="d-flex h-100 w-100 align-items-center">
+                <label class="checkbox-container h-100">
+                  <input id="1" type="checkbox" class="custom-checkbox rounded-1" checked disabled />
+                  <span class="checkmark"></span>
+                </label>
+
+                <label for="1" class="mb-0 mx-2">
+                  {{'fixedBenefit' | translate}}
+                  <span class="value-color">{{'fixedBenefitPrice' | translate}}</span>
+                </label>
+              </div>
+
+              <div class="d-flex h-100 w-100 align-items-center">
+                <label class="checkbox-container h-100">
+                  <input id="2" type="checkbox"   class="custom-checkbox rounded-1" (change)="takeValue(3000, $event)"/>
+                  <span class="checkmark"></span>
+                </label>
+                <label for="2" class="mt-1 mx-2">
+                  {{'covering_physical_damage_car' | translate}}
+                  <span class="value-color">3,000 {{'sr' | translate}}</span>
+                </label>
+              </div>
+
+              @for(item of benefits;track $index){
+                @if($index < 2){
+                  <div class="d-flex h-100 w-100 align-items-center">
+                    <label class="checkbox-container h-100">
+                      <input id="1" type="checkbox" class="custom-checkbox rounded-1"/>
+                      <span class="checkmark"></span>
+                    </label>
+                    <label for="1" class="mt-1 mx-2">
+                      {{item.name | translate}}
+                      <span class="value-color" value=""> {{item.value}} {{'sr' | translate}}</span>
+                    </label>
+                  </div>
+                }
+
+                @else {
+                <div class="h-100 d-flex w-100 align-items-center " [class.hide]="!showMore">
+                  <label class="checkbox-container h-100">
+                    <input id="1" type="checkbox" class="custom-checkbox rounded-1" />
+                    <span class="checkmark"></span>
+                  </label>
+                  <label for="1" class="mt-1 mx-2">
+                    {{item.name | translate}}
+                    <span class="value-color"> {{item.value}} {{'sr' | translate}}</span>
+                  </label>
+                </div>
+                }
+              }
+            </div>
+        </div>
+
+        <div class="bg-primary-500 row py-3">
+          <div class="row">
+            <span class="col-6 fw-lighter  text-white">{{'basicPremium' | translate}}</span>
+            <span  class="col-6  text-white text-end">1,500 {{'sr' | translate}}</span>
+          </div>
+
+          <div class="row my-3">
+            <span  class="col-6  text-white">{{'Tax' | translate}}</span>
+            <span  class="col-6  text-end text-white">500 {{'sr' | translate}}</span>
+          </div>
+
+          <div class="row">
+            <span  class="col-6 fw-bold text-white">{{'total' | translate}}</span>
+            <span  class="col-6  text-end fw-bold text-white h5 ">{{totalCost}} {{'sr' | translate}}</span>
+          </div>
+        </div>
+
+        <div class="row bg-secondary rounded-bottom-2 mt">
+          <button type="button" class="btn bg-secondary mx-0 text-white " data-toggle="tooltip" data-bs-target="#againstOthers" data-bs-toggle="modal" (click)="displayValue(1)">{{'purches' | translate}}</button>
+        </div>
+        </div>
+      }
+  </div>
+}
+  <!--Quotation-->
+  @if(including){
+    <div class="row justify-content-between align-items-center gy-5 my-2 px-2">
+      @for(item of carIncluding;track $index){
+        <div class="col-md-4 car-card pt-3 position-relative ">
+          <div class="card-offer py-2 px-1 position-absolute text-white top-0 d-flex flex-column align-items-center justify-content-center ">
+            <p class="text-center mb-2">  {{'noClaimsDiscount' | translate}}</p>
+            <p class="mb-0 fw-bold">500 {{'sr' | translate}}</p>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-center flex-column">
+            <img class="w-img mb-3" [src]=item.src>
+
+              <h5 class="fw-bold">{{item.title}}</h5>
+              <div >
+              <span class="rate-negam">{{'rate-negam' | translate}}</span>
+              <div class="star-rating d-flex justify-content-center" title="{{'negm4' | translate}}">
+                <label class="star" for="star1">&#9733;</label>
+                <label class="star" for="star2">&#9733;</label>
+                <label class="star" for="star3">&#9733;</label>
+                <label class="star" for="star4">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1" hidden>
+                <input type="radio" id="star2" name="rating" value="2" hidden>
+                <input type="radio" id="star3" name="rating" value="3" hidden>
+                <input type="radio" id="star4" name="rating" value="4" hidden>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row d-flex flex-column align-items-center justify-content-center">
+            <span class="text-center">{{'negamDiscount' | translate}}</span>
+            <span class="total-span text-center">500 {{'sr' | translate}}</span>
+          </div>
+          <div class="my-3">
+            <div class="d-flex tabby  align-items-center py-1 px-0" title="{{'tabbyTittle' | translate}}">
+              <img class="px-2" src="../../../../../assets/icons/tabby.svg">
+              <span class="opacity-75">{{'installment'| translate}}</span>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <label style="margin-left: -68px;" class="form-label px-3">{{'Endurance' | translate}}</label>
+            <div class=" ratio"  title="{{'ratio' | translate}}">
+              <select class=" form-select fw-bolder">
+                <option selected="">1000<span>{{'sr' | translate}}</span></option>
+                <option >500<span>{{'sr' | translate}}</span></option>
+                <option>200<span>{{'sr' | translate}}</span></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div>
+              <div class="d-flex h-100 w-100 align-items-center">
+                <label class="checkbox-container h-100">
+                  <input id="1" type="checkbox" class="custom-checkbox rounded-1" checked disabled />
+                  <span class="checkmark"></span>
+                </label>
+
+                <label for="1" class="mt-1 mx-2">
+                  {{'car_accident_coverage' | translate}}
+                  <span class="value-color">5,000 {{'sr' | translate}}</span>
+                </label>
+              </div>
+
+              <div class="d-flex h-100 w-100 align-items-center">
+                <label class="checkbox-container h-100">
+                  <input id="2" type="checkbox" checked disabled  class="custom-checkbox rounded-1"/>
+                  <span class="checkmark"></span>
+                </label>
+                <label for="2" class="mt-1 mx-2">
+                  {{'covering_physical_damage_car' | translate}}
+                  <span class="value-color">3,000 {{'sr' | translate}}</span>
+                </label>
+              </div>
+
+              @for(item of benefits;track $index){
+                @if($index < 2){
+                  <div class="d-flex h-100 w-100 align-items-center">
+                    <label class="checkbox-container h-100">
+                      <input id="1" type="checkbox" class="custom-checkbox rounded-1" />
+                      <span class="checkmark"></span>
+                    </label>
+                    <label for="1" class="mt-1 mx-2">
+                      {{item.name | translate}}
+                      <span class="value-color" value=""> {{item.value}} {{'sr' | translate}}</span>
+                    </label>
+            </div>
+            }
+
+            @else {
+            <div class="h-100 d-flex w-100 align-items-center " [class.hide]="!showMore">
+              <label class="checkbox-container h-100">
+                <input id="1" type="checkbox" class="custom-checkbox rounded-1" />
+                <span class="checkmark"></span>
+              </label>
+              <label for="1" class="mt-1 mx-2">
+                {{item.name | translate}}
+                <span class="value-color"> {{item.value}} {{'sr' | translate}}</span>
+              </label>
+            </div>
+            }
+              }
+            </div>
+        </div>
+
+        <div class="bg-primary-500 row py-3">
+            <div class="row">
+              <span class="col-6 fw-lighter  text-white">{{'basicPremium' | translate}}</span>
+              <span  class="col-6  text-white text-end">1,500 {{'sr' | translate}}</span>
+            </div>
+
+            <div class="row my-3">
+              <span  class="col-6  text-white">{{'Tax' | translate}}</span>
+              <span  class="col-6  text-end text-white">500 {{'sr' | translate}}</span>
+            </div>
+
+            <div class="row">
+              <span  class="col-6 fw-bold text-white">{{'total' | translate}}</span>
+              <span  class="col-6  text-end fw-bold text-white h5 ">4,000 {{'sr' | translate}}</span>
+            </div>
+        </div>
+
+        <div class="row bg-secondary rounded-bottom-2 mt">
+          <button type="button" class="btn bg-secondary mx-0 text-white " data-toggle="tooltip" data-bs-target="#including" data-bs-toggle="modal">{{'purches' | translate}}</button>
+        </div>
+       </div>
+      }
+    </div>
+  }
+
+  <div class=" col-12 my-3 text-end">
+    <button type="button" class="btn primary-500 back-btn btn-outline px-4 rounded-3" (click)="previousPage()">
+      {{'back' | translate}}</button>
+  </div>
+</div>
+
+<!--  Pop up of share Button -->
+<div class="modal fade" id="share-offer" tabindex="-1" aria-labelledby="share-offerLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header  d-flex flex-column">
+      <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn close me-auto"><i class="fa-solid fa-circle-xmark fs-4"></i></button>
+
+      <dotlottie-player
+      class="text-center mb-4"
+      src="../../../../../assets/loaders/Animation - 1724568812549 (1).json"
+      background
+      ="transparent"
+      speed
+      ="2"
+      style
+      ="width: 45px;"
+      loop
+      autoplay
+      ></dotlottie-player>
+
+        <h6 class="modal-title fw-bold primary-500" id="share-offerLabel">{{"shareOffer" | translate}}</h6>
+    </div>
+    <div class="modal-body text-center ">
+      <p class="fs-6 fw-bold">{{"payLater" | translate}}</p>
+      <a class="copy-link" [href]="shareLink">{{shareLink}}</a>
+      <div class="w-md-50 mx-auto d-flex justify-content-between align-items-center my-3">
+        <svg class="pointer" [ngClass]="{'d-none': copySuccess}"  (click)="copyUrl()" width="30" height="30" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.8307 17.6544V23.2544C21.8307 27.9211 19.9641 29.7878 15.2974 29.7878H9.6974C5.03073 29.7878 3.16406 27.9211 3.16406 23.2544V17.6544C3.16406 12.9878 5.03073 11.1211 9.6974 11.1211H15.2974C19.9641 11.1211 21.8307 12.9878 21.8307 17.6544Z" fill="#32012F"/>
+          <path d="M23.2997 3.12109H17.6997C13.5889 3.12109 11.661 4.57988 11.2593 8.10644C11.1753 8.84422 11.7863 9.45443 12.5289 9.45443H15.2997C20.8997 9.45443 23.4997 12.0544 23.4997 17.6544V20.4252C23.4997 21.1678 24.1099 21.7788 24.8477 21.6948C28.3742 21.2931 29.833 19.3652 29.833 15.2544V9.65443C29.833 4.98776 27.9664 3.12109 23.2997 3.12109Z" fill="#32012F"/>
+          </svg>
+
+          <svg [ngClass]="{'d-none': !copySuccess}" width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.7997 2.66602H17.1997C13.0889 2.66602 11.161 4.1248 10.7593 7.65137C10.6753 8.38914 11.2863 8.99935 12.0289 8.99935H14.7997C20.3997 8.99935 22.9997 11.5993 22.9997 17.1993V19.9701C22.9997 20.7127 23.6099 21.3237 24.3477 21.2397C27.8742 20.838 29.333 18.9101 29.333 14.7993V9.19935C29.333 4.53268 27.4664 2.66602 22.7997 2.66602Z" fill="#32012F"/>
+            <path d="M14.7974 10.666H9.1974C4.53073 10.666 2.66406 12.5327 2.66406 17.1993V22.7993C2.66406 27.466 4.53073 29.3327 9.1974 29.3327H14.7974C19.4641 29.3327 21.3307 27.466 21.3307 22.7993V17.1993C21.3307 12.5327 19.4641 10.666 14.7974 10.666ZM16.3841 18.1993L11.4374 23.146C11.2507 23.3327 11.0107 23.426 10.7574 23.426C10.5041 23.426 10.2641 23.3327 10.0774 23.146L7.5974 20.666C7.22406 20.2927 7.22406 19.6927 7.5974 19.3193C7.97073 18.946 8.57073 18.946 8.94406 19.3193L10.7441 21.1193L15.0241 16.8393C15.3974 16.466 15.9974 16.466 16.3707 16.8393C16.7441 17.2127 16.7574 17.826 16.3841 18.1993Z" fill="#32012F"/>
+            </svg>
+
+<a class="text-decoration-none" >  <i class="fa-brands fa-x-twitter circle-style"></i> </a>
+         <a  class="text-decoration-none" >  <i class="fa-brands fa-snapchat circle-style"></i></a>
+         <a  class="text-decoration-none" > <i class="fa-brands fa-tiktok circle-style"></i></a>
+         <a class="text-decoration-none" >  <i class="fa-brands fa-instagram circle-style"></i></a>
+         <a class="text-decoration-none"><i class="fa-brands fa-facebook-f circle-style"></i></a>
+          
+  
+      <!-- <button class="btn btn-purple mt-2"   data-bs-dismiss="modal" aria-label="Close" (click)="copyUrl()">{{"copyLink" | translate}}</button></div> -->
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Pop up of against others -->
+<div class="modal fade" id="againstOthers" tabindex="-1" aria-labelledby="againstOthersLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header pb-2 d-flex align-items-center justify-content-between">
+      <h6 class="modal-title primary-500 fw-semibold" id="includingLabel">{{"againstOthersTitle" | translate}}</h6>
+      <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn close m-0">
+        <i class="fa-solid fa-circle-xmark fs-4"></i>
+      </button>
+    </div>
+    <div class="modal-body pt-0">
+      <div class="">
+      
+        <div class="difference-border px-2 pt-2">
+          <div class="d-flex">
+            <span class="mb-0">{{'priceDifference' | translate}}</span>
+            <span class="secondary fw-bold px-2">4000<span class="fw-bold px-1">{{'sr'| translate}}</span></span>
+          </div>
+          <div class="price-difference">
+            <p>{{'includingAdvantages' | translate}}</p>
+          </div>
+        </div>
+
+        <div class="px-3 row d-flex text-center justify-content-center gap-4">
+          <!-- <div class="card col-lg-5 col-md-5 col-sm-12 advantages pb-0 desktop-show">
+            <h6 class="primary-500 fw-bold fs-6">{{'advantages' | translate}}</h6>
+            <ul class="text-start px-4">
+              <li >
+                <p class="mb-2">الأخطار الطبيعية</p>
+              </li>
+              <li>
+                <p class="mb-2">ضرر كامل</p>
+              </li>
+              <li>
+                <p  class="mb-2">مصاريف طبية</p>
+              </li>
+              <li>
+                <p  class="mb-2">الأضرار المادية للطرف الثالث</p>
+              </li>
+              <li>
+                <p  class="mb-2">السرقة</p>
+              </li>
+              <li>
+                <p  class="mb-2">الحرائق</p>
+              </li>
+            </ul>
+          </div> -->
+
+          <div class=" px-0 col-lg-12 col-md-12 col-sm-12" (click)="showAdvantages()" >
+            <div class="d-flex justify-content-between px-2 border rounded my-3 py-2 pt-3">
+              <h6 class="primary-500 fw-bold fs-6">{{'advantages' | translate}}</h6>
+              <a>
+                @if(advantages) {
+                <i class="fa my-0 fa-caret-up" aria-hidden="true"></i>
+                } @else {
+                <i class="fa my-0 fa-caret-down" aria-hidden="true"></i>
+                }
+              </a>
+            </div>
+            @if(advantages) {
+            <ul class="text-start px-4">
+              <li>
+                <p class="mb-2 fs-7">الأخطار الطبيعية</p>
+              </li>
+              <li>
+                <p class="mb-2 fs-7">ضرر كامل</p>
+              </li>
+              <li>
+                <p  class="mb-2 fs-7">مصاريف طبية</p>
+              </li>
+              <li>
+                <p  class="mb-2 fs-7">الأضرار المادية للطرف الثالث</p>
+              </li>
+              <li>
+                <p  class="mb-2 fs-7">السرقة</p>
+              </li>
+              <li>
+                <p  class="mb-2 fs-7">الحرائق</p>
+              </li>
+            </ul>
+          }
+          </div>
+
+        </div>
+
+        <div class="row d-flex justify-content-between mt-4">
+          <div class="col-6 d-flex align-items-center justify-content-center">
+            <label class="form-label text-end">{{'endurance' | translate}}</label>
+            <p class="px-1 my-0"><span class="endurance-percentage fw-semibold  px-2 py-1">1000{{'sr' | translate}}</span></p>
+          </div>
+
+          <div class="col-6 d-flex align-items-center justify-content-center">
+            <label class="form-label text-end">{{'maintenance_way' | translate}}</label>
+            <p class="px-1 my-0"><span class="endurance-percentage fw-semibold  px-2 py-1">ورش</span></p>
+          </div>
+          
+        </div>
+
+        <div class="mt-3 px-3 row d-flex justify-content-center gap-4">
+          <button class="col-lg-5 col-md-5 col-sm-12 btn-continue btn-outline py-2" (click)="onSubmit()" data-bs-dismiss="modal" aria-label="Close">
+             <div>
+              <span class="secondary px-1">(8000 {{'sr' | translate}})</span>
+              <span>{{"gotoPayment"| translate}}</span>
+              <img class="rotate-img" src="../../../../../assets/icons/fi-ss-arrow-small-left.svg">
+             </div>
+          </button>
+          
+          <button class="col-lg-5 col-md-5 col-sm-12  btn-continue-popup  px-1 py-2" (click)="onSubmit()" data-bs-dismiss="modal" aria-label="Close">
+            <div class="py-1">
+              <span class="">{{"continueAgainst"| translate}}</span> <span class="secondary"> {{totalCost}} {{'sr' | translate}}</span>
+            </div>
+        </button>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Pop up of including -->
+<div class="modal fade" id="including" tabindex="-1" aria-labelledby="includingLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header d-flex align-items-center justify-content-between">
+      <h6 class="modal-title primary-500 fw-semibold" id="includingLabel">{{"checkVehicle" | translate}}</h6>
+      <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn close">
+        <i class="fa-solid fa-circle-xmark fs-4"></i>
+      </button>
+
+    </div>
+    <div class="modal-body pt-0">
+      <form [formGroup]="uploadMediaForm" (ngSubmit)="onSubmitIncluding()">
+        <div class="img-transform" (click)="openuploadImagesForm()">
+          <h5 class="primary-500">
+            {{"uploadImageNum" | translate}}
+          </h5>
+          <p class="upload-text black-900">{{"uploadImage" | translate}}</p>
+        </div>
+      @if(showUploadImages)
+      {
+        <div  class="col-md-12">
+          <div class="d-flex justify-content-between mt-3 row-container ps-10">
+            <div class="w-100">
+              <div class="text-center p-2 border-secondary border-lighten-3 rounded-lg bg-light-secondary">
+                <div class="images-card">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-container custom-border">
+                    @for(i of [1,2,3,4,5];track $index)
+                    {
+                    <div class="file-container" >
+                      <label class="drag-text text-center" style="cursor: pointer;">
+                        <input type="file" [formControlName]="'ImageFile' + i" (change)="uploadFile($event, i)" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                        @if(showUploadImages)
+                        {
+                        <div class="col-md-12">
+                            @if(selectedImages[i-1])
+                            {
+                            <img [src]="getImagePreview(selectedImages[i-1])" alt="Image preview" style="width:50px;height:50px;">
+                          }
+                        </div>
+                      }
+                          @if(!selectedImages[i-1])
+                          {
+                            <img src="../../../../../assets/images/Layer 2.png">
+                          <h6>{{'Side' + i  | translate}}</h6>
+                          }
+                      </label>
+                    </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              @if(flagErrorInFile)
+              {
+              <div class="text-danger" style="font-size: .875em;">
+                <span>{{errorMessageInFile}}</span>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+        <p class="text-center">{{'or' | translate}}</p>
+
+        <div class="img-transform" (click)="openuploadVideosForm()">
+          <h5 class="primary-500">
+            {{"uploadVideoNum" | translate}}
+          </h5>
+          <p class="upload-text black-900">{{"uploadVideo" | translate}}</p>
+        </div>
+      @if(showUploadVideos)
+      {
+        <div  class="col-md-12">
+          <div class="d-flex justify-content-between mt-3 row-container ps-10">
+            <div class="w-100">
+              <div class="text-center p-2 border-secondary border-lighten-3 rounded-lg bg-light-secondary">
+                <div class="images-card">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-container custom-border">
+                    @for(i of [1,2,3,4,5];track $index)
+                    {
+                    <div class="file-container" >
+                      <label class="drag-text text-center" style="cursor: pointer;">
+                        <input type="file" [formControlName]="'VideoFile' + i" (change)="uploadFile($event, i)" accept="video/mp4" style="display: none;">
+
+                          @if(showUploadVideos&&selectedVideos[i-1] )
+                          {
+                            <div class="col-md-12">
+                          <video  [src]="getVideoPreview(selectedVideos[i-1])"></video>
+                            <!-- <h6>{{selectedVideos[i-1].name}}</h6>  -->
+                          </div>
+                        }
+
+                        @if(!selectedVideos[i-1])
+                        {
+                          <img src="../../../../../assets/images/Layer 5.png">
+                          <h6>{{'Side' + i  | translate}}</h6>
+                        }
+                      </label>
+                    </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              @if(flagErrorInFile)
+              {
+              <div class="text-danger" style="font-size: .875em;">
+                <span>{{errorMessageInFile}}</span>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+      <div class="text-center">
+        <button class="btn-continue px-2" type="submit"
+        [class.disabled]="!isButtonEnabled"
+        data-bs-dismiss="modal" aria-label="Close">
+        {{ 'continue' | translate }}
+      </button>
+      
+    </div>
+
+      </form>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Pop up of send email -->
+<div class="modal fade" id="send-email" tabindex="-1" aria-labelledby="send-email" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body pt-0">
+        <form [formGroup]="sendPhoneForm" (ngSubmit)="sendPhone()" class="bg-white pt-5 px-3   border-1 rounded-3 mx-auto payment-for">
+          <h3 class="fw-bold text-center text-black opacity-75 mb-4">{{'checkEmail' | translate}}</h3>
+          <div class="row mb-1">
+            <label>{{'email' | translate}}</label>
+            <input type="email" class="form-control"
+            formControlName="phoneNumber" [ngClass]="{'is-invalid':(phoneNumber?.touched || phoneNumber?.dirty) && phoneNumber?.invalid}"/>
+            <span class="invalid-feedback">
+              @if(phoneNumber?.errors?.['required']) {<span>{{'phone_required' | translate}}</span>}
+              @else if(phoneNumber?.errors?.['pattern']) {<span>{{'phone_not-valid' | translate}}</span>}
+            </span>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">    
+              <button class="w-100 btn-registration bg-primary-500 py-2 my-3" type="submit">{{'send_code' | translate}} </button>
+            </div>
+          </div>
+          <!-- @if(serverSideError && serverSideError.length!=0)
+          {
+          <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+            <img src="assets/icons/alert-danger.svg">
+          {{serverSideError}}
+          </div>
+          } -->
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pop up of otp -->
+<div class="modal fade" id="otp" tabindex="-1" aria-labelledby="otp" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body pt-0">
+        <form [formGroup]="otpForm"  class="bg-white pt-5 px-3   border-1 rounded-3 mx-auto payment-for">
+          <h3 class="fw-bold text-center text-black opacity-75 mb-4">{{'checkEmail' | translate}}</h3>
+          <div class="row mb-1">
+            <label>{{'checkCode' | translate}}</label>
+            <div class="text-center my-2">
+              <ngx-otp-input [options]="otpOptions" (otpChange)="otpComplete($event)"></ngx-otp-input>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="align-items-center d-flex justify-content-between">
+                <a class="resend-code fw-bold"   [class.disabled]="isResendDisabled">{{'resendCode' |  translate}}</a>
+                <label class="form-check-label fw-bold">{{ minutes }}:{{ seconds | number: '2.0' }}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">    
+              <button class="w-100 btn-registration bg-primary-500 py-2 my-3" type="submit">{{'check' | translate}} </button>
+            </div>
+          </div>
+          <!-- @if(serverSideError && serverSideError.length!=0)
+          {
+          <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+            <img src="assets/icons/alert-danger.svg">
+          {{serverSideError}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          } -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

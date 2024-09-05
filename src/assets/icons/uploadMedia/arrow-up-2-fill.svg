@@ -1,0 +1,14 @@
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="iconamoon:arrow-up-2-fill">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M13.75 6.41686C13.7499 6.23559 13.6961 6.0584 13.5954 5.90769C13.4947 5.75698 13.3515 5.63952 13.1841 5.57016C13.0166 5.50079 12.8323 5.48264 12.6545 5.51799C12.4767 5.55335 12.3134 5.64062 12.1852 5.76878L7.60188 10.3521C7.43004 10.524 7.3335 10.7571 7.3335 11.0002C7.3335 11.2433 7.43004 11.4764 7.60188 11.6483L12.1852 16.2316C12.3134 16.3598 12.4767 16.447 12.6545 16.4824C12.8323 16.5178 13.0166 16.4996 13.1841 16.4302C13.3515 16.3609 13.4947 16.2434 13.5954 16.0927C13.6961 15.942 13.7499 15.7648 13.75 15.5835L13.75 6.41686Z" fill="url(#paint0_linear_2008_12910)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_2008_12910" x1="8.50257" y1="14.6035" x2="29.4779" y2="2.00079" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4DC6C3"/>
+<stop offset="0.378165" stop-color="#5268A9"/>
+<stop offset="0.507" stop-color="#8EDFDE"/>
+<stop offset="0.813" stop-color="#C0ECE2"/>
+<stop offset="1" stop-color="#0AB3B0" stop-opacity="0.42"/>
+</linearGradient>
+</defs>
+</svg>

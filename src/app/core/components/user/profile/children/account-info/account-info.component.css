@@ -1,0 +1,104 @@
+/* Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bg-input{
+    border-top-left-radius: 6px !important; /* Adjust the value as needed */
+      border-bottom-left-radius: 6px !important; 
+    background-color:#EAEDF1 !important;
+}
+.border-input{
+    border-top-left-radius: 0px !important; /* Adjust the value as needed */
+    border-bottom-left-radius: 0px !important; 
+}
+input::placeholder{
+    color:#678196 !important;
+}
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+
+.number-style{
+    height:30px;
+    width:30px;
+    border-radius:50%;
+   
+}
+.main-profile{
+    border-radius:8px;
+    width:95%;
+}
+p{
+    font-size:15px;
+}
+
+.form-control:focus{
+    color:black !important;
+}
+label{
+    
+    font-size:14px ;
+    color:#221F1F;
+}
+input{
+    border-radius: 8px;
+    border: 1px solid  #D1D5DB;
+    background:  #F9FAFB !important;
+}
+.w-30 {
+    width:60%;
+}
+@media only screen and (max-width: 768px) {
+    .w-50{
+        width:100% !important;
+    }
+    .w-30 {
+        width:100%;
+    }
+}
+
+.btn-purple{
+  
+color:white;
+background-color:#32012F;
+}
+
+button:hover{
+    color:white;
+}
+.label-content{
+    color:var(--blue);
+    font-size:14px ;
+}
+.form-control:focus {
+    color:#ECEEF4;
+    background-color:#ECEEF4;
+    border-color: #ECEEF4;
+}
+
+.centered-container {
+    display: grid;
+    place-items: center;
+    height: 250px;
+}
+
+.loader-quick{
+    position: relative; 
+    margin: 0px 0 30px 30px;
+    width:75%;
+}
+.fa-circle-xmark{
+   color:gray;
+}
+.opacity{
+Opacity:40%;
+}
+.btn:active{
+    background-color:#32012F;
+color:white;
+}

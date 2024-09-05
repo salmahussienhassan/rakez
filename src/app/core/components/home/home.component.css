@@ -1,0 +1,367 @@
+::ng-deep{
+    body{ background:white!important;}
+}
+
+.landing-section, .landing-section1{
+    background-image: url('../../../../assets/images/home-icons/DJI_0155.jpg');
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+.landing-section {
+    background-image: url('../../../../assets/images/home-icons/DJI_0155.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* animation: animateBg 15s linear; */
+    width: 100%;
+
+}
+
+@keyframes animateBg {
+    0% {
+        background-position: right center;
+    }
+    100% {
+        background-position: left center;
+    }
+}
+
+.about-rakez{
+    border: 1px solid var(--white);
+    color:var(--white);
+    border-radius: 35px;
+    background: none;
+}
+
+.about-rakez-active{
+    color:var(--primary--500);
+    background: white;
+}
+
+.title
+{
+    font-size:var(--font-size-xxl);
+}
+.card{
+    background:var(--gray--400);
+    border-radius:24px;
+    color:var(--black-100);
+    border:none;
+    padding: 20px;
+    text-align: justify;
+}
+
+.card:hover{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+.step{
+    border: 3px solid var(--black);
+    color:var(--black);
+    border-radius :50%;
+    position: relative;
+    width: 100px;
+    height:100px;
+    margin: 0 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.test:hover{
+    transform: translateX(0px) translateY(0px) scale(1.1) rotate(0deg);
+   border:1px dashed white;
+}
+
+.about-content h4:hover ~ .about-content h4::before{
+    border:1px dashed var(--white);
+}
+
+section p{
+    color:var(--black-100);
+    font-size:var(--font-size-normal);
+    text-align: center;
+}
+
+section h4{
+    margin: 10px 0;
+    color:var(--black-100);
+    font-size:var(--font-size-lg);
+}
+
+.service{
+    background-color: rgb(241 241 241);
+}
+
+.service p{
+    width: 80%;
+}
+
+
+.service .carousel, .partner .carousel{
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+
+.service .carousel .col-md-3 {
+    width:30%;
+}
+
+.service .carousel h6{
+    color:var(--white);
+    margin-top:10px;
+}
+
+.service .carousel-control-prev, .service .carousel-control-next{
+    width:5%;
+}
+
+.service .image-container{
+    background:var(--primary-500);
+    border-radius:10px;
+    padding: 30px 0;
+}
+.service .image-container:hover{
+    opacity:0.8;
+    /* background:var(--orange2); */
+}
+
+.partner .image-container
+{
+    justify-content: center;
+    display: flex;
+    margin-top:40px;
+}
+.partner{
+    padding:40px 0;
+}
+
+.img-style{
+    background: #eeeeee;
+    padding: 20px;
+}
+
+.bg-slider .carousel-control-prev, .bg-slider .carousel-control-next {
+    width: unset;
+}
+
+#who .card{
+    border-radius: 24px;
+    background-color: rgb(241 241 241);
+}
+
+.about-content{
+    width:50%;
+    justify-content: space-between;
+}
+
+.step-title
+{
+   text-align: center;
+}
+
+select{
+    padding:0.45rem!important;
+}
+
+@media only screen and (max-width: 600px) {
+    .landing-section1 {
+        /* animation: animateBg 16s linear ; */
+        background-size: cover;
+    }
+    
+    @keyframes animateBg {
+        0% {
+            background-position: top right ; /* Start from the right */
+        }
+        100% {
+            background-position: bottom left ; /* Move to the left */
+        }
+    }
+    
+    .landing-section1{
+        padding-bottom:20px;
+    }
+    
+    .img-style{
+        padding: 6px;
+    }
+    
+    .bg-container{
+        margin-top:0!important;
+    }
+    section h1{
+        font-size: var(--font-size-md)!important;
+        font-weight: 700;
+    }
+
+    section h4, section p{
+        font-size:var(--font-size-sm);
+    }
+
+    .step-title p{
+        font-size:var(--font-size-xs);
+    }
+
+    .about-content{
+        width:100%;
+    }
+
+    .step{
+        width: 50px;
+        height: 50px;
+        margin: unset;
+    }
+
+    .login-process{
+        font-size:var(--font-size-lg);
+        opacity: 70%;
+       font-weight: 700;
+    }
+    .subTab-panel-title{
+        margin:0;
+    }
+    .partner .title , .partner .image-container{
+        margin-top:0px!important;
+    }
+
+    .partner{
+        margin-bottom:0!important;
+    }
+}
+
+
+.m-130-auto{
+    margin:130px auto 0;
+}
+.mb-100{
+    margin-bottom: 100px;
+}
+
+.partner{
+    padding:40px 0;
+}
+
+.image-container {
+    transition: transform 0.5s ease;
+    opacity: 0.8;
+}
+
+.carousel-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.image-container.middle-image {
+    transform: scale(1.5); /* Enlarge the middle image */
+    z-index: 1;
+    opacity: 1;
+}
+
+.arrow{
+    z-index:99;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    bottom: 2%;
+    color:#F1F1F1;
+    cursor:pointer;
+}
+
+.quick-cards-row {
+    display: flex;
+    overflow-x: auto; 
+    flex-wrap: nowrap; 
+    padding-bottom: 1rem; 
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on touch devices */
+}
+
+.quick-card {
+    min-width: calc((100% / 5) - 1.5rem); 
+    flex: 0 0 calc((100% / 5) - 1.5rem); 
+    border-radius: 8px;
+    border: 1px solid #FFF;
+    background: rgba(30, 60, 117, 0.76);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .quick-card {
+        min-width: calc((100% / 3) - 1.5rem); 
+        flex: 0 0 calc((100% / 3) - 1.5rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-card {
+        min-width: calc((100% / 2) - 1.5rem); 
+        flex: 0 0 calc((100% / 2) - 1.5rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .quick-card {
+        min-width: calc(100% - 1.5rem); 
+        flex: 0 0 calc(100% - 1.5rem);
+    }
+}
+
+/* Custom Scrollbar Styling */
+.quick-cards-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.quick-cards-row::-webkit-scrollbar-thumb {
+    background-color: #32012F;
+    border-radius: 4px;
+}
+/* Scrollbar for the entire row */
+.quick-cards-row {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Custom Scrollbar Styling */
+.quick-cards-row::-webkit-scrollbar {
+    height: 12px; /* Increase the height for a thicker scrollbar */
+}
+
+.quick-cards-row::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Lighter background for the track */
+    border-radius: 6px;
+    margin: 0.5rem; /* Add some space around the scrollbar track */
+}
+
+.quick-cards-row::-webkit-scrollbar-thumb {
+    background-color: #32012F; /* Custom color for the scrollbar thumb */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    border: 2px solid #e5e8ee; /* Border around the thumb for contrast */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Change thumb color on hover */
+.quick-cards-row::-webkit-scrollbar-thumb:hover {
+    background-color: #32012F; /* Darker shade on hover */
+}
+
+/* Change thumb color when active (clicked) */
+.quick-cards-row::-webkit-scrollbar-thumb:active {
+    background-color: #32012F; /* Even darker shade when active */
+}
+
+

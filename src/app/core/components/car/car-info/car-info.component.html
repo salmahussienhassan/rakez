@@ -1,0 +1,786 @@
+
+<!-- ***** Sub TabView Title ***** -->
+<div class="subTabView d-flex px-3 justify-content-center desktop-show">
+  <button class="subTab-panel-title px-3 btn" [class.active]="isActive(1)"  (click)="selectType(1)">
+    {{'new_insurance' | translate}}  
+  </button>
+  <button class="subTab-panel-title px-3 btn" [class.active]="isActive(2)"  (click)="selectType(2)">
+    {{'own_transfer' | translate}}
+  </button>
+  <button class="subTab-panel-title px-3 btn" [class.active]="isActive(3)" (click)="selectType(3)">
+    {{'customs_card' | translate}}
+  </button>
+</div>
+
+<div class="subTabView my-3 d-flex justify-content-center  mobile-show">
+  <button class="subTab-panel-title px-2 btn" [class.active]="isActive(1)"  (click)="selectType(1)">
+    {{'new_insurance' | translate}}  
+  </button>
+  <button class="subTab-panel-title px-2 btn" [class.active]="isActive(2)"  (click)="selectType(2)">
+    {{'own_transfer' | translate}}
+  </button>
+  <button class="subTab-panel-title px-2 btn" [class.active]="isActive(3)" (click)="selectType(3)">
+    {{'customs_card' | translate}}
+  </button>
+</div>
+<!-- ***** Sub TabView Form Content ***** -->
+@if(activeIndex == 1){
+  <form  [formGroup]="newInsuranceForm" (ngSubmit)="submitNewInsurance(newInsuranceForm.value)" class="w-100">
+    <div class="subTabViewContent">
+      <div class="newInsurance">
+        @if(userLoggedIn == 'true'){
+          <div class="px-1 row my-2">
+            <div class="col-6">
+              <label>{{'identification_no' | translate}}</label> 
+              <input type="tel" class="bg-white form-control text-black"
+               value="{{this.registrationData.identityNumber}}" readonly>
+            </div>
+      
+            <div class=" col-6">
+              <label>{{'birthdate' | translate}}</label>
+              <input type="tel" class="bg-white form-control text-black"  
+              value="{{this.registrationData.birthdate}}" readonly>
+            </div>
+          </div>
+        }
+
+        @else{
+          <div class="row my-2">
+            <div class="col-6">
+              <label>{{'identification_no' | translate}}</label> 
+              <input type="tel"  required="required" class="bg-white form-control text-black"  placeholder="{{'enterId' | translate}}"
+              formControlName="ownerId" (keypress)="allowSudiaID($event)" (change)="newInsuranceOwnerIdVal($event)"
+              [maxLength]="10" [ngClass]="{'is-invalid': (ownerIdValidation?.touched || ownerIdValidation?.dirty) && ownerIdValidation?.invalid}">
+              <span class="invalid-feedback">
+                @if(ownerIdValidation?.errors?.['required']) {<span>{{'identification_no_required' | translate}}</span>}
+                @else if(ownerIdValidation?.errors?.['minlength']) {<span>{{'limitOwnerId' | translate}}</span>}
+              </span>
+            </div>
+          
+            @if(showHijriCalendar){
+              <!-- Hijri Calendar -->
+              <div class=" col-6 ps-4">
+                <div class="row">
+                  <div class="col-6 px-1">
+                    <label>{{'month_birth' | translate}}</label>
+                    <!-- <select class="form-select modal-select birthday"
+                      formControlName="driverHijriMonth"
+                      [ngClass]="{ 'is-invalid': (driverHijriMonth?.touched || driverHijriMonth?.dirty) && driverHijriMonth?.invalid}">
+                      @if(currentLanguage == 'ar'){
+                        <option value="" disabled selected>Select your option</option>
+                      @for(month of hijriMonthsAr;track $index){
+                      <option value="{{month.id}}">{{month.value}}</option>
+                      }
+                      }
+                      @else{
+                      @for(month of hijriMonthsEn;track $index){
+                      <option value="{{month.id}}">{{month.value}}</option>
+                      }
+                      }
+                    </select> -->
+
+                    <ng-select class="form-select modal-select birthday"
+                    placeholder="{{'selectMonth'|translate}}"
+                    formControlName="driverHijriMonth"
+                    [ngClass]="{ 'is-invalid': (driverHijriMonth?.touched || driverHijriMonth?.dirty) && driverHijriMonth?.invalid }"
+                    [items]="currentLanguage === 'ar' ? hijriMonthsAr : hijriMonthsEn"
+                    bindLabel="value"
+                    bindValue="id">
+         </ng-select>
+         
+                    <span class="invalid-feedback">
+                      @if(driverHijriMonth?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                    </span>
+                  </div>
+
+                  <div class="col-6 px-1">
+                    <label>{{'year_birth' | translate}}</label>
+
+                    <ng-select
+                    class="form-select modal-select birthday"
+                    formControlName="driverHijriYear"
+                    bindLabel="value"   
+                    bindValue="id"
+  [items]="years"
+  [ngClass]="{ 'is-invalid': (driverHijriYear?.touched || driverHijriYear?.dirty) && driverHijriYear?.invalid }"
+  placeholder="{{'selectYear'|translate}}"
+>
+</ng-select> 
+<!-- 
+                    <select class="form-select modal-select birthday"
+                      formControlName="driverHijriYear"
+                      [ngClass]="{ 'is-invalid': (driverHijriYear?.touched || driverHijriYear?.dirty) && driverHijriYear?.invalid}">
+                      @for(year of years;track $index){
+                      <option value="{{year}}">{{year}}</option>
+                      }
+                    </select> -->
+
+
+                    <span class="invalid-feedback">
+                      @if(driverHijriYear?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            }
+
+            @if(showMeladiCalendar){
+            <!-- Meladi Calendar -->
+            <div class=" col-6 ps-4">
+              <div class="row">
+                <div class="col-6 px-1">
+                  <label>{{'month_birth' | translate}}</label>
+
+
+                  <ng-select class="form-select modal-select birthday"
+                  placeholder="{{'selectMonth'|translate}}"
+                  formControlName="driverMeladiMonth"
+                  [ngClass]="{ 'is-invalid': (driverMeladiMonth?.touched || driverMeladiMonth?.dirty) && driverMeladiMonth?.invalid }"
+                  [items]="currentLanguage === 'ar' ? meladiMonthsAr : meladiMonthsEn"
+                  bindLabel="value"
+                  bindValue="id">
+       </ng-select>
+
+                  <!-- <select class="form-select modal-select birthday" formControlName="driverMeladiMonth" 
+                    [ngClass]="{ 'is-invalid': (driverMeladiMonth?.touched || driverMeladiMonth?.dirty) && driverMeladiMonth?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(month of meladiMonthsAr;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                    @else{
+                    @for(month of meladiMonthsEn;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                  </select> -->
+
+
+                  <span class="invalid-feedback">
+                    @if(driverMeladiMonth?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+                <div class="col-6 px-1">
+                  <label>{{'year_birth' | translate}}</label>
+                
+                  <ng-select
+                  class="form-select modal-select birthday"
+                  formControlName="driverMeladiYear"
+                  bindLabel="value"   
+                  bindValue="id"
+[items]="meladiYears"
+[ngClass]="{ 'is-invalid': (driverMeladiYear?.touched || driverMeladiYear?.dirty) && driverMeladiYear?.invalid }"
+placeholder="{{'selectYear'|translate}}">
+</ng-select> 
+                
+                  <!-- <select class="form-select modal-select birthday" formControlName="driverMeladiYear"
+                  [ngClass]="{ 'is-invalid': (driverMeladiYear?.touched || driverMeladiYear?.dirty) && driverMeladiYear?.invalid}">
+                    @for(year of meladiYears;track $index){
+                    <option value="{{year}}">{{year}}</option>
+                    }
+                  </select> -->
+
+                  <span class="invalid-feedback">
+                    @if(driverMeladiYear?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        }
+       
+        <div class="row my-2 mx-1">
+          <label class="p-0">{{'serial_no' | translate}}</label> 
+          <input type="tel" required="required" class="form-control bg-white" placeholder="{{'enterSerial' | translate}}"
+          formControlName="serialNumber1" (keypress)="allowOnlyNumbers($event)" [maxLength]="10"
+          [ngClass]="{'is-invalid': (serialNumber1Validation?.touched || serialNumber1Validation?.dirty) && serialNumber1Validation?.invalid}">
+          <span class="invalid-feedback">
+            @if(serialNumber1Validation?.errors?.['required']) {<span>{{'serial_no_required' | translate}}</span>}
+            @else if(serialNumber1Validation?.errors?.['minlength']) {<span>{{'limitSerialNo' | translate}}</span>}
+          </span>
+        </div> 
+
+        <div class="row my-2 mx-1">
+          <label class="p-0">{{'insurance_start_date' | translate}}</label> 
+          <p-calendar class="p-0" formControlName="policyStartDate1" inputId="basic" (click)="policyStartDate1()"
+          [showOtherMonths]="true"  [selectOtherMonths]="true" [minDate]="minDate" required
+          placeholder="{{'enterDate' | translate}}"
+          [ngClass]="{'is-invalid': (policyStartDateValidation1?.touched || policyStartDateValidation1?.dirty) && policyStartDateValidation1?.invalid}"></p-calendar>
+          <span class="invalid-feedback">
+            @if(policyStartDateValidation1?.errors?.['required']) {<span>{{'insurance_start_date_required' | translate}}</span>}
+          </span>
+        </div>
+        
+        <div class="row d-flex px-0 my-2 mx-1">
+          <div class="col-5 pe-0">
+            <img [src]="imgurl" class="captchaImg">
+          </div>
+          <div class="col-1 pe-1">
+            <i class="fa fa-refresh" aria-hidden="true" (click)="getCaptchaIMG()"></i>
+          </div>
+          <div class="col-6 ps-0 position-relative">
+              <label>{{'enterCode' | translate}}</label> 
+              <input  type="tel" formControlName="captcha1" required maxlength="4"
+              placeholder="{{'captchaInput' | translate}}"
+              class="form-control captcha bg-white " (keypress)="allowOnlyNumbers($event)"
+              [ngClass]="{'is-invalid': submitted && captcha1Validation?.invalid}">
+              <span class="invalid-feedback position-absolute">
+                @if(captcha1Validation?.errors?.['required']) {<span>{{'codeRequired' | translate}}</span>}
+                @else if(captcha1Validation?.errors?.['codeMatched']) {<span>{{'codeNotMatched' | translate}}</span>}
+              </span>
+          </div>
+        </div>
+
+        <div class="form-row-check d-flex align-items-center position-relative mx-1" title="{{ 'conditions_agree2' | translate }}">
+          <input
+            type="checkbox"
+            id="done-check1"
+            [checked]="isChecked1"
+            (change)="onCheckboxChange($event,1)"
+            [ngClass]="{ 'checked': isChecked1 }"
+          >
+          <label for="done-check1" class="form-check-label mx-2 my-0 ">
+            {{ 'conditions_agree1' | translate }}
+          </label>
+        </div>
+        
+        <div class="row my-3">
+          <div class="get-quote-container">
+            <button type="submit"
+            class="btn text-white w-100 py-3 fs-6 get-quotation"  
+            [class.disabled]="!isChecked1"  id="get-quotation1">{{'get_offers' | translate}}</button>
+          </div>
+        </div>
+
+        @if(serverSideError && serverSideError.length!=0)
+        {
+        <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+          {{serverSideError}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        }
+      </div>
+    </div>
+  </form>
+}
+
+@if(activeIndex == 2){
+  <form  [formGroup]="transferOwnershipForm" (ngSubmit)="submitTransferOwnership(transferOwnershipForm.value)" class="w-100">
+    <div class="subTabViewContent">
+      <div class="">
+        <div class="row my-2 mx-1">
+          <label class="p-0">{{'identification_no_seller' | translate}}</label> 
+          <input type="tel" required="required" class="form-control bg-white"  placeholder="{{'enterId' | translate}}"
+          formControlName="ownerId2" (keypress)="allowSudiaID($event)"  [maxLength]="10"
+          [ngClass]="{'is-invalid': (ownerId2Validation?.touched || ownerId2Validation?.dirty) && ownerId2Validation?.invalid}">
+          <span class="invalid-feedback">
+            @if(ownerId2Validation?.errors?.['required']) {<span>{{'identification_no_seller_required' | translate}}</span>}
+            @else if(ownerId2Validation?.errors?.['minlength']){<span>{{'limitOwnerId' | translate}}</span>}
+          </span>
+        </div> 
+
+        @if(userLoggedIn == 'true'){
+          <div class="px-1 row my-2">
+            <div class="col-6">
+              <label>{{'identification_no_owner' | translate}}</label> 
+              <input type="tel" class="bg-white form-control text-black"  
+              value="{{this.registrationData.identityNumber}}" readonly>
+            </div>
+      
+            <div class=" col-6 retrive-birthdate">
+              <label class="">{{'birthdate_buyer' | translate}}</label>
+              <input type="tel" class="bg-white form-control text-black"  
+              value="{{this.registrationData.birthdate}}" readonly>
+            </div>
+          </div>
+        }
+        @else {
+          <div class="row my-2">
+            <div class="col-6">
+              <label>{{'identification_no_owner' | translate}}</label> 
+              <input type="tel" required="required" class="form-control bg-white"  (change)="newOwnerIdVal($event)"
+              formControlName="newOwnerId" (keypress)="allowSudiaID($event)" [maxLength]="10" placeholder="{{'enterId' | translate}}"
+              [ngClass]="{'is-invalid': (newOwnerIdValidation?.touched || newOwnerIdValidation?.dirty) && newOwnerIdValidation?.invalid}">
+              <span class="invalid-feedback">
+                @if(newOwnerIdValidation?.errors?.['required']) {<span>{{'identification_no_owner_required' | translate}}</span>}
+                @else if(newOwnerIdValidation?.errors?.['minlength']) {<span>{{'limitOwnerId' | translate}}</span>}
+                @else if(newOwnerIdValidation?.errors?.['identityNotMatched']) {<span>{{'identityNotMatched' | translate}}</span>}
+              </span>
+            </div>
+            @if(showHijriCalendar){
+              <!-- Hijri Calendar -->
+              <div class="col-6 ps-4">
+                <div class="row">
+                  <div class="col-6 px-1">
+                    <label>{{'month_birth' | translate}}</label>
+
+<!-- 
+                    <select class="form-select modal-select birthday"
+                      formControlName="driverHijriMonthBuyer"
+                      [ngClass]="{ 'is-invalid': (driverHijriMonthBuyer?.touched || driverHijriMonthBuyer?.dirty) && driverHijriMonthBuyer?.invalid}">
+                      @if(currentLanguage == 'ar'){
+                      @for(month of hijriMonthsAr;track $index){
+                      <option value="{{month.id}}">{{month.value}}</option>
+                      }
+                      }
+                      @else{
+                      @for(month of hijriMonthsEn;track $index){
+                      <option value="{{month.id}}">{{month.value}}</option>
+                      }
+                      }
+                    </select> -->
+
+                    <ng-select class="form-select modal-select birthday"
+                    placeholder="{{'selectMonth'|translate}}"
+                    formControlName="driverHijriMonthBuyer"
+                    [ngClass]="{ 'is-invalid': (driverHijriMonthBuyer?.touched || driverHijriMonthBuyer?.dirty) && driverHijriMonthBuyer?.invalid }"
+                    [items]="currentLanguage === 'ar' ? hijriMonthsAr : hijriMonthsEn"
+                    bindLabel="value"
+                    bindValue="id">
+         </ng-select>
+  
+                    <span class="invalid-feedback">
+                      @if(driverHijriMonthBuyer?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                    </span>
+                  </div>
+                  <div class="col-6 px-1">
+                    <label>{{'year_birth' | translate}}</label>
+
+                    <ng-select
+                    class="form-select modal-select birthday"
+                    formControlName="driverHijriYearBuyer"
+                    bindLabel="value"   
+                    bindValue="id"
+  [items]="years"
+  [ngClass]="{ 'is-invalid': (driverHijriYearBuyer?.touched || driverHijriYearBuyer?.dirty) && driverHijriYearBuyer?.invalid }"
+  placeholder="{{'selectYear'|translate}}"
+>
+</ng-select> 
+
+                    <!-- <select class="form-select modal-select birthday"
+                      formControlName="driverHijriYearBuyer"
+                      [ngClass]="{ 'is-invalid': (driverHijriYearBuyer?.touched || driverHijriYearBuyer?.dirty) && driverHijriYearBuyer?.invalid}">
+                      @for(year of years;track $index){
+                      <option value="{{year}}">{{year}}</option>
+                      }
+                    </select> -->
+
+                    
+                    <span class="invalid-feedback">
+                      @if(driverHijriYearBuyer?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            }
+  
+            @if(showMeladiCalendar){
+            <!-- Meladi Calendar -->
+            <div class=" col-6 ps-4">
+              <div class="row">
+                <div class="col-6 px-1">
+                  <label>{{'month_birth' | translate}}</label>
+
+                  <ng-select class="form-select modal-select birthday"
+                  placeholder="{{'selectMonth'|translate}}"
+                  formControlName="driverMeladiMonthBuyer"
+                  [ngClass]="{ 'is-invalid': (driverMeladiMonthBuyer?.touched || driverMeladiMonthBuyer?.dirty) && driverMeladiMonthBuyer?.invalid }"
+                  [items]="currentLanguage === 'ar' ? meladiMonthsAr : meladiMonthsEn"
+                  bindLabel="value"
+                  bindValue="id">
+       </ng-select>
+                  
+                  <!-- <select class="form-select modal-select birthday" formControlName="driverMeladiMonthBuyer"
+                    [ngClass]="{ 'is-invalid': (driverMeladiMonthBuyer?.touched || driverMeladiMonthBuyer?.dirty) && driverMeladiMonthBuyer?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(month of meladiMonthsAr;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                    @else{
+                    @for(month of meladiMonthsEn;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                  </select> -->
+
+                  <span class="invalid-feedback">
+                    @if(driverMeladiMonthBuyer?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+                <div class="col-6 px-1">
+                  <label>{{'year_birth' | translate}}</label>
+
+
+                  <ng-select
+                  class="form-select modal-select birthday"
+                  formControlName="driverMeladiYearBuyer"
+                  bindLabel="value"   
+                  bindValue="id"
+[items]="meladiYears"
+[ngClass]="{ 'is-invalid': (driverMeladiYearBuyer?.touched || driverMeladiYearBuyer?.dirty) && driverMeladiYearBuyer?.invalid }"
+placeholder="{{'selectYear'|translate}}"
+>
+</ng-select>  
+
+                  <!-- <select class="form-select modal-select birthday" formControlName="driverMeladiYearBuyer"
+                  [ngClass]="{ 'is-invalid': (driverMeladiYearBuyer?.touched || driverMeladiYearBuyer?.dirty) && driverMeladiYearBuyer?.invalid}">
+                    @for(year of meladiYears;track $index){
+                    <option value="{{year}}">{{year}}</option>
+                    }
+                  </select> -->
+
+                  <span class="invalid-feedback">
+                    @if(driverMeladiYearBuyer?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+              </div>
+            </div>    
+            }
+          </div>
+        }
+        <div class="row my-2 mx-1">
+          <label class="p-0">{{'serial_no' | translate}}</label> 
+          <input type="tel" required="required" class="form-control bg-white" placeholder="{{'enterSerial' | translate}}"
+          formControlName="serialNumber2" (keypress)="allowOnlyNumbers($event)" [maxLength]="10"
+          [ngClass]="{'is-invalid': (serialNumber2Validation?.touched || serialNumber2Validation?.dirty) && serialNumber2Validation?.invalid}">
+          <span class="invalid-feedback">
+            @if(serialNumber2Validation?.errors?.['required']){<span>{{'serial_no_required' | translate}}</span>}
+            @else if(serialNumber2Validation?.errors?.['minlength']){<span>{{'limitSerialNo' | translate}}</span>}
+          </span>
+        </div> 
+
+        <div class="row my-2 mx-1">
+          <label class="p-0">{{'insurance_start_date' | translate}}</label> 
+          <p-calendar class="p-0" formControlName="policyStartDate2" inputId="basic" (click)="policyStartDate2()"
+          [showOtherMonths]="true"  [selectOtherMonths]="true" [minDate]="minDate" required placeholder="{{'enterDate' | translate}}"
+          [ngClass]="{'is-invalid': (policyStartDateValidation2?.touched || policyStartDateValidation2?.dirty) && policyStartDateValidation2?.invalid}"></p-calendar>
+          <span class="invalid-feedback">
+            @if(policyStartDateValidation2?.errors?.['required']) {<span>{{'insurance_start_date_required' | translate}}</span>}
+          </span>
+        </div>
+
+        <div class="row d-flex px-0 my-2 mx-1">
+          <div class="col-5 pe-0">
+            <img [src]="imgurl" class="captchaImg">
+          </div>
+          <div class="col-1 pe-1">
+            <i class="fa fa-refresh" aria-hidden="true" (click)="getCaptchaIMG()"></i>
+          </div>
+          <div class="col-6 ps-0 position-relative">
+              <label>{{'enterCode' | translate}}</label> 
+              <input  type="tel" formControlName="captcha2" required maxlength="4"
+              placeholder="{{'captchaInput' | translate}}"
+              class="form-control captcha bg-white" (keypress)="allowOnlyNumbers($event)"
+              [ngClass]="{'is-invalid':  submitted && captcha2Validation?.invalid}">
+              <span class="invalid-feedback position-absolute">
+                @if(captcha2Validation?.errors?.['required']) {<span>{{'codeRequired' | translate}}</span>}
+                @else if(captcha2Validation?.errors?.['codeMatched']) {<span>{{'codeNotMatched' | translate}}</span>}
+              </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div  class="form-row-check d-flex align-items-center position-relative mx-1"  title="{{'conditions_agree2' | translate}}">
+              <input 
+               type="checkbox" id="done-check2" 
+               [checked]="isChecked2"
+               (change)="onCheckboxChange($event,2)"
+               [ngClass]="{ 'checked': isChecked2 }"/>
+
+              <!-- <label  for="done-check2" class="check-input mb-0"></label> -->
+            
+              <label  for="done-check2" class="form-check-label mx-2 my-0"> {{'conditions_agree1' | translate}}</label>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="get-quote-container">
+            <button type="submit"
+            class="btn text-white w-100 py-3 fs-6 get-quotation"  
+            [class.disabled]="!isChecked2" id="get-quotation2">{{'get_offers' | translate}}</button>
+          </div>
+        </div>
+
+        @if(serverSideError && serverSideError.length!=0)
+        {
+        <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+          {{serverSideError}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        }
+      </div>      
+    </div>
+  </form>
+}
+
+@if(activeIndex == 3){
+  <form  [formGroup]="customsCardForm" (ngSubmit)="submitCustomsCard(customsCardForm.value)" class="w-100">
+    <div class="subTabViewContent">
+      <div class="newInsurance">
+        @if(userLoggedIn == 'true'){
+          <div class="px-1 row my-2">
+            <div class="col-6">
+              <label>{{'identification_no' | translate}}</label> 
+              <input type="tel" class="bg-white form-control text-black" 
+              value="{{this.registrationData.identityNumber}}" readonly>
+            </div>
+      
+            <div class=" col-6">
+              <label>{{'birthdate' | translate}}</label>
+              <input type="tel" class="bg-white form-control text-black"  
+              value="{{this.registrationData.birthdate}}" readonly>
+            </div>
+          </div>
+        }
+        @else {
+        <div class="row my-2">
+            <div class="col-6">
+              <label>{{'identification_no' | translate}}</label> 
+              <input type="tel"  required="required" class="bg-white form-control" (change)="customsCardOwnerIdVal($event)"
+              formControlName="ownerId3" (keypress)="allowSudiaID($event)" [maxLength]="10" placeholder="{{'enterId' | translate}}" 
+              [ngClass]="{'is-invalid': (ownerId3Validation?.touched || ownerId3Validation?.dirty) && ownerId3Validation?.invalid}">
+              <span class="invalid-feedback">
+                @if(ownerId3Validation?.errors?.['required']){<span>{{'identification_no_required' | translate}}</span>}
+                @else if(ownerId3Validation?.errors?.['minlength']){<span>{{'limitOwnerId' | translate}}</span>}
+              </span>
+            </div>
+            @if(showHijriCalendar){
+              <!-- Hijri Calendar -->
+              <div class="col-6 ps-4">
+                <div class="row">
+                  <div class="col-6 px-1">
+                    <label>{{'month_birth' | translate}}</label>
+                    <!-- <select class="form-select modal-select birthday"
+                      formControlName="driverHijriMonth2"
+                      [ngClass]="{ 'is-invalid': (driverHijriMonth2?.touched || driverHijriMonth2?.dirty) && driverHijriMonth2?.invalid}">
+                      @if(currentLanguage == 'ar'){
+                      @for(month of hijriMonthsAr;track $index){
+                      <option value="{{month.id}}">{{month.value}}</option>
+                      }
+                      }
+                      @else{
+                      @for(month of hijriMonthsEn;track $index){
+                      <option value="{{month.id}}">{{month.value}}</option>
+                      }
+                      }
+                    </select> -->
+
+
+                    <ng-select class="form-select modal-select birthday"
+                    placeholder="{{'selectMonth'|translate}}"
+                    formControlName="driverHijriMonth2"
+                    [ngClass]="{ 'is-invalid': (driverHijriMonth2?.touched || driverHijriMonth2?.dirty) && driverHijriMonth2?.invalid }"
+                    [items]="currentLanguage === 'ar' ? hijriMonthsAr : hijriMonthsEn"
+                    bindLabel="value"
+                    bindValue="id">
+         </ng-select>
+
+                    <span class="invalid-feedback">
+                      @if(driverHijriMonth2?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                    </span>
+                  </div>
+                  <div class="col-6 px-1">
+                    <label>{{'year_birth' | translate}}</label>
+
+                    <ng-select
+                    class="form-select modal-select birthday"
+                    formControlName="driverHijriYear2"
+                    bindLabel="value"   
+                    bindValue="id"
+  [items]="years"
+  [ngClass]="{ 'is-invalid': (driverHijriYear2?.touched || driverHijriYear2?.dirty) && driverHijriYear2?.invalid }"
+  placeholder="{{'selectYear'|translate}}"
+  >
+  </ng-select>  
+
+                    <!-- <select class="form-select modal-select birthday"
+                      formControlName="driverHijriYear2"
+                      [ngClass]="{ 'is-invalid': (driverHijriYear2?.touched || driverHijriYear2?.dirty) && driverHijriYear2?.invalid}">
+                      @for(year of years;track $index){
+                      <option value="{{year}}">{{year}}</option>
+                      }
+                    </select> -->
+
+                    <span class="invalid-feedback">
+                      @if(driverHijriYear2?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            }
+
+            @if(showMeladiCalendar){
+            <!-- Meladi Calendar -->
+            <div class="birthday col-6 ps-4">
+              <div class="row">
+                <div class="col-6 px-1">
+                  <label>{{'month_birth' | translate}}</label>
+
+                  <ng-select class="form-select modal-select birthday"
+                  placeholder="{{'selectMonth'|translate}}"
+                  formControlName="driverMeladiMonth2"
+                  [ngClass]="{ 'is-invalid': (driverMeladiMonth2?.touched || driverMeladiMonth2?.dirty) && driverMeladiMonth2?.invalid }"
+                  [items]="currentLanguage === 'ar' ? meladiMonthsAr : meladiMonthsEn"
+                  bindLabel="value"
+                  bindValue="id">
+       </ng-select>
+
+
+                  <!-- <select class="form-select modal-select birthday" formControlName="driverMeladiMonth2"
+                    [ngClass]="{ 'is-invalid': (driverMeladiMonth2?.touched || driverMeladiMonth2?.dirty) && driverMeladiMonth2?.invalid}">
+                    @if(currentLanguage == 'ar'){
+                    @for(month of meladiMonthsAr;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                    @else{
+                    @for(month of meladiMonthsEn;track $index){
+                    <option value="{{month.id}}">{{month.value}}</option>
+                    }
+                    }
+                  </select> -->
+
+
+                  <span class="invalid-feedback">
+                    @if(driverMeladiMonth2?.errors?.['required']) {<span>{{'month_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+                <div class="col-6 px-1">
+                  <label>{{'year_birth' | translate}}</label>
+
+                  <ng-select
+                  class="form-select modal-select birthday"
+                  formControlName="driverMeladiYear2"
+                  bindLabel="value"   
+                  bindValue="id"
+[items]="meladiYears"
+[ngClass]="{ 'is-invalid': (driverMeladiYear2?.touched || driverMeladiYear2?.dirty) && driverMeladiYear2?.invalid }"
+placeholder="{{'selectYear'|translate}}"
+>
+</ng-select>  
+
+                  <!-- <select class="form-select modal-select birthday" formControlName="driverMeladiYear2"
+                  [ngClass]="{ 'is-invalid': (driverMeladiYear2?.touched || driverMeladiYear2?.dirty) && driverMeladiYear2?.invalid}">
+                    @for(year of meladiYears;track $index){
+                    <option value="{{year}}">{{year}}</option>
+                    }
+                  </select> -->
+
+                  <span class="invalid-feedback">
+                    @if(driverMeladiYear2?.errors?.['required']) {<span>{{'year_birth_required' | translate}}</span>}
+                  </span>
+                </div>
+              </div>
+            </div>
+            }
+        </div>
+        }
+        
+        <div class="row my-2 mx-1">
+          <label class="p-0">{{'insurance_start_date' | translate}}</label> 
+          <p-calendar class="p-0" formControlName="policyStartDate3" inputId="basic" (click)="policyStartDate3()"
+          [showOtherMonths]="true"  [selectOtherMonths]="true" [minDate]="minDate" required placeholder="{{'enterDate' | translate}}"
+          [ngClass]="{'is-invalid': (policyStartDateValidation3?.touched || policyStartDateValidation3?.dirty) && policyStartDateValidation3?.invalid}"></p-calendar>
+          <span class="invalid-feedback">
+            @if(policyStartDateValidation3?.errors?.['required']) {<span>{{'insurance_start_date_required' | translate}}</span>}
+          </span>
+        </div>
+        
+        <div class="row my-2 mx-1">
+        <div class="col-6 px-0">
+          <label>{{'customs_card' | translate}}</label> 
+          <input type="tel" required="required" class="bg-white form-control" placeholder="{{'enterCustomCard' | translate}}"
+          formControlName="customsCard" (keypress)="allowOnlyNumbers($event)" [maxLength]="10" [minLength]="5" 
+          [ngClass]="{'is-invalid': (customsCardValidation?.touched || customsCardValidation?.dirty) && customsCardValidation?.invalid}">
+          <span class="invalid-feedback">
+            @if(customsCardValidation?.errors?.['required']) {<span>{{'customs_card_required' | translate}}</span>}
+            @if(customsCardValidation?.errors?.['minlength']) {<span>{{'limitCustomerCard' | translate}}</span>}
+          </span>
+        </div>
+        <!-- placeholder="{{'enterManufactureYear' | translate}}" -->
+        <div class="col-6 ps-0 pe-1">
+          <label>{{'manufacture_year' | translate}}</label>
+
+          <ng-select
+                  class="form-select modal-select birthday"
+                  formControlName="manufactureYearValidation"
+                  bindLabel="value"   
+                  bindValue="id"
+[items]="manufactureYear"
+[ngClass]="{ 'is-invalid': (manufactureYearValidation?.touched || manufactureYearValidation?.dirty) && manufactureYearValidation?.invalid }"
+placeholder="{{'selectYear'|translate}}"
+>
+</ng-select>  
+
+          <!-- <select class="form-select modal-select" formControlName="manufactureYear" 
+          (keypress)="allowOnlyNumbers($event)"
+          [ngClass]="{
+            'is-invalid': (manufactureYearValidation?.touched || manufactureYearValidation?.dirty) &&
+            manufactureYearValidation?.invalid}">
+          @for(item of manufactureYear ;track $index ){
+            <option>{{item}}</option>}
+          </select> -->
+
+          <span class="invalid-feedback">
+            @if(manufactureYearValidation?.errors?.['required']) {<span>{{'manufacture_year_required' | translate}}</span>}
+          </span>
+        </div> 
+        </div>
+          
+        <div class="row d-flex px-0 my-2 mx-1"> 
+            <div class="col-5 pe-0">
+              <img [src]="imgurl" class="captchaImg">
+            </div>
+            <div class="col-1 pe-1">
+              <i class="fa fa-refresh" aria-hidden="true" (click)="getCaptchaIMG()"></i>
+            </div>
+            <div class="col-6 ps-0 position-relative">
+                <label>{{'enterCode' | translate}}</label> 
+                <input  type="tel" formControlName="captcha3" required    maxlength="4"
+                placeholder="{{'captchaInput' | translate}}"
+                class="form-control bg-white captcha" (keypress)="allowOnlyNumbers($event)"
+                [ngClass]="{'is-invalid':   submitted && captcha3Validation?.invalid}">
+                <span class="invalid-feedback position-absolute">
+                  @if(captcha3Validation?.errors?.['required']) {<span>{{'codeRequired' | translate}}</span>}
+                  @else if(captcha3Validation?.errors?.['codeMatched']) {<span>{{'codeNotMatched' | translate}}</span>}
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+          <div  class="form-row-check d-flex align-items-center position-relative mx-1"  title="{{'conditions_agree2' | translate}}">
+              <input  type="checkbox" 
+              id="done-check3" 
+              [checked]="isChecked3"
+              (change)="onCheckboxChange($event,3)"
+              [ngClass]="{ 'checked': isChecked3 }"
+              >
+              
+              <!-- <label  for="done-check3" class="check-input mb-0"></label> -->
+             
+              <label  for="done-check3" class="form-check-label mx-2 my-0"> {{'conditions_agree1' | translate}}</label>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="get-quote-container">
+            <button type="submit"
+            class="btn text-white w-100 py-3 fs-6 get-quotation"  
+            [class.disabled]="!isChecked3"  id="get-quotation3">{{'get_offers' | translate}}</button>
+          </div>
+        </div>
+        
+        @if(serverSideError && serverSideError.length!=0)
+        {
+        <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+          {{serverSideError}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        }
+      </div>
+    </div>
+  </form>
+}
+

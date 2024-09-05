@@ -1,0 +1,21 @@
+
+<app-header [dir]="direction"></app-header>
+
+<div [dir]="direction">
+<router-outlet></router-outlet>
+</div>
+@if(showNav)
+{
+<app-footer [dir]="direction"></app-footer>
+}
+<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+
+<ngx-spinner
+bdColor="rgba(255, 255,255, 0.7)"
+
+[fullScreen] = "true"
+class="d-flex justify-content-center align-items-center"
+  template="<img class='w-100 d-flex justify-content-center align-items-center' src='../assets/images/home-icons/Rakeez.svg' />"
+>
+Loading...
+</ngx-spinner>

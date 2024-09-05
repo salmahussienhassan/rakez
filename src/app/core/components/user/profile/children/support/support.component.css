@@ -1,0 +1,127 @@
+.main-profile{
+    border-radius:8px;
+    width:95%;
+}
+label{
+    color:#221F1F;
+}
+.bg-gray{
+    padding:5px;
+    background-color:#F4F4F4
+}
+.btn-purple{
+    padding:5px 7px !important;
+    color:white;
+    background-color:#32012F;
+    }
+.add-ticket{
+    cursor:pointer;
+    font-size:18px;
+}
+.download-img{
+    width: 5%;
+}
+.gray-600{
+    color:#4B5563;
+}
+.form-control{
+    background: #F9FAFB;
+}
+.drag-text {
+    border-radius: 8px;
+    border: 1px dashed var(--gray-300, #7D94A6);
+    background: var(--white, #FFF);
+}
+
+.send{
+    font-size:var(--font-size-normal);
+    border:none;
+    color:white;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: var(--p-100, linear-gradient(134deg, #4DC6C3 17.72%, #5268A9 100.61%, #8EDFDE 128.84%, #C0ECE2 195.91%, rgba(10, 179, 176, 0.42) 236.89%));
+}
+
+.row-width{
+    width:50%;
+}
+.padding{
+    padding:0px !important;
+}
+@media only screen and (max-width: 768px) {
+    .padding{
+        padding-right: 1.5rem !important; 
+        padding-left:1.5rem !important;
+    }
+    .row-width{
+        width:100%;
+    }
+}
+
+li{
+    font-size:14px;
+  }
+  .selector{
+    border-radius: 8px;
+    background:  #F4F4F4;
+    cursor:pointer;
+}
+.mb-1 {
+    margin-bottom: 0.1rem !important;
+  }
+  p{
+    font-size:14px;
+  }
+  @media only screen and (max-width: 600px) {
+    .fs-sm {
+        font-size: 12px !important;
+    }
+}
+
+.select-status
+{
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #d2d2d2;
+    padding: 3px;
+}
+
+.ticket-card
+{
+    border-radius: 8px;
+    border-right: 7px #4B5563;
+    background: #fff;
+}
+
+.ticket-id{
+    border-radius: 8px;
+    background: rgba(245, 245, 245, 0.72);
+    color: var(--primary-700);
+}
+
+.status{
+    font-size:var(--font-size-sm)
+}
+.date{
+    color:#4B5563;
+}
+
+select, textarea{
+    font-size: 12px;
+    padding-top:.4rem;
+    padding-bottom:.4rem;
+}
+
+select:focus-visible , textarea:focus-visible{
+    outline: none!important;
+}
+
+.fa-circle {
+    font-size:10px;
+}
+
+.ticket-card div{
+    font-size:var(--font-size-sm);
+}
